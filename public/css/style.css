@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 :root {
   --cor-fundo-header: #2d4164;
   --cor-violeta-fundo: #712cf9;
@@ -6,7 +12,8 @@
   --cor-violeta-ativa: #5a23c8;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
@@ -15,9 +22,65 @@ html, body {
 }
 
 header {
-  background-color: var(--cor-fundo-header);
+  background-color: #141921;
   width: 100%;
-  height: 80px; /* Altura fixa */
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  width: 60px;
+  height: 50px;
+}
+
+.nav-header {
+  height: 100%;
+  width: 33%;
+  display: flex; /* Organiza .img-nav e .ancora-nav lado a lado */
+  align-items: center; /* Centraliza verticalmente */
+  gap: 20px; /* Espaço entre logo e links */
+}
+.img-nav{
+  margin-left: 5%;
+}
+.ancora-nav{
+  margin-left: 5%;
+
+  gap: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.ancora-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+.pesquisa-header {
+  flex: 1; /* Ocupa espaço flexível */
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+}
+
+.pesquisa-header input {
+  width: 200px; /* Ajuste o tamanho conforme quiser */
+  padding: 8px 12px;
+  border-radius: 20px; /* Bordas arredondadas */
+  border: none; /* Remove borda padrão */
+  outline: none; /* Remove contorno ao focar */
+  font-size: 14px;
+  margin-left: -65%;
+}
+.config-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 30%;
+}
+.config-header img{
+  width: 35px;
+  height: 35px;
 }
 
 .custom-carousel {
@@ -35,12 +98,14 @@ header {
   height: auto;
   object-fit: cover;
   display: block;
-  aspect-ratio: 16 / 9; /* Mantém proporção widescreen */
+  aspect-ratio: 16 / 9;
+  /* Mantém proporção widescreen */
 }
 
 @media (max-width: 576px) {
   .custom-carousel .carousel-item img {
-    aspect-ratio: 4 / 3; /* Proporção diferente para mobile */
+    aspect-ratio: 4 / 3;
+    /* Proporção diferente para mobile */
   }
 }
 
@@ -65,7 +130,7 @@ header {
   border: solid rgba(0, 0, 0, .15);
   border-width: 1px 0;
   box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1),
-              inset 0 .125em .5em rgba(0, 0, 0, .15);
+    inset 0 .125em .5em rgba(0, 0, 0, .15);
 }
 
 .b-example-vr {
