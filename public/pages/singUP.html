@@ -3,17 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameWave Cadastro</title>
+    <title>GameWave SingUp</title>
+    <link rel="stylesheet" href="../css/styleSingUP.css">
+    <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon">
 </head>
 <body>
-    <nav>
-        <h1>Game</h1>
-        <img src="#" alt="Logo do GameWave">
-        <h1>Wave</h1>
-    </nav>
+    <header>
+            <h1>Game</h1>
+            <img src="../../assets/logo-sem-fundo.png" alt="Logo do GameWave">
+            <h1>Wave</h1>
+    </header>
     <main>
-        <h2>Cadastre-se</h2>
-        <p>ENDEREÇO DE EMAIL</p>
+        <p id="cad">Cadastre-se</p>
+        <div id="container"> 
+            <form action="submit">
+                <label for="nomeEscolhido">Nome</label>
+                <input placeholder="Insira seu nome" type="text">
+                <label for="email">Email</label>
+                <input placeholder="Insira seu Email" type="text">
+                <label for="senha">Senha</label>
+                <input placeholder="Insira sua Senha" type="text">
+                <label for="comfirmaSenha">Comfirmar Senha</label>
+                <input placeholder="Comfirme sua Senha" type="text">
+                <input id="checkBox" type="checkbox" value="16Anos">
+                <label for="Termo">Tenho 16 anos ou mais.</label>
+            </form>
+            <button id="nextSingUp">Continuar</button>
+        </div>
     </main>
 </body>
 </html>
