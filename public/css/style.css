@@ -57,20 +57,22 @@ header img {
   text-decoration: none;
   font-size: 16px;
 }
-.pesquisa-header {
-  flex: 1; /* Ocupa espaço flexível */
-  display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
+.pesquisa-header input {
+  width: 100%;
+  max-width: 600px; /* Limite máximo em telas grandes */
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-left: 0; /* Remova margem negativa */
 }
 
-.pesquisa-header input {
-  width: 200px; /* Ajuste o tamanho conforme quiser */
-  padding: 8px 12px;
-  border-radius: 20px; /* Bordas arredondadas */
-  border: none; /* Remove borda padrão */
-  outline: none; /* Remove contorno ao focar */
-  font-size: 14px;
-  margin-left: -65%;
+.pesquisa-header {
+  width: 100%;
+  max-width: 600px; /* Limita o tamanho da pesquisa */
+  margin: 0 auto; /* Centraliza */
+  padding: 10px;
 }
 .config-header{
   display: flex;
@@ -88,6 +90,39 @@ header img {
   margin-bottom: 50px;
   position: relative;
 }
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -250px; /* escondido inicialmente */
+  width: 250px;
+  height: 100%;
+  background-color: #141921;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.side-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.side-menu.show {
+  right: 0;
+}
+
+/* Botão de menu para mobile */
+.btn-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 
 .custom-carousel .carousel-item {
   width: 100%;
@@ -103,9 +138,26 @@ header img {
 }
 
 @media (max-width: 576px) {
+  .menu-toggle{
+    margin-right: 4%;
+  }
   .custom-carousel .carousel-item img {
     aspect-ratio: 4 / 3;
-    /* Proporção diferente para mobile */
+  }
+  .pesquisa-header input {
+    width: 100%;
+    max-width: none;
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+  form{
+    margin-left: -40%;
+    min-width: 40vw;
+  }
+  .pesquisa-header {
+    width: 80%;
+    padding: 10px 0;
+    margin: 0 auto;
   }
 }
 
@@ -117,11 +169,59 @@ header img {
   user-select: none;
 }
 
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
+/* Esconde o menu-overlay por padrão */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100%;
+  background-color: #141921;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.menu-overlay.show {
+  right: 10px;
+  transform: translateX(-50px); 
+}
+
+.menu-toggle img {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+/* Ocultar elementos no mobile */
+@media (max-width: 768px) {
+  .ancora-nav, .config-header {
+    display: none;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-header {
+    width: auto;
   }
 }
+
+/* Mostrar normalmente em desktop */
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+  
+  .menu-overlay {
+    display: none;
+  }
+}
+
 
 .b-example-divider {
   width: 100%;
@@ -187,4 +287,10 @@ header img {
 
 .bd-mode-toggle .dropdown-menu .active .bi {
   display: block !important;
+}
+
+@media screen {
+  .pesquisa-header{
+    width: 20%;
+  }
 }
