@@ -38,49 +38,53 @@ header img {
 .nav-header {
   height: 100%;
   width: 33%;
-  display: flex; /* Organiza .img-nav e .ancora-nav lado a lado */
-  align-items: center; /* Centraliza verticalmente */
-  gap: 20px; /* Espaço entre logo e links */
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
-.img-nav{
-  margin-left: 5%;
-}
-.ancora-nav{
-  margin-left: 5%;
 
+.img-nav {
+  margin-left: 5%;
+}
+
+.ancora-nav {
+  margin-left: 5%;
   gap: 20px;
   display: flex;
   justify-content: space-between;
 }
+
 .ancora-nav a {
   color: #fff;
   text-decoration: none;
   font-size: 16px;
 }
+
 .pesquisa-header input {
   width: 100%;
-  max-width: 600px; /* Limite máximo em telas grandes */
+  max-width: 600px;
   padding: 10px 16px;
   border-radius: 20px;
   border: none;
   outline: none;
   font-size: 16px;
-  margin-left: 0; /* Remova margem negativa */
 }
 
 .pesquisa-header {
   width: 100%;
-  max-width: 600px; /* Limita o tamanho da pesquisa */
-  margin: 0 auto; /* Centraliza */
+  max-width: 600px;
+  margin: 0 auto;
   padding: 10px;
 }
-.config-header{
+
+.config-header {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 30%;
 }
-.config-header img{
+
+.config-header img {
   width: 35px;
   height: 35px;
 }
@@ -90,17 +94,20 @@ header img {
   margin-bottom: 50px;
   position: relative;
 }
+
+/* ALTERADO: aside menor e mais à direita */
 .side-menu {
   position: fixed;
   top: 0;
-  right: -250px; /* escondido inicialmente */
-  width: 250px;
-  height: 100%;
+  right: -150px; /* escondido inicialmente */
+  width: 150px; /* largura menor */
+  height: auto; /* altura ajustável */
   background-color: #141921;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  gap: 20px;
+  align-items: flex-start; /* alinha itens à esquerda */
+  padding: 10px;
+  gap: 10px; /* menos espaço entre itens */
   box-shadow: -2px 0 5px rgba(0,0,0,0.5);
   transition: right 0.3s ease;
   z-index: 1000;
@@ -109,20 +116,19 @@ header img {
 .side-menu a {
   color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 14px; /* fonte menor */
+  width: 100%;
 }
 
 .side-menu.show {
-  right: 0;
+  right: 10px; /* mais próximo da borda */
 }
 
-/* Botão de menu para mobile */
 .btn-menu {
   background: none;
   border: none;
   cursor: pointer;
 }
-
 
 .custom-carousel .carousel-item {
   width: 100%;
@@ -134,26 +140,29 @@ header img {
   object-fit: cover;
   display: block;
   aspect-ratio: 16 / 9;
-  /* Mantém proporção widescreen */
 }
 
 @media (max-width: 576px) {
-  .menu-toggle{
+  .menu-toggle {
     margin-right: 4%;
   }
+  
   .custom-carousel .carousel-item img {
     aspect-ratio: 4 / 3;
   }
+
   .pesquisa-header input {
     width: 100%;
     max-width: none;
     font-size: 16px;
     padding: 12px 20px;
   }
-  form{
+
+  form {
     margin-left: -40%;
     min-width: 40vw;
   }
+
   .pesquisa-header {
     width: 80%;
     padding: 10px 0;
@@ -169,25 +178,35 @@ header img {
   user-select: none;
 }
 
-/* Esconde o menu-overlay por padrão */
 .menu-overlay {
   position: fixed;
   top: 0;
-  right: -100%;
-  width: 70%;
-  height: 100%;
+  right: 0;
+  width: 35%;
+  height: 20%;
   background-color: #141921;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   gap: 20px;
   transition: right 0.3s ease;
+  border: 3px solid #fff;
   z-index: 1000;
+}
+.aside-menu{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.aside-menu a{
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid #fff;
 }
 
 .menu-overlay.show {
   right: 10px;
-  transform: translateX(-50px); 
+  transform: translateX(-50px);
 }
 
 .menu-toggle img {
@@ -196,7 +215,6 @@ header img {
   cursor: pointer;
 }
 
-/* Ocultar elementos no mobile */
 @media (max-width: 768px) {
   .ancora-nav, .config-header {
     display: none;
@@ -211,17 +229,15 @@ header img {
   }
 }
 
-/* Mostrar normalmente em desktop */
 @media (min-width: 769px) {
   .menu-toggle {
     display: none;
   }
-  
+
   .menu-overlay {
     display: none;
   }
 }
-
 
 .b-example-divider {
   width: 100%;
@@ -230,7 +246,7 @@ header img {
   border: solid rgba(0, 0, 0, .15);
   border-width: 1px 0;
   box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1),
-    inset 0 .125em .5em rgba(0, 0, 0, .15);
+              inset 0 .125em .5em rgba(0, 0, 0, .15);
 }
 
 .b-example-vr {
@@ -290,7 +306,7 @@ header img {
 }
 
 @media screen {
-  .pesquisa-header{
+  .pesquisa-header {
     width: 20%;
   }
 }
