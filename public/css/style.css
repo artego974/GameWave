@@ -63,7 +63,7 @@ header img {
 .pesquisa-header input {
   width: 100%;
   max-width: 600px;
-  padding: 10px 16px;
+  padding: 10px 16px; 
   border-radius: 20px;
   border: none;
   outline: none;
@@ -116,7 +116,7 @@ header img {
 .side-menu a {
   color: white;
   text-decoration: none;
-  font-size: 14px; /* fonte menor */
+  font-size: 16px; /* fonte menor */
   width: 100%;
 }
 
