@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable, OneToOne} from "typeorm";
 import { Campeonato } from "./Campeonato";
+import { Live } from "./Live";
 
 @Entity('users')
 export class User {
@@ -28,6 +29,9 @@ export class User {
   @ManyToMany(() => Campeonato)
   @JoinTable({ name: 'users_campeonatos' })
   private _Campeonatos!: Campeonato[];
+
+  @OneToOne(()=> Live,(live) => live.user)
+  Live!: Live;
 
     /**
      * Getter Name
