@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 :root {
   --cor-fundo-header: #2d4164;
   --cor-violeta-fundo: #712cf9;
@@ -6,7 +12,8 @@
   --cor-violeta-ativa: #5a23c8;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
@@ -15,15 +22,112 @@ html, body {
 }
 
 header {
-  background-color: var(--cor-fundo-header);
+  background-color: #141921;
   width: 100%;
-  height: 80px; /* Altura fixa */
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  width: 60px;
+  height: 50px;
+}
+
+.nav-header {
+  height: 100%;
+  width: 33%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.img-nav {
+  margin-left: 5%;
+}
+
+.ancora-nav {
+  margin-left: 5%;
+  gap: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ancora-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.pesquisa-header input {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.pesquisa-header {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.config-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 30%;
+}
+
+.config-header img {
+  width: 35px;
+  height: 35px;
 }
 
 .custom-carousel {
   width: 100%;
   margin-bottom: 50px;
   position: relative;
+}
+
+/* ALTERADO: aside menor e mais à direita */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -150px; /* escondido inicialmente */
+  width: 150px; /* largura menor */
+  height: auto; /* altura ajustável */
+  background-color: #141921;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* alinha itens à esquerda */
+  padding: 10px;
+  gap: 10px; /* menos espaço entre itens */
+  box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.side-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px; /* fonte menor */
+  width: 100%;
+}
+
+.side-menu.show {
+  right: 10px; /* mais próximo da borda */
+}
+
+.btn-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .custom-carousel .carousel-item {
@@ -35,12 +139,34 @@ header {
   height: auto;
   object-fit: cover;
   display: block;
-  aspect-ratio: 16 / 9; /* Mantém proporção widescreen */
+  aspect-ratio: 16 / 9;
 }
 
 @media (max-width: 576px) {
+  .menu-toggle {
+    margin-right: 4%;
+  }
+  
   .custom-carousel .carousel-item img {
-    aspect-ratio: 4 / 3; /* Proporção diferente para mobile */
+    aspect-ratio: 4 / 3;
+  }
+
+  .pesquisa-header input {
+    width: 100%;
+    max-width: none;
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+
+  form {
+    margin-left: -40%;
+    min-width: 40vw;
+  }
+
+  .pesquisa-header {
+    width: 80%;
+    padding: 10px 0;
+    margin: 0 auto;
   }
 }
 
@@ -52,9 +178,64 @@ header {
   user-select: none;
 }
 
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 35%;
+  height: 20%;
+  background-color: #141921;
+  padding: 10px;
+  gap: 20px;
+  transition: right 0.3s ease;
+  border: 3px solid #fff;
+  z-index: 1000;
+}
+.aside-menu{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.aside-menu a{
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid #fff;
+}
+
+.menu-overlay.show {
+  right: 10px;
+  transform: translateX(-50px);
+}
+
+.menu-toggle img {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .ancora-nav, .config-header {
+    display: none;
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-header {
+    width: auto;
+  }
+}
+
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .menu-overlay {
+    display: none;
   }
 }
 
@@ -122,4 +303,10 @@ header {
 
 .bd-mode-toggle .dropdown-menu .active .bi {
   display: block !important;
+}
+
+@media screen {
+  .pesquisa-header {
+    width: 20%;
+  }
 }
