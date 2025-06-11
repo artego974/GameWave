@@ -30,7 +30,7 @@ export class User {
   @JoinTable({ name: 'users_campeonatos' })
   private _Campeonatos!: Campeonato[];
 
-  @OneToOne(()=> Live,(live) => live.user)
+  @OneToMany(()=> Live,(live) => live.user)
   Live!: Live;
 
     /**
