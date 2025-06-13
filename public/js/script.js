@@ -1,4 +1,5 @@
-const openBtn = document.getElementById('menuButton');
+document.addEventListener('DOMContentLoaded', function () {
+  const openBtn = document.getElementById('menuButton');
   const sideMenu = document.getElementById('menuOverlay');
 
   openBtn.addEventListener('click', function (e) {
@@ -11,3 +12,8 @@ const openBtn = document.getElementById('menuButton');
       sideMenu.classList.remove('show');
     }
   });
+
+  sideMenu.addEventListener('click', function (e) {
+    e.stopPropagation();
+  });
+});
