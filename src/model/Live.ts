@@ -19,6 +19,48 @@ export class Live {
     @ManyToOne(()=> User,(user) => user.Live)
     user!:User;
 
+
+     // GETTERS
+     public get duracao(): Date {
+        return this._duracao;
+    }
+
+    public get titulo(): string {
+        return this._titulo;
+    }
+
+    public get subtitulo(): string {
+        return this._subtitulo;
+    }
+
+    public get tipo(): string {
+        return this._tipo;
+    }
+
+    public get espectadores(): number {
+        return this._espectadores;
+    }
+
+    // SETTERS
+    public set duracao(duracao: Date) {
+        this._duracao = duracao;
+    }
+
+    public set titulo(titulo: string) {
+        this._titulo = titulo;
+    }
+
+    public set subtitulo(subtitulo: string) {
+        this._subtitulo = subtitulo;
+    }
+
+    public set tipo(tipo: string) {
+        this._tipo = tipo;
+    }
+
+    public set espectadores(espectadores: number) {
+        this._espectadores = espectadores;
+    }
     constructor(duracao:Date,titulo:string,subtitulo:string,tipo:string,espectadores:number){
         this._duracao = duracao;
         this._titulo = titulo;
