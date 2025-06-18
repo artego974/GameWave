@@ -3,19 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx ts-node-dev src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Foi ultilizado bootstrap para a tela principal do site para facilitar e ajudar na interface grafica do projeto ultilizando de um carrosel e do album para aparecer de forma dinamica os campeonatos novos e recentes do que estão acontecendo de cada jogo.",
   "devDependencies": {
-    "@types/express": "^5.0.2",
-    "@types/node": "^22.15.24",
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.30",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
     "reflect-metadata": "^0.2.2",
