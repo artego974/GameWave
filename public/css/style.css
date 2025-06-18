@@ -63,7 +63,7 @@ header img {
 .pesquisa-header input {
   width: 100%;
   max-width: 600px;
-  padding: 10px 16px; 
+  padding: 10px 16px;
   border-radius: 20px;
   border: none;
   outline: none;
@@ -99,16 +99,21 @@ header img {
 .side-menu {
   position: fixed;
   top: 0;
-  right: -150px; /* escondido inicialmente */
-  width: 150px; /* largura menor */
-  height: auto; /* altura ajustável */
+  right: -150px;
+  /* escondido inicialmente */
+  width: 150px;
+  /* largura menor */
+  height: auto;
+  /* altura ajustável */
   background-color: #141921;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* alinha itens à esquerda */
+  align-items: flex-start;
+  /* alinha itens à esquerda */
   padding: 10px;
-  gap: 10px; /* menos espaço entre itens */
-  box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+  gap: 10px;
+  /* menos espaço entre itens */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   transition: right 0.3s ease;
   z-index: 1000;
 }
@@ -116,12 +121,14 @@ header img {
 .side-menu a {
   color: white;
   text-decoration: none;
-  font-size: 16px; /* fonte menor */
+  font-size: 16px;
+  /* fonte menor */
   width: 100%;
 }
 
 .side-menu.show {
-  right: 10px; /* mais próximo da borda */
+  right: 10px;
+  /* mais próximo da borda */
 }
 
 .btn-menu {
@@ -146,7 +153,7 @@ header img {
   .menu-toggle {
     margin-right: 4%;
   }
-  
+
   .custom-carousel .carousel-item img {
     aspect-ratio: 4 / 3;
   }
@@ -168,59 +175,73 @@ header img {
     padding: 10px 0;
     margin: 0 auto;
   }
+
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .menu-overlay {
+    pointer-events: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 35%;
+    height: 20%;
+    background-color: #141921;
+    padding: 10px;
+    gap: 20px;
+    transition: right 0.3s ease;
+    border: 3px solid #fff;
+    z-index: 1000;
+  }
+
+  .aside-menu {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .aside-menu a {
+    color: #fff;
+    text-decoration: none;
+    border: 2px solid #fff;
+  }
+
+
+  .menu-overlay.hide {
+    display: none;
+    top: 0;
+    right: 0;
+  }
+
+  .menu-overlay.show {
+    display: block;
+    top: 0;
+    right: 0;
+  }
+
+  .menu-toggle img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+  }
+
 }
 
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-.menu-overlay {
-  pointer-events: auto;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 35%;
-  height: 20%;
-  background-color: #141921;
-  padding: 10px;
-  gap: 20px;
-  transition: right 0.3s ease;
-  border: 3px solid #fff;
-  z-index: 1000;
-}
-.aside-menu{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-}
-.aside-menu a{
-  color: #fff;
-  text-decoration: none;
-  border: 2px solid #fff;
-}
-
-.menu-overlay.show {
-  right: 10px;
-  transform: translateX(-50px);
-}
-
-.menu-toggle img {
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-}
 
 @media (max-width: 768px) {
-  .ancora-nav, .config-header {
+
+  .ancora-nav,
+  .config-header {
     display: none;
   }
-  
+
   .menu-toggle {
     display: block;
   }
@@ -247,7 +268,7 @@ header img {
   border: solid rgba(0, 0, 0, .15);
   border-width: 1px 0;
   box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1),
-              inset 0 .125em .5em rgba(0, 0, 0, .15);
+    inset 0 .125em .5em rgba(0, 0, 0, .15);
 }
 
 .b-example-vr {
