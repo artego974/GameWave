@@ -4,121 +4,98 @@ import { Live } from "./Live";
 
 @Entity('users')
 export class User {
+  
+    @PrimaryGeneratedColumn()
+    id!: number;
 
-  @PrimaryGeneratedColumn()
-  id!: number;
+    @Column({type:'varchar', length: 100, nullable: false })
+    private _name: string;
 
-  @Column({ type:"varchar", length: 255, nullable: false, unique:true})
-  private _NickName: string;
+    @Column({ unique: true })
+    private _email: string;
 
-  @Column({ type:"varchar", length: 255, nullable: false})
-  private _Name: string;
+    @Column({type:'varchar', nullable: false })
+    private _password: string;
 
-  @Column({ type:"varchar", length: 255, nullable: false})
-  private _Password: string;
+    @Column({type:'varchar', length: 100, nullable: false, unique: true})
+    private _nickName: string;
 
-  @Column({ type:"varchar", length: 255, nullable: false, unique:true})
-  private _Email: number;
+    @Column({type: "decimal"})
+    seguidores!: number
 
-  @Column({ type:"int", default: 0 })
-  private _Seguindo: number;
+    @Column({       })
+    seguindo!: number
 
-  @Column({ type:"int", default: 0 })
-  private _Seguidores: number;
 
-  @ManyToMany(() => Campeonato)
-  @JoinTable({ name: 'users_campeonatos' })
-  private _Campeonatos!: Campeonato[];
-
-  @OneToMany(()=> Live,(live) => live.user)
-  Live!: Live;
+    constructor(name:string,email:string,password:string,nickName:string){
+        this._nickName = nickName
+        this._name = name;
+        this._email = email;
+        this._password = password;
+    }
 
     /**
-     * Getter Name
+     * Getter name
      * @return {string}
      */
-	public get Name(): string {
-		return this._Name;
+	public get name(): string {
+		return this._name;
 	}
 
     /**
-     * Setter Name
-     * @param {string} value
-     */
-	public set Name(value: string) {
-		this._Name = value;
-	}
-
-    /**
-     * Getter NickName
+     * Getter email
      * @return {string}
      */
-	public get NickName(): string {
-		return this._NickName;
+	public get email(): string {
+		return this._email;
 	}
 
     /**
-     * Setter NickName
-     * @param {string} value
-     */
-	public set NickName(value: string) {
-		this._NickName = value;
-	}
-
-    /**
-     * Getter Password
+     * Getter password
      * @return {string}
      */
-	public get Password(): string {
-		return this._Password;
+	public get password(): string {
+		return this._password;
 	}
 
     /**
-     * Setter Password
+     * Getter nickName
+     * @return {string}
+     */
+	public get nickName(): string {
+		return this._nickName;
+	}
+
+    /**
+     * Setter name
      * @param {string} value
      */
-	public set Password(value: string) {
-		this._Password = value;
+	public set name(value: string) {
+		this._name = value;
 	}
 
     /**
-     * Getter Email
-     * @return {number}
+     * Setter email
+     * @param {string} value
      */
-	public get Email(): number {
-		return this._Email;
+	public set email(value: string) {
+		this._email = value;
 	}
 
     /**
-     * Setter Email
-     * @param {number} value
+     * Setter password
+     * @param {string} value
      */
-	public set Email(value: number) {
-		this._Email = value;
+	public set password(value: string) {
+		this._password = value;
 	}
 
     /**
-     * Getter Seguidores
-     * @return {number}
+     * Setter nickName
+     * @param {string} value
      */
-	public get Seguidores(): number {
-		return this._Seguidores;
+	public set nickName(value: string) {
+		this._nickName = value;
 	}
 
-    /**
-     * Setter Seguidores
-     * @param {number} value
-     */
-	public set Seguidores(value: number) {
-		this._Seguidores = value;
-	}
-
-  constructor(NickName:string, Name:string, Password:string, Email:number) {
-    this._NickName = NickName;
-    this._Name = Name;
-    this._Password = Password;
-    this._Email = Email;
-    this._Seguindo = 0;
-    this._Seguidores = 0;
-  }
 }
