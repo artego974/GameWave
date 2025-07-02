@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx ts-node-dev src/server.ts"
   },
   "keywords": [],
@@ -11,12 +10,17 @@
   "license": "ISC",
   "description": "Foi ultilizado bootstrap para a tela principal do site para facilitar e ajudar na interface grafica do projeto ultilizando de um carrosel e do album para aparecer de forma dinamica os campeonatos novos e recentes do que estão acontecendo de cada jogo.",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^22.15.30",
     "ts-node-dev": "^2.0.0",
+    "typeorm-migration-helper": "^1.0.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
