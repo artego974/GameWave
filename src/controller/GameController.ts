@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../db/data_source';
+import { AppDataSource } from '../config/data-source';
 import { Games } from '../model/Game';
 
 const gameRepository = AppDataSource.getRepository(Games);

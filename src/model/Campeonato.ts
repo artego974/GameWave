@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
 import { User } from "./User";
 @Entity('Campeonato')
 export class Campeonato {
@@ -20,6 +20,12 @@ export class Campeonato {
     @Column({ type: 'datetime', nullable: false })
     private _timeDate: Date;
 
+    @ManyToOne(()=> User, (host) => host.campeonato)
+    host!: User
+
+    @ManyToMany(() => User)
+    @JoinTable({ name: 'participantes' })
+    participantes!: User[];
 
     /**
      * Getter name

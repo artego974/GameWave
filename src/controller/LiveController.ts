@@ -1,6 +1,7 @@
 import { Live } from "../model/Live";
 import { Request,Response } from "express";
-import { AppDataSource } from "../db/data_source";
+import { AppDataSource } from "../config/data-source";
+
 
 const liveRepository = AppDataSource.getRepository(Live);
 
@@ -14,12 +15,16 @@ export class liveController {
 
     // Criar novo live
     async create(req: Request, res: Response) {
-        const { duracao,titulo,subtitulo,tipo,espectadores } = req.body;
-
-            const live = liveRepository.create({duracao,titulo,subtitulo,tipo,espectadores  });
+        const { link,titulo,subtitulo } = req.body;
+        if(link == '' || titulo =='' || subtitulo == ''){
+            res.status(400).json({  messagem: "Preencha todos os campos!" })
+            return
+        }else{
+            const live = liveRepository.create({link,titulo,subtitulo});
             await liveRepository.save(live);
             res.status(201).json(live);
             return;
+        }
     }
 
     // Buscar live por ID
@@ -40,31 +45,28 @@ export class liveController {
     // Atualizar live
     async update(req: Request, res: Response) {
         const { id } = req.params;
-        const { duracao,titulo,subtitulo,tipo,espectadores } = req.body;
+        const { link,titulo,subtitulo} = req.body;
 
         if(!id) {
             res.status(400).json({ message: "ID não informado!" });
             return
         }
 
-        if(!duracao && !titulo && !subtitulo && !tipo && !espectadores) {
-            res.status(400).json({ message: "Informe algum liveo!" });
-            return            
+        if(!link && !titulo && !subtitulo) {
+            res.status(400).json({ message: "Informe algum campo!" });
+            return;          
         }
 
         const live = await liveRepository.findOneBy({ id: Number(id) });
 
         if(!live) {
-            res.status(404).json({ message: "live não encontrado!" });
+            res.status(404).json({ message: "live não encontrada!" });
             return            
         }
 
-        live.duracao = duracao ? duracao : live.duracao
+        live.link = link ? link : live.link
         live.titulo = titulo ? titulo : live.titulo
         live.subtitulo = subtitulo ? subtitulo : live.subtitulo
-        live.tipo = tipo ? tipo : live.tipo
-        live.espectadores = espectadores ? espectadores : live.espectadores
-
         
     }
 

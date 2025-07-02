@@ -4,7 +4,7 @@ import { AppDataSource } from "../config/data-source"
 
 const userRepository = AppDataSource.getRepository(User);
 
-export class ProductController{
+export class UserController{
     async list(req: Request,res:Response){
         const prod = await userRepository.find();
         res.json(prod);

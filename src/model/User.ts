@@ -20,12 +20,17 @@ export class User {
     @Column({type:'varchar', length: 100, nullable: false, unique: true})
     private _nickName: string;
 
-    @Column({type: "decimal"})
+    @Column({type: "int", default: 0})
     seguidores!: number
 
-    @Column({       })
+    @Column({  type: "int", default: 0})
     seguindo!: number
 
+    @OneToMany( () => Live, (live) => live.user)
+    Live!: Live;
+
+    @OneToMany(()=> Campeonato, (campeonato) => campeonato.host)
+    campeonato!: User
 
     constructor(name:string,email:string,password:string,nickName:string){
         this._nickName = nickName

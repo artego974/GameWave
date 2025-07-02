@@ -1,28 +1,30 @@
 import { time } from "console";
-import { Entity,PrimaryColumn, Column, OneToMany, OneToOne, ManyToOne } from "typeorm";
+import { Entity, PrimaryColumn, Column, OneToMany, OneToOne, ManyToOne } from "typeorm";
 import { User } from "./User";
+import { Games } from "./Game";
 
 @Entity("lives")
 export class Live {
     @PrimaryColumn()
     id!: number;
-    @Column({type:"time", nullable:false})
-    private _duracao: Date;
-    @Column({type:"varchar",length:255, nullable:false})
+
+    @Column({ type: "varchar", length: 255, nullable: false, unique: true })
+    private _link: string
+
+    @Column({ type: "varchar", length: 255, nullable: false })
     private _titulo: string;
-    @Column({type:"varchar",length:255, nullable:false})
+
+    @Column({ type: "varchar", length: 255, nullable: false })
     private _subtitulo: string;
-    @Column({type:"varchar",length:255, nullable:false})
-    private _tipo: string;
-    @Column({type:"int", nullable:false})
-    private _espectadores: number;
-    @ManyToOne(()=> User,(user) => user.Live)
-    user!:User;
 
+    @ManyToOne(() => User, (user) => user.Live)
+    user!: User;
 
-     // GETTERS
-     public get duracao(): Date {
-        return this._duracao;
+    @ManyToOne(() => Games, (game) => game.live)
+    game!: Games
+
+    public get link(): string {
+        return this._link
     }
 
     public get titulo(): string {
@@ -33,17 +35,8 @@ export class Live {
         return this._subtitulo;
     }
 
-    public get tipo(): string {
-        return this._tipo;
-    }
-
-    public get espectadores(): number {
-        return this._espectadores;
-    }
-
-    // SETTERS
-    public set duracao(duracao: Date) {
-        this._duracao = duracao;
+    public set link(link: string) {
+        this._link = link
     }
 
     public set titulo(titulo: string) {
@@ -54,19 +47,9 @@ export class Live {
         this._subtitulo = subtitulo;
     }
 
-    public set tipo(tipo: string) {
-        this._tipo = tipo;
-    }
-
-    public set espectadores(espectadores: number) {
-        this._espectadores = espectadores;
-    }
-    constructor(duracao:Date,titulo:string,subtitulo:string,tipo:string,espectadores:number){
-        this._duracao = duracao;
+    constructor(link: string, titulo: string, subtitulo: string, tipo: string,) {
+        this._link = link
         this._titulo = titulo;
         this._subtitulo = subtitulo;
-        this._tipo = tipo;
-        this._espectadores = espectadores;
-
     }
 }
