@@ -1,4 +1,3 @@
-import { time } from "console";
 import { Entity, PrimaryColumn, Column, OneToMany, OneToOne, ManyToOne } from "typeorm";
 import { User } from "./User";
 import { Games } from "./Game";
@@ -8,7 +7,10 @@ export class Live {
     @PrimaryColumn()
     id!: number;
 
-    @Column({ type: "varchar", length: 255, nullable: false, unique: true })
+    @Column({type:"text"})
+    private _img: string
+
+    @Column({ type: "text", nullable: false, unique: true })
     private _link: string
 
     @Column({ type: "varchar", length: 255, nullable: false })
@@ -27,6 +29,10 @@ export class Live {
         return this._link
     }
 
+    public get img(): string {
+        return this._img
+    }
+
     public get titulo(): string {
         return this._titulo;
     }
@@ -39,6 +45,10 @@ export class Live {
         this._link = link
     }
 
+    public set img(img: string) {
+        this._img = img
+    }
+
     public set titulo(titulo: string) {
         this._titulo = titulo;
     }
@@ -47,9 +57,10 @@ export class Live {
         this._subtitulo = subtitulo;
     }
 
-    constructor(link: string, titulo: string, subtitulo: string, tipo: string,) {
+    constructor(link: string, titulo: string, subtitulo: string, img:string) {
         this._link = link
         this._titulo = titulo;
         this._subtitulo = subtitulo;
+        this._img = img
     }
 }
