@@ -8,49 +8,50 @@
     <link rel="stylesheet" href="../css/header.css">
 </head>
 <body>
-    <header>
+  <header>
 
-        <div class="nav-header">
-          <div class="img-nav">
-            <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt=""></a>
-          </div>
+    <div class="nav-header">
+      <div class="img-nav">
+        <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt=""></a>
+      </div>
+
+      <div class="ancora-nav">
+        <a href="campeonatos.html">Campeonatos</a>
+        <a href="lives.html">Lives</a>
+      </div>
+    </div>
+
+    <div class="pesquisa-header">
+      <form action="">
+        <input type="text" placeholder="Pesquisar">
+      </form>
+    </div>
+    <div class="config-header">
+
+      <img src="../../assets/plus.png" alt=""> <!-- criar lives e coisas em um bloco-->
+      <!-- se sobrar tempo fazer notificação -->
+      <a href="perfil.html">
+        <img src="../../assets/perfil.png" alt="">
+      </a> <!-- perfil -->
+      <a href="config.html">
+        <img src="../../assets/configuracoes.png" alt=""> <!-- configurações -->
+      </a>
+    </div>  
     
-          <div class="ancora-nav">
-            <a href="campeonatos.html">Campeonatos</a>
-            <a href="lives.html">Lives</a>
-          </div>
-        </div>
+    <div class="menu-toggle">
+      <img src="../assets/setting.png" alt="Menu" id="menuButton">
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay">
+      <aside class="aside-menu">
+        <a href="./campeonatos.html">Campeonatos</a>
+        <a href="./lives.html">Lives</a>
+        <a href="./perfil.html">Perfil</a>
+        <a href="./config.html">Configurações</a>
+      </aside>
+    </div>
     
-        <div class="pesquisa-header">
-          <form action="">
-            <input type="text" placeholder="Pesquisar">
-          </form>
-        </div>
-        <div class="config-header">
-    
-          <img src="../../assets/plus.png" alt=""> <!-- criar lives e coisas em um bloco-->
-          <!-- se sobrar tempo fazer notificação -->
-          <a href="perfil.html">
-            <img src="../../assets/profile-user.png" alt="">
-          </a> <!-- perfil -->
-          <a href="config.html">
-            <img src="../../assets/setting.png" alt=""> <!-- configurações -->
-          </a>
-        </div>  
-    
-        <div class="menu-toggle">
-          <img src="../assets/setting.png" alt="Menu" id="menuButton">
-        </div>
-    
-        <div class="menu-overlay" id="menuOverlay">
-          <aside class="aside-menu">
-            <a href="campeonatos.html">Campeonatos</a>
-            <a href="lives.html">Lives</a>
-            <a href="perfil.html">Perfil</a>
-            <a href="config.html">Configurações</a>
-          </aside>
-        </div>
-      </header>
+  </header>
 
 
       <script src="../js/script.js"></script>
