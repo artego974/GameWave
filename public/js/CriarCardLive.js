@@ -1,6 +1,8 @@
-const API_URL = "http://localhost:3000/live";
-
-const row = document.querySelector(".container-cards .row");
+const LIVE_API_URL = "http://localhost:3000/live";
+document.addEventListener("DOMContentLoaded", () => {
+  carregarlive(); // ou carregarlive()
+});
+const rowLive = document.querySelector("#container-lives .row");
 
 // Função para gerar o card de cada live
 function criarCard(live) {
@@ -9,38 +11,43 @@ function criarCard(live) {
 
   col.innerHTML = `
     <div class="card shadow-sm">
-      <img class="card-img-top" src="${live.imagem}" alt="Thumbnail">
-      <div class="card-body">
+      <img class="card-img-top" src="${
+        live.img || "https://via.placeholder.com/150"
+      }"alt="Thumbnail">
         <h5 class="card-title">${live.titulo}</h5>
-        <p class="card-text">${live.descricao}</p>
+        <p class="card-text">${live.subtitulo}</p>
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+            <a href="${
+              live.link
+            }" target="_blank" class="btn btn-sm btn-outline-secondary">Ver</a>
           </div>
-          <small class="text-body-secondary">${live.tempo || '0 min'}</small>
+          <small class="text-body-secondary">${
+            live.timeDate
+              ? new Date(live.timeDate).toLocaleDateString()
+              : "Sem data"
+          }</small>
         </div>
       </div>
     </div>
   `;
 
-  row.appendChild(col);
+  rowLive.appendChild(col);
 }
 
 // Carregar dados reais da API
 async function carregarlive() {
   try {
-    const response = await fetch(API_URL);
-    const live = await response.json();
+    const response = await fetch(LIVE_API_URL);
+    const lives = await response.json();
+    console.log("Lives recebidas:", lives);
 
-    // Limpa os cards antigos, se necessário
-    row.innerHTML = "";
+    rowLive.innerHTML = "";
 
-    live.forEach(live => criarCard(live));
-
+    lives.forEach((live) => criarCard(live));
   } catch (err) {
-    console.error("Erro ao carregar live", err);
-    alert("Erro ao carregar live.");
+    console.error("Erro ao carregar lives", err);
+    alert("Erro ao carregar lives.");
   }
 }
 

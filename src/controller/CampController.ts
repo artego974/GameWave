@@ -8,7 +8,17 @@ export class CampeonatoController {
     // Listar todos os campeonatos
     async list(req: Request, res: Response) {
         const camp = await campRepository.find();
-        res.json(camp);
+
+        const cleanCamp = camp.map((c) => ({
+          id: c.id,
+          name: c.name,
+          description: c.description,
+          game: c.game,
+          numberOfPlayers: c.numberOfPlayers,
+          timeDate: c.timeDate,
+        }));
+
+        res.json(cleanCamp);        
         return;
     }
 
@@ -65,7 +75,8 @@ export class CampeonatoController {
         camp.timeDate = timeDate ? timeDate : camp.timeDate
         camp.numberOfPlayers = numberOfPlayers ? numberOfPlayers : camp.numberOfPlayers
 
-        
+        await campRepository.save(camp);
+        res.json(camp);
     }
 
     // Deletar campeonato

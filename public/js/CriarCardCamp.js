@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/campeonatos";
+const API_URL = "http://localhost:3000/campeonato";
 
 const row = document.querySelector(".container-cards .row");
 
@@ -9,7 +9,9 @@ function criarCard(camp) {
 
   col.innerHTML = `
     <div class="card shadow-sm">
-      <img class="card-img-top" src="${camp.imagem}" alt="Thumbnail">
+      <img class="card-img-top" src="${
+        camp.imagem || "https://via.placeholder.com/150"
+      }" alt="Thumbnail">
       <div class="card-body">
         <h5 class="card-title">${camp.name}</h5>
         <p class="card-text">${camp.description}</p>
@@ -17,7 +19,11 @@ function criarCard(camp) {
           <div class="btn-group">
             <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
           </div>
-          <small class="text-body-secondary">${camp.tempo || '0 min'}</small>
+          <small class="text-body-secondary">${
+            camp.timeDate
+              ? new Date(camp.timeDate).toLocaleDateString()
+              : "Sem data"
+          }</small>
         </div>
       </div>
     </div>
@@ -32,11 +38,7 @@ async function carregarCamp() {
     const response = await fetch(API_URL);
     const campeonatos = await response.json();
 
-    // Limpa os cards antigos, se necessário
-    row.innerHTML = "";
-
-    campeonatos.forEach(camp => criarCard(camp));
-
+    campeonatos.forEach((camp) => criarCard(camp));
   } catch (err) {
     console.error("Erro ao carregar campeonatos", err);
     alert("Erro ao carregar campeonatos.");
