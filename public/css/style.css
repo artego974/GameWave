@@ -249,6 +249,10 @@ header img {
   .nav-header {
     width: auto;
   }
+  .rowCamp, .rowLive{
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
 }
 
 @media (min-width: 769px) {
@@ -259,6 +263,7 @@ header img {
   .menu-overlay {
     display: none;
   }
+
 }
 
 .b-example-divider {
@@ -332,3 +337,20 @@ header img {
     width: 20%;
   }
 }
+
+.card {
+  margin: auto;           
+  width: 90%;   
+  max-height: 500px;         
+  max-width: 450px;       
+}
+
+.card-body {
+  text-align: center;     
+}
+
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+

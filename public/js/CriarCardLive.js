@@ -2,7 +2,7 @@ const LIVE_API_URL = "http://localhost:3000/live";
 document.addEventListener("DOMContentLoaded", () => {
   carregarlive(); // ou carregarlive()
 });
-const rowLive = document.querySelector("#container-lives .row");
+const rowLive = document.querySelector("#container-lives .rowLive");
 
 // Função para gerar o card de cada live
 function criarCard(live) {

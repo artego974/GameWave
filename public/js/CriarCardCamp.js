@@ -1,7 +1,10 @@
 const API_URL = "http://localhost:3000/campeonato";
 
-const row = document.querySelector(".container-cards .row");
+const rowC = document.querySelector("#container-campeonatos .rowCamp");
 
+if(!rowC){
+  console.error("card não encontrado")
+}
 // Função para gerar o card de cada campeonato
 function criarCard(camp) {
   const col = document.createElement("div");
@@ -29,7 +32,7 @@ function criarCard(camp) {
     </div>
   `;
 
-  row.appendChild(col);
+  rowC.appendChild(col);
 }
 
 // Carregar dados reais da API
@@ -41,7 +44,7 @@ async function carregarCamp() {
     campeonatos.forEach((camp) => criarCard(camp));
   } catch (err) {
     console.error("Erro ao carregar campeonatos", err);
-    alert("Erro ao carregar campeonatos.");
+    alert("Erro ao carregar campeonatos.",err);
   }
 }
 
