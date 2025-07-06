@@ -6,8 +6,8 @@ const userRepository = AppDataSource.getRepository(User);
 
 export class UserController{
     async list(req: Request,res:Response){
-        const prod = await userRepository.find();
-        res.json(prod);
+        const User = await userRepository.find();
+        res.json(User);
         return;
     }
 
@@ -65,28 +65,28 @@ export class UserController{
         const {id} = req.params;
         const {name,nickName,email,password} = req.body;
 
-        const prod = await userRepository.findOneBy({id:Number(id)});
+        const User = await userRepository.findOneBy({id:Number(id)});
 
-        if(!prod){
-            res.status(404).json({menssagem: "Produto não encontrado"})
+        if(!User){
+            res.status(404).json({menssagem: "Useruto não encontrado"})
             return;
         }
 
         if(name != ''){
-            prod.name = name;
+            User.name = name;
         }
         if(nickName != ''){
-            prod.nickName = nickName;
+            User.nickName = nickName;
         }
         if(email != ''){
-            prod.email = email;
+            User.email = email;
         }
         if(password != ''){
-            prod.password = password;
+            User.password = password;
         }
 
-        await userRepository.save(prod)
-        res.json(prod);
+        await userRepository.save(User)
+        res.json(User);
         return;
     }
 }
