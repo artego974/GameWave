@@ -1,10 +1,11 @@
-import { Entity, PrimaryColumn, Column, OneToMany, OneToOne, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, ManyToOne } from "typeorm";
 import { User } from "./User";
 import { Games } from "./Game";
 
 @Entity("lives")
 export class Live {
-    @PrimaryColumn()
+
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Column({type:"text"})

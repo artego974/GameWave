@@ -37,6 +37,10 @@ export class CampeonatoController {
         return;
     }
 
+    async entarCampeonato(req:Request,res:Response) {
+        
+    }
+
     // Atualizar campeonato
     async update(req: Request, res: Response) {
         const { id } = req.params;

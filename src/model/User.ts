@@ -1,6 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable, OneToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany,BeforeInsert, BeforeUpdate, AfterLoad, ManyToMany,ManyToOne, JoinTable, OneToOne} from "typeorm";
 import { Campeonato } from "./Campeonato";
 import { Live } from "./Live";
+import bcrypt from "bcryptjs";
+import { Participantes } from "./Participantes";
 
 @Entity('users')
 export class User {
@@ -18,7 +20,7 @@ export class User {
     private _password: string;
 
     @Column({type:'varchar', length: 100, nullable: false, unique: true})
-    private _nickName: string;
+    _nickName: string;
 
     @Column({type: "int", default: 0})
     seguidores!: number
@@ -30,13 +32,33 @@ export class User {
     Live!: Live;
 
     @OneToMany(()=> Campeonato, (campeonato) => campeonato.host)
-    campeonato!: User
+    campeonato!: Campeonato
+
+    @ManyToOne(() => Participantes, (participantes) => participantes.campeonato)
+    participantes!: Participantes;
+
+    private originalPassword: string
 
     constructor(name:string,email:string,password:string,nickName:string){
         this._nickName = nickName
         this._name = name;
         this._email = email;
         this._password = password;
+        this.originalPassword = password
+    }
+
+    @AfterLoad()
+    setOriginalPassword() {
+        this.originalPassword = this.password;
+    }
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    async hashPassword() {
+        if (this.password !== this.originalPassword) {
+            const salt = await bcrypt.genSalt(10);
+            this.password = await bcrypt.hash(this.password, salt)
+        }
     }
 
     /**

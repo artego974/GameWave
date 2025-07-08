@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
 import { User } from "./User";
+import { Participantes } from "./Participantes";
 @Entity('Campeonato')
 export class Campeonato {
     @PrimaryGeneratedColumn()
@@ -7,6 +8,9 @@ export class Campeonato {
 
     @Column({type: 'varchar', length: 255, nullable: false})
     private _name: string;
+
+    @Column({type: "varchar"})
+    fotoCampeonato!: string;
 
     @Column({ type: 'text', nullable: true})
     private _description: string;
@@ -23,9 +27,8 @@ export class Campeonato {
     @ManyToOne(()=> User, (host) => host.campeonato)
     host!: User
 
-    @ManyToMany(() => User)
-    @JoinTable({ name: 'participantes' })
-    participantes!: User[];
+    @ManyToOne(() => Participantes, (participantes) => participantes.campeonato)
+    participantes!: Participantes;
 
     /**
      * Getter name
