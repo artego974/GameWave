@@ -10,7 +10,7 @@ export class Live {
     @Column({type:"text"})
     private _img: string
 
-    @Column({ type: "text", nullable: false, unique: true })
+    @Column({ type: "text", nullable: false })
     private _link: string
 
     @Column({ type: "varchar", length: 255, nullable: false })

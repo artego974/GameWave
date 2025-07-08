@@ -13,6 +13,7 @@ export class CampeonatoController {
           id: c.id,
           name: c.name,
           description: c.description,
+          img: c.img,
           game: c.game,
           numberOfPlayers: c.numberOfPlayers,
           timeDate: c.timeDate,
@@ -24,9 +25,9 @@ export class CampeonatoController {
 
     // Criar novo Campeonato
     async create(req: Request, res: Response) {
-        const { name, description, game, timeDate, numberOfPlayers } = req.body;
+        const { name, description, img, game, timeDate, numberOfPlayers } = req.body;
 
-            const camp = campRepository.create({ name, description, game, numberOfPlayers,timeDate  });
+            const camp = campRepository.create({ name, description, img, game, numberOfPlayers,timeDate  });
             await campRepository.save(camp);
             res.status(201).json(camp);
             return;
@@ -50,7 +51,7 @@ export class CampeonatoController {
     // Atualizar campeonato
     async update(req: Request, res: Response) {
         const { id } = req.params;
-        const { name, description, game, timeDate, numberOfPlayers } = req.body;
+        const { name, description, img, game, timeDate, numberOfPlayers } = req.body;
 
         if(!id) {
             res.status(400).json({ message: "ID não informado!" });
@@ -71,6 +72,7 @@ export class CampeonatoController {
 
         camp.name = name ? name : camp.name
         camp.description = description ? description : camp.description
+        camp.img = img ? img : camp.img
         camp.game = game ? game : camp.game
         camp.timeDate = timeDate ? timeDate : camp.timeDate
         camp.numberOfPlayers = numberOfPlayers ? numberOfPlayers : camp.numberOfPlayers

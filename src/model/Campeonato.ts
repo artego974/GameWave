@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
 import { User } from "./User";
-@Entity('Campeonato')
+@Entity('campeonato')
 export class Campeonato {
     @PrimaryGeneratedColumn()
     id!: number;
@@ -11,6 +11,9 @@ export class Campeonato {
     @Column({ type: 'text', nullable: true})
     private _description: string;
 
+    @Column({type:"text"})
+    private _img: string;
+    
     @Column({ type: 'varchar', length: 100, nullable: false })
     private _game: string;
 
@@ -41,6 +44,13 @@ export class Campeonato {
      */
     public get description(): string {
         return this._description;
+    }
+    /**
+     * Getter description
+     * @return {string}
+     */
+    public get img(): string {
+        return this._img;
     }
 
     /**
@@ -82,6 +92,13 @@ export class Campeonato {
     public set description(value: string) {
         this._description = value;
     }
+    /**
+     * Setter description
+     * @param {string} value
+     */
+    public set img(value: string) {
+        this._img = value;
+    }
 
     /**
      * Setter game
@@ -106,9 +123,10 @@ export class Campeonato {
     public set timeDate(value: Date) {
         this._timeDate = value;
     }
-    constructor(name: string, description:string, game:string, numberOfPlayers:number,timeDate: Date) {
+    constructor(name: string, description:string, game:string,img:string , numberOfPlayers:number,timeDate: Date) {
         this._name = name;
         this._description = description;
+        this._img = img;
         this._game = game;
         this._numberOfPlayers = numberOfPlayers;
         this._timeDate = timeDate;
