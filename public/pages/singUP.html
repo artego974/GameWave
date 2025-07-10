@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameWave SingUp</title>
-    <link rel="stylesheet" href="../css/styleSingUP.css">
-    <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GameWave SignUp</title>
+  <link rel="stylesheet" href="../css/styleSingUP.css" />
+  <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon" />
 </head>
-
 <body>
-   
-    <main>
-        <p id="cad">Cadastre-se</p>
-        <div id="container">
-            <form action="submit">
-                <label for="nomeEscolhido">Nome</label>
-                <input placeholder="Insira seu nome" type="text">
-                <label for="email">Email</label>
-                <input placeholder="Insira seu Email" type="text">
-                <label for="senha">Senha</label>
-                <input placeholder="Insira sua Senha" type="text">
-                <label for="comfirmaSenha">Comfirmar Senha</label>
-                <input placeholder="Comfirme sua Senha" type="text">
-                <input id="checkBox" type="checkbox" value="16Anos">
-                <label for="Termo">Tenho 16 anos ou mais.</label>
-            </form>
-            <button id="nextSingUp">Continuar</button>
-        </div>
-    </main>
-</body>
+  <main>
+    <div id="container">
+      <p id="cad">Cadastre-se</p>
+      <form action="#">
+        <label for="nomeEscolhido">Nome</label>
+        <input placeholder="Insira seu nome" type="text" id="nomeEscolhido" />
 
+        <label for="email">Email</label>
+        <input placeholder="Insira seu Email" type="email" id="email" />
+
+        <label for="senha">Senha</label>
+        <input placeholder="Insira sua Senha" type="password" id="senha" />
+
+        <label for="confirmarSenha">Confirmar Senha</label>
+        <input placeholder="Confirme sua Senha" type="password" id="confirmarSenha" />
+
+        <div class="checkbox">
+          <input id="checkBox" type="checkbox" />
+          <label for="checkBox">Tenho 16 anos ou mais.</label>
+        </div>
+
+        <button id="nextSingUp" type="submit">Continuar</button>
+      </form>
+    </div>
+  </main>
+</body>
 </html>
