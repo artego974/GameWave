@@ -2,8 +2,19 @@ import {Request, Response} from "express"
 import { User } from "../model/User"
 import { AppDataSource } from "../config/data-source"
 import bcrypt from "bcryptjs"
+import jwt from "jsonwebtoken";                         // Biblioteca para manipulação de Tokens JWT (Authenticação)
+import dotenv from "dotenv";                            // Biblioteca para carregar variáveis de ambiente
 
 const userRepository = AppDataSource.getRepository(User);
+
+dotenv.config();                                        // Carrega as variáveis de ambiente do arquivo .env
+
+const JWT_SECRET = process.env.JWT_SECRET as jwt.Secret; // Obtém a chave secreta para JWT do ambiente
+
+// Verifica se a variável de ambiente JWT_SECRET está definida
+if (!JWT_SECRET) {
+    throw new Error("JWT_SECRET environment variable is not defined");
+}
 
 export class UserController{
     async list(req: Request,res:Response){
@@ -174,14 +185,30 @@ export class UserController{
                 res.status(401).json({ message: "Senha invalida." });
                 return;
             }
+            
+            const { password: _, ...userWithoutPassword } = user; // Remove a senha do objeto
 
-            res.status(200).json({ message: "Logado com sucesso."});
-            return;
+            const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
+
+            // Salva o token no cookie
+            res.cookie("token", token, {
+                httpOnly: true,                                 // Define o cookie como HttpOnly (não acessível via JavaScript)
+                secure: process.env.NODE_ENV === "production",  // Define o cookie como seguro (só enviado via HTTPS em produção)
+                sameSite: "none",                               // Define o cookie como None (padrão para cookies de terceiros)
+                maxAge: 1000 * 60 * 60                          // 1 hora em ms
+            });
+
+            // Se tudo estiver correto, retorna sucesso (200) com os dados do usuário sem a senha
+            res.status(200).json({ message: "Logado com sucesso.", user: userWithoutPassword });
         } catch (error) {
             // Em caso de erro inesperado, exibe o erro e retorna 500
-            console.error("Erro bizonho:", error);
-            res.status(500).json({ message: "Erro bizonho ou erro no server." });
-            return;
+            console.error("Erro ao logar no user:", error);
+            res.status(500).json({ message: "Erro bizonho ou erro de server." });
         }
+    }
+
+    async logoutUser(req: Request, res: Response): Promise<void> {
+        res.clearCookie("token");
+        res.status(200).json({ message: "Logout successful." });
     }
 }

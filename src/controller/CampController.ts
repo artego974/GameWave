@@ -60,10 +60,6 @@ export class CampeonatoController {
         return;
     }
 
-    async entarCampeonato(req:Request,res:Response) {
-        
-    }
-
     // Atualizar campeonato
     async update(req: Request, res: Response) {
         const { id } = req.params;
@@ -111,4 +107,18 @@ export class CampeonatoController {
         res.status(204).send();
         return;
     }
+
+    
+    async shew(req:Request,res:Response){
+        const {name} = req.body;
+        const camp = await campRepository.findOneBy({ name });
+
+        if(!camp){
+            res.status(404).json({menssagem: "Campeonato não encontrado!"});
+            return;
+        }
+        res.status(200).json(camp);
+        return;
+    }
+
 }
