@@ -53,9 +53,7 @@ export class UserController{
 
     async shew(req:Request,res:Response){
         const {nickName} = req.body;
-        const user = await userRepository.findOne({ where: {
-            _nickName: nickName
-        } });
+        const user = await userRepository.findOneBy({ nickName });
 
         if(!user){
             res.status(404).json({menssagem: "User não encontrado!"});
@@ -147,5 +145,43 @@ export class UserController{
         await userRepository.save(user)
         res.status(200).json(user);
         return;
+    }
+
+    // Método para logar no site
+    async loginUser(req: Request, res: Response){
+        const { email, password } = req.body;
+
+        //verifica se ambos campos foram fornecidos
+        if (!email || !password) {
+            res.status(400).json({ message: "Email e senha são necessarios." });
+            return;
+        }
+
+        try {
+            // Busca o usuário no banco de dados pelo email
+            const user = await userRepository.findOneBy({ email });
+
+            // Se não encontrar o usuário
+            if (!user) {
+                res.status(401).json({ message: "Usuario não encontrado." });
+                return;
+            }
+
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+
+            // Se a senha não for válida
+            if (!isPasswordValid) {
+                res.status(401).json({ message: "Senha invalida." });
+                return;
+            }
+
+            res.status(200).json({ message: "Logado com sucesso."});
+            return;
+        } catch (error) {
+            // Em caso de erro inesperado, exibe o erro e retorna 500
+            console.error("Erro bizonho:", error);
+            res.status(500).json({ message: "Erro bizonho ou erro no server." });
+            return;
+        }
     }
 }
