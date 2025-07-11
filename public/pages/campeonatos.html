@@ -32,7 +32,13 @@
     </div>
     <div class="config-header">
 
-      <img src="../../assets/plus.png" alt=""> <!-- criar lives e coisas em um bloco-->
+      <img src="../../assets/plus.png" alt="" id="plusButton"> <!-- criar lives e coisas em um bloco-->
+      <div id="plusOverlay" class="plus-overlay hide">
+        <aside class="aside-plus-menu">
+          <a href="./pages/criar-live.html">Criar Live</a>
+          <a href="./pages/criar-camp.html">Criar Camp</a>
+        </aside>
+      </div>
       <!-- se sobrar tempo fazer notificação -->
       <a href="perfil.html">
         <img src="../../assets/perfil.png" alt="">
@@ -40,8 +46,8 @@
       <a href="config.html">
         <img src="../../assets/configuracoes.png" alt=""> <!-- configurações -->
       </a>
-    </div>  
-    
+    </div>
+
     <div class="menu-toggle">
       <img src="../../assets/configuracoes.png" alt="Menu" id="menuButton">
     </div>
@@ -54,7 +60,7 @@
         <a href="./config.html">Configurações</a>
       </aside>
     </div>
-    
+
   </header>
 
   <div class="album py-5 bg-body-tertiary">
@@ -65,8 +71,8 @@
       </div>
     </div>
   </div>
-  
-  <script src="../js/script.js"></script>
+
+  <script src="../js/script.js" defer></script>
   <script src="../js/CriarCardCamp.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameWave Configurações</title>
-    <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon">
-    <link rel="stylesheet" href="../css/config.css">
-    <link rel="stylesheet" href="../css/header.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameWave Configurações</title>
+  <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon">
+  <link rel="stylesheet" href="../css/config.css">
+  <link rel="stylesheet" href="../css/header.css">
 </head>
+
 <body>
   <header>
 
@@ -29,7 +31,14 @@
     </div>
     <div class="config-header">
 
-      <img src="../../assets/plus.png" alt=""> <!-- criar lives e coisas em um bloco-->
+      <img src="../../assets/plus.png" alt="plus" id="plusButton">
+
+      <div id="plusOverlay" class="plus-overlay hide">
+        <aside class="aside-plus-menu">
+          <a href="./pages/criar-live.html">Criar Live</a>
+          <a href="./pages/criar-camp.html">Criar Camp</a>
+        </aside>
+      </div>
       <!-- se sobrar tempo fazer notificação -->
       <a href="perfil.html">
         <img src="../../assets/perfil.png" alt="">
@@ -37,8 +46,8 @@
       <a href="config.html">
         <img src="../../assets/configuracoes.png" alt=""> <!-- configurações -->
       </a>
-    </div>  
-    
+    </div>
+
     <div class="menu-toggle">
       <img src="../../assets/configuracoes.png" alt="Menu" id="menuButton">
     </div>
@@ -51,36 +60,37 @@
         <a href="./config.html">Configurações</a>
       </aside>
     </div>
-    
+
   </header>
 
-      <main class="container">
-        <h1>Configurações de Perfil</h1>
-        <p>Edite seu nickname, nome, imagem de perfil, banner e o tema do site.</p>
-    
-        <section class="form-section">
-          <label for="nickname">Nickname</label>
-          <input type="text" id="nickname" placeholder="Digite seu nickname">
-    
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" placeholder="Digite seu nome">
-    
-          <label for="banner">Banner</label>
-          <input type="file" id="banner">
-    
-          <label for="fotoPerfil">Foto de Perfil</label>
-          <input type="file" id="fotoPerfil">
-    
-          <label for="tema">Tema</label>
-          <select id="tema">
-            <option value="claro">Claro</option>
-            <option value="escuro" selected>Escuro</option>
-          </select>
-    
-          <button id="salvar">Salvar alterações</button>
-        </section>
-      </main>
+  <main class="container">
+    <h1>Configurações de Perfil</h1>
+    <p>Edite seu nickname, nome, imagem de perfil, banner e o tema do site.</p>
 
-      <script src="../js/script.js"></script>
+    <section class="form-section">
+      <label for="nickname">Nickname</label>
+      <input type="text" id="nickname" placeholder="Digite seu nickname">
+
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" placeholder="Digite seu nome">
+
+      <label for="banner">Banner</label>
+      <input type="file" id="banner">
+
+      <label for="fotoPerfil">Foto de Perfil</label>
+      <input type="file" id="fotoPerfil">
+
+      <label for="tema">Tema</label>
+      <select id="tema">
+        <option value="claro">Claro</option>
+        <option value="escuro" selected>Escuro</option>
+      </select>
+
+      <button id="salvar">Salvar alterações</button>
+    </section>
+  </main>
+
+  <script src="../js/script.js"></script>
 </body>
+
 </html>
