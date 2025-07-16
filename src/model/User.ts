@@ -1,106 +1,66 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable, OneToOne} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BeforeInsert, BeforeUpdate, AfterLoad, ManyToMany, ManyToOne, JoinTable, OneToOne } from "typeorm";
 import { Campeonato } from "./Campeonato";
 import { Live } from "./Live";
+import bcrypt from "bcryptjs";
+import { Participantes } from "./Participantes";
 
 @Entity('users')
 export class User {
-  
+
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({type:'varchar', length: 100, nullable: false })
-    private _name: string;
+    @Column({ type: 'varchar', length: 100, nullable: false })
+    name: string;
 
     @Column({ unique: true })
-    private _email: string;
+    email: string;
 
-    @Column({type:'varchar', nullable: false })
-    private _password: string;
+    @Column({ type: 'varchar', nullable: false })
+    password: string;
 
-    @Column({type:'varchar', length: 100, nullable: false, unique: true})
-    private _nickName: string;
+    @Column({ type: 'varchar', length: 100, nullable: false, unique: true })
+    nickName: string;
 
-    @Column({type: "int", default: 0})
-    seguidores!: number
+    @Column({ type: 'varchar', default: "../../pubic/img/fotoPadrao.png" })
+    fotoPerfil!: string
 
-    @Column({  type: "int", default: 0})
-    seguindo!: number
+    @Column({ type: 'varchar', default: "../../pubic/img/banerPadrao.png" })
+    banerPerfil!: string
 
-    @OneToMany( () => Live, (live) => live.user)
+    @OneToMany(() => Live, (live) => live.user)
     Live!: Live;
 
-    @OneToMany(()=> Campeonato, (campeonato) => campeonato.host)
-    campeonato!: User
+    @OneToMany(() => Campeonato, (campeonato) => campeonato.host)
+    campeonato!: Campeonato
 
-    constructor(name:string,email:string,password:string,nickName:string){
-        this._nickName = nickName
-        this._name = name;
-        this._email = email;
-        this._password = password;
+
+
+    @ManyToOne(() => Participantes, (participantes) => participantes.campeonato)
+    participantes!: Participantes;
+
+    private originalPassword: string
+
+    constructor(name: string, email: string, password: string, nickName: string) {
+        this.nickName = nickName
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.originalPassword = password
     }
 
-    /**
-     * Getter name
-     * @return {string}
-     */
-	public get name(): string {
-		return this._name;
-	}
+    @AfterLoad()
+    setOriginalPassword() {
+        this.originalPassword = this.password;
+    }
 
-    /**
-     * Getter email
-     * @return {string}
-     */
-	public get email(): string {
-		return this._email;
-	}
-
-    /**
-     * Getter password
-     * @return {string}
-     */
-	public get password(): string {
-		return this._password;
-	}
-
-    /**
-     * Getter nickName
-     * @return {string}
-     */
-	public get nickName(): string {
-		return this._nickName;
-	}
-
-    /**
-     * Setter name
-     * @param {string} value
-     */
-	public set name(value: string) {
-		this._name = value;
-	}
-
-    /**
-     * Setter email
-     * @param {string} value
-     */
-	public set email(value: string) {
-		this._email = value;
-	}
-
-    /**
-     * Setter password
-     * @param {string} value
-     */
-	public set password(value: string) {
-		this._password = value;
-	}
-
-    /**
-     * Setter nickName
-     * @param {string} value
-     */
-	public set nickName(value: string) {
-		this._nickName = value;
-	}
+    @BeforeInsert()
+    @BeforeUpdate()
+    async hashPassword() {
+        if (this.password !== this.originalPassword) {
+            const salt = await bcrypt.genSalt(10);
+            this.password = await bcrypt.hash(this.password, salt)
+        }
+    }
 
 }
