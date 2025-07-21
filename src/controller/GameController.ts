@@ -21,9 +21,9 @@ export class GameController {
             return;
         }
 
-        const nameGame = gameRepository.findOneBy({name: name})
+        const nameGame = await gameRepository.findOneBy({name: name})
 
-        if(nameGame !== null){
+        if(nameGame){
             res.status(409).json({message: "Jogo já existente!"})
             return;
         }

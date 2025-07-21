@@ -7,34 +7,24 @@ const liveRepository = AppDataSource.getRepository(Live);
 
 export class liveController {
     // Listar todos os lives
-       async list(req: Request, res: Response) {
-           const live = await liveRepository.find();
-   
-           const cleanlive = live.map((l) => ({
-             id: l.id,
-             titulo: l.titulo,
-             subtitulo: l.subtitulo,
-             link: l.link,
-             img: l.img,
-           }));          
-   
-           res.json(cleanlive);        
-           return;
+    async list(req: Request, res: Response) {
+        const live = await liveRepository.find();
+        res.json(live);
+        return;
     }
 
     // Criar novo live
     async create(req: Request, res: Response) {
-        const { link, titulo, subtitulo, img } = req.body;
-
-        if (!link || !titulo || !subtitulo || !img) {
-          res.status(400).json({ message: "Preencha todos os campos!" });
-          return;
+        const { link,titulo,subtitulo } = req.body;
+        if(link == '' || titulo =='' || subtitulo == ''){
+            res.status(400).json({  messagem: "Preencha todos os campos!" })
+            return
+        }else{
+            const live = liveRepository.create({link,titulo,subtitulo});
+            await liveRepository.save(live);
+            res.status(201).json(live);
+            return;
         }
-
-        const live = liveRepository.create({ link, titulo, subtitulo, img });
-        await liveRepository.save(live);
-        res.status(201).json(live);
-
     }
 
     // Buscar live por ID
@@ -63,7 +53,7 @@ export class liveController {
         }
 
         if(!link && !titulo && !subtitulo) {
-            res.status(400).json({ message: "Informe algum liveo!" });
+            res.status(400).json({ message: "Informe algum campo!" });
             return;          
         }
 
