@@ -1,10 +1,7 @@
 import { Router } from "express";
 import { UserController } from "../controller/UserController"
 import { AuthMiddleware } from "../middlewares/AuthMiddlewares";
-<<<<<<< HEAD
 import { upload } from "../middlewares/upload";
-=======
->>>>>>> 9844d7bba2009c02e6ec246cf97f8b23f204b97c
 
 const router = Router();
 const userController = new UserController();
@@ -19,9 +16,6 @@ router.patch("/user/updatePassword/:id",AuthMiddleware, userController.updatePas
 router.patch("/user/updateEmail/:id",AuthMiddleware, userController.updateEmail);
 router.post("/user/login", userController.loginUser)
 router.post("/user/logout", AuthMiddleware, userController.logoutUser)
-<<<<<<< HEAD
 router.post("/user/upload/avatar", upload.single("file"), userController.uploadAvatar)
-=======
->>>>>>> 9844d7bba2009c02e6ec246cf97f8b23f204b97c
 
 export default router;

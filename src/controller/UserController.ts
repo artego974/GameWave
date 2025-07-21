@@ -206,16 +206,11 @@ export class UserController{
             res.status(500).json({ message: "Erro bizonho ou erro de server." });
         }
     }
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 9844d7bba2009c02e6ec246cf97f8b23f204b97c
     async logoutUser(req: Request, res: Response): Promise<void> {
         res.clearCookie("token");
         res.status(200).json({ message: "Logout successful." });
     }
-<<<<<<< HEAD
 
     async uploadAvatar(req: Request, res: Response): Promise<void> {
         try {
@@ -243,6 +238,4 @@ export class UserController{
           res.status(500).json({ error: "Erro no upload" });
         }
       }      
-=======
->>>>>>> 9844d7bba2009c02e6ec246cf97f8b23f204b97c
 }
