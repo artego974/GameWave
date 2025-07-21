@@ -15,23 +15,33 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
+<<<<<<< HEAD
     "@types/mime-types": "^3.0.1",
     "@types/multer": "^2.0.0",
+=======
+>>>>>>> 9844d7bba2009c02e6ec246cf97f8b23f204b97c
     "@types/node": "^22.15.30",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+<<<<<<< HEAD
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
+=======
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^3.0.2",
+>>>>>>> 9844d7bba2009c02e6ec246cf97f8b23f204b97c
     "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
+    "dotenv": "^16.6.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+<<<<<<< HEAD
     "mime-types": "^3.0.1",
     "multer": "^2.0.2",
+=======
+>>>>>>> 9844d7bba2009c02e6ec246cf97f8b23f204b97c
     "mysql2": "^3.14.1",
-    "ora": "^5.4.1",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.24",
     "typeorm-migration-helper": "^1.0.2"

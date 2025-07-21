@@ -65,62 +65,64 @@
 
   <main>
     <div id="container-banner">
-      <img id="img-banner" src="./assets/" alt="fotoBanner">
-      <button id="change-banner-button">Adicione um banner</button>
+  <img id="img-banner" src="./assets/banner-exemplo.jpg" alt="fotoBanner">
 
-      <div id="container-perfil">
-        <div class="foto-perfil-wrapper">
-          <img id="img-perfil" src="./assets/usuario.png" alt="fotoPerfil">
-          <button class="botao-camera">
-            <img src="./assets/cam.png" alt="ícone câmera">
-          </button>
-        </div>
-        <div id="info">
-          <h2 id="nickName">NickName</h2>
-          <p class="description">Description</p>
-        </div>
-      </div>
+  <input type="file" id="input-banner" accept="image/*" style="display: none;">
+  <button id="change-banner-button">Adicione um banner</button>
+
+  <div id="container-perfil">
+    <div class="foto-perfil-wrapper">
+      <img id="img-perfil" src="./assets/usuario.png" alt="fotoPerfil">
+
+      <input type="file" id="input-perfil" accept="image/*" style="display: none;">
+      <button class="botao-camera" id="botao-camera">
+        <img src="./assets/cam.png" alt="ícone câmera">
+      </button>
     </div>
+
+    <div id="info">
+      <h2 id="nickName">NickName</h2>
+    </div>
+  </div>
+</div>
 
     <div id="container-menu">
 
       <div>
-        <button id="config-perfil"><img src="./assets/configuracoes.png" alt="config-">
-          <p>configuracoes</p>
-        </button>
+        <button id="config-perfil"><img src="./assets/configuracoes.png" alt="config-"><p>configuracoes</p></button>
       </div>
 
-      <h1>Torneios</h1>
-      <div id="camps">
+        <h1>Campeonatos</h1>
+        <div id="camps">
         <div class="torneio">
           <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Torneio</h3>
+          <h3 class="tituloCamp">Titulo do Campeonato</h3>
           <p class="gameTorneio">Jogo</p>
         </div>
         <div class="torneio">
           <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Torneio</h3>
+          <h3 class="tituloCamp">Titulo do Campeonato</h3>
           <p class="gameTorneio">Jogo</p>
         </div>
         <div class="torneio">
           <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Torneio</h3>
+          <h3 class="tituloCamp">Titulo do Campeonato</h3>
           <p class="gameTorneio">Jogo</p>
         </div>
-        <div class="torneio">
+         <div class="torneio">
           <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Torneio</h3>
+          <h3 class="tituloCamp">Titulo do Campeonato</h3>
           <p class="gameTorneio">Jogo</p>
         </div>
-        <div class="torneio">
+         <div class="torneio">
           <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Torneio</h3>
+          <h3 class="tituloCamp">Titulo do Campeonato</h3>
           <p class="gameTorneio">Jogo</p>
         </div>
       </div>
-
-      <h1>Lives</h1>
-      <div id="Lives">
+      
+        <h1>Lives</h1>
+        <div id="Lives">
         <div class="live">
           <img src="./assets/" alt="fotoVideo">
           <h3 class="tituloLive">Titulo da Live</h3>
@@ -147,7 +149,7 @@
           <p class="subtitulo">Subtitulo</p>
         </div>
       </div>
-
+      
     </div>
 
     <script src="../js/script.js"></script>
