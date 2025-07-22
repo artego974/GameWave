@@ -92,67 +92,25 @@
         <button id="config-perfil"><img src="./assets/configuracoes.png" alt="config-"><p>configuracoes</p></button>
       </div>
 
-        <h1>Campeonatos</h1>
-        <div id="camps">
-        <div class="torneio">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Campeonato</h3>
-          <p class="gameTorneio">Jogo</p>
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container-cards" id="container-campeonatos">
+          <h2 class="text-center">Campeonatos</h2>
+          <div class="rowCamp d-flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <!-- Cards de Campeonatos gerados por JS -->
+          </div>
         </div>
-        <div class="torneio">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Campeonato</h3>
-          <p class="gameTorneio">Jogo</p>
-        </div>
-        <div class="torneio">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Campeonato</h3>
-          <p class="gameTorneio">Jogo</p>
-        </div>
-         <div class="torneio">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Campeonato</h3>
-          <p class="gameTorneio">Jogo</p>
-        </div>
-         <div class="torneio">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloCamp">Titulo do Campeonato</h3>
-          <p class="gameTorneio">Jogo</p>
-        </div>
-      </div>
-      
-        <h1>Lives</h1>
-        <div id="Lives">
-        <div class="live">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloLive">Titulo da Live</h3>
-          <p class="subtitulo">Subtitulo</p>
-        </div>
-        <div class="live">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloLive">Titulo da Live</h3>
-          <p class="subtitulo">Subtitulo</p>
-        </div>
-        <div class="live">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloLive">Titulo da Live</h3>
-          <p class="subtitulo">Subtitulo</p>
-        </div>
-        <div class="live">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloLive">Titulo da Live</h3>
-          <p class="subtitulo">Subtitulo</p>
-        </div>
-        <div class="live">
-          <img src="./assets/" alt="fotoVideo">
-          <h3 class="tituloLive">Titulo da Live</h3>
-          <p class="subtitulo">Subtitulo</p>
+    
+        <div class="container-cards" id="container-lives" style="margin-top: 5rem;">
+          <h2 class="text-center">Lives</h2>
+          <div class="rowLive d-flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"></div>
         </div>
       </div>
       
     </div>
 
     <script src="../js/script.js"></script>
+    <script src="../js/CriarCardCamp.js"></script>
+    <script src="../js/CriarCardLive.js"></script>
 </body>
 
 </html>
