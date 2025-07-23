@@ -11,18 +11,21 @@
   <main>
     <div id="container">
       <p id="cad">Cadastre-se</p>
-      <form action="#">
+      <form id="cadastroForm" action="submit">
         <label for="nomeEscolhido">Nome</label>
-        <input placeholder="Insira seu nome" type="text" id="nomeEscolhido" />
+        <input placeholder="Insira seu nome" type="text" id="nomeEscolhido" name="name" required />
+
+        <label for="nickNameEscolhido">NickName</label>
+        <input placeholder="Insira seu nick name" type="text" id="nickNameEscolhido" name="nickName" required />
 
         <label for="email">Email</label>
-        <input placeholder="Insira seu Email" type="email" id="email" />
+        <input placeholder="Insira seu Email" type="email" id="email" name="email" required />
 
         <label for="senha">Senha</label>
-        <input placeholder="Insira sua Senha" type="password" id="senha" />
+        <input placeholder="Insira sua Senha" type="password" id="senha" name="password" required />
 
         <label for="confirmarSenha">Confirmar Senha</label>
-        <input placeholder="Confirme sua Senha" type="password" id="confirmarSenha" />
+        <input placeholder="Confirme sua Senha" type="password" id="confirmarSenha" required />
 
         <div class="checkbox">
           <input id="checkBox" type="checkbox" />
@@ -33,5 +36,6 @@
       </form>
     </div>
   </main>
+  <script src="../js/SingUP.js"></script>
 </body>
 </html>

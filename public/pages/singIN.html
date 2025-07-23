@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameWave SingIN</title>
@@ -11,14 +13,15 @@
     <main>
         <div id="container">
             <p id="cad">Login</p>
-            <form action="submit">
+            <form id="loginForm" action="submit">
                 <label for="email">Email</label>
-                <input placeholder="Insira seu Email" type="text" id="email">
+                <input placeholder="Insira seu Email" type="text" id="email" name="email" required>
                 <label for="senha">Senha</label>
-                <input placeholder="Insira sua Senha" type="password" id="senha">
-                <button id="nextSingUp">Continuar</button>
+                <input placeholder="Insira sua Senha" type="password" id="senha" name="password" required>
+                <button id="nextSingIN">Continuar</button>
             </form>
         </div>
     </main>
+    <script src="../js/SingIN.js"></script>
 </body>
 </html>
