@@ -1,0 +1,185 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-fundo-header: #2d4164;
+  --cor-violeta-fundo: #712cf9;
+  --cor-violeta-hover: #6528e0;
+  --cor-violeta-ativa: #5a23c8;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0f111a;
+  font-family: Arial, sans-serif;
+}
+
+/* Container flex principal */
+.container-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem 2rem; /* Alterado aqui */
+    background-color: #1c1f2e;
+    border-radius: 1%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    max-width: 85%;
+    margin: 2rem auto;
+  }
+
+/* Card */
+.card {
+  flex-grow: 1;
+  width: auto;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+}
+
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  background-color: #55595c;
+  overflow: hidden;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+#imagem-preview {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+/* Questionário */
+.questionnaire {
+    margin-top: 2%; /* Alterado aqui */
+    width: 30%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+  }
+
+/* Texto das perguntas */
+.quest {
+  color: #ffffff;
+  font-size: 105%;
+  margin-bottom: 2%;
+  font-weight: bold;
+}
+
+/* Inputs do questionário */
+.input-quest {
+  width: 100%;
+  font-size: 100%;
+  margin-bottom: 2%;
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+/* Botão Criar */
+#buttom-quest button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.75rem 0;
+  background-color: #2a2f45;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 5%;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  font-size: 100%;
+}
+
+#buttom-quest button:hover {
+  background-color: #3b4261;
+  color: #f0f0f0;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  background-color: #2a2f45;
+}
+
+.btn-group {
+  background-color: #2a2f45;
+  color: #ccc;
+}
+
+.btn-sm:hover {
+  background-color: #3b4261;
+  color: #f0f0f0;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#botao {
+  padding: 5px;
+  margin: 2px;
+  border-radius: 5px;
+  border: 0.3px solid #ffffff;
+}
+
+/* Novo estilo para o botão de escolher arquivo */
+.file-upload-wrapper {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.file-upload-label {
+  display: inline-block;
+  width: 100%;
+  padding: 0.75rem 0;
+  background-color: #2a2f45;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 5%;
+  text-align: center;
+  cursor: pointer;
+  font-size: 100%;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.file-upload-label:hover {
+  background-color: #3b4261;
+  color: #f0f0f0;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .container-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .questionnaire {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
