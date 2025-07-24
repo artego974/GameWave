@@ -16,8 +16,8 @@ router.patch("/user/updatePassword/:id",AuthMiddleware, userController.updatePas
 router.patch("/user/updateEmail/:id",AuthMiddleware, userController.updateEmail);
 router.post("/user/login", userController.loginUser)
 router.post("/user/logout", AuthMiddleware, userController.logoutUser)
-router.put("/user/upload/avatar", upload.single("file"), userController.uploadAvatar)
-router.put("/user/upload/banner", upload.single("file"), userController.uploadBanner)
+router.put("/user/upload/avatar/:id", upload.single("file"), userController.uploadAvatar)
+router.put("/user/upload/banner/:id", upload.single("file"), userController.uploadBanner)
 
 
 export default router;
