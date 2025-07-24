@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // voces tinham escrito const botao = dpppppcument.getElementById("nextSingIN")
     const botao = document.getElementById("nextSingIN")
-    const loginForm = document.getElementById("loginForm");         // Formulário de login
     const formulario = document.getElementById("container");       // Container principal do formulário (pode conter login ou cadastro)
   
     /**
@@ -13,11 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
      * Impede o envio tradicional do formulário, coleta os dados e envia uma requisição POST para a API.
      * Se o login for bem-sucedido, exibe mensagem e redireciona para a tela principal.
      */
-    async function realizarLogin(e) {
+    formulario.addEventListener("submit",async (e) => {
       e.preventDefault(); // Evita recarregar a página
+      alert("teste")
   
       // Coleta os dados inseridos nos campos
-      const email = document.getElementById("email").value;
+      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("senha").value;
   
       try {
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Se o login foi bem-sucedido
           formulario.style.display = "none";       // Esconde o formulário
           setTimeout(() => {
-            window.location.href = "index.html"; // Redireciona após 1.5s
+            window.location.href = "../index.html"; // Redireciona após 1.5s
           }, 1500);
         } else {
           // Se houve erro, exibe a mensagem da API (ou uma mensagem genérica)
@@ -44,8 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } catch (error) {
         alert("Erro na requisição: " + error.message); // Erro de rede ou execução
       }
-    }
-    botao.addEventListener("submit", realizarLogin)
+    })
   });
 
 

@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameWave Configurações</title>
-    <link rel="stylesheet" href="../css/criar.css">
-    <link rel="stylesheet" href="../css/header.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GameWave Criar Lives</title>
+  <link rel="stylesheet" href="../css/criarLive.css" />
+  <link rel="stylesheet" href="../css/header.css" />
 </head>
 <body>
   <header>
-
     <div class="nav-header">
       <div class="img-nav">
-        <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt=""></a>
+        <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt="" /></a>
       </div>
-
       <div class="ancora-nav">
         <a href="campeonatos.html">Campeonatos</a>
         <a href="lives.html">Lives</a>
@@ -23,23 +21,24 @@
 
     <div class="pesquisa-header">
       <form action="">
-        <input type="text" placeholder="Pesquisar">
+        <input type="text" placeholder="Pesquisar" />
       </form>
     </div>
-    <div class="config-header">
 
-      <img src="../../assets/plus.png" alt=""> <!-- criar lives e coisas em um bloco-->
-      <!-- se sobrar tempo fazer notificação -->
-      <a href="perfil.html">
-        <img src="../../assets/perfil.png" alt="">
-      </a> <!-- perfil -->
-      <a href="config.html">
-        <img src="../../assets/configuracoes.png" alt=""> <!-- configurações -->
-      </a>
-    </div>  
-    
+    <div class="config-header">
+      <img src="../../assets/plus.png" alt="plus" id="plusButton" />
+      <div id="plusOverlay" class="plus-overlay hide">
+        <aside class="aside-plus-menu">
+          <a href="../pages/criarLives.html">Criar Live</a>
+          <a href="../pages/criarCampeonatos.html">Criar Camp</a>
+        </aside>
+      </div>
+      <a href="perfil.html"><img src="../../assets/perfil.png" alt="" /></a>
+      <a href="config.html"><img src="../../assets/configuracoes.png" alt="" /></a>
+    </div>
+
     <div class="menu-toggle">
-      <img src="../assets/setting.png" alt="Menu" id="menuButton">
+      <img src="../../assets/configuracoes.png" alt="Menu" id="menuButton" />
     </div>
 
     <div class="menu-overlay" id="menuOverlay">
@@ -50,9 +49,42 @@
         <a href="./config.html">Configurações</a>
       </aside>
     </div>
-    
   </header>
 
-      <script src="../js/script.js"></script>
+  <div class="container-flex">
+    <div class="card shadow-sm" style="width: 22rem; margin: 0;">
+      <div class="card-img-wrapper">
+        <svg class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img"
+          width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100%" height="100%" fill="#55595c"></rect>
+        </svg>
+        <img id="imagem-preview" src="#" alt="Pré-visualização" />
+      </div>
+    </div>
+
+    <div class="questionnaire">
+      <!-- Botão Escolher Arquivo -->
+      <div class="file-upload-wrapper">
+        <label id="btnEscolher" for="arquivo" class="file-upload-label">Escolher arquivo</label>
+        <input type="file" id="arquivo" name="arquivo" accept="image/*" onchange="previewImagem()" style="display:none;" />
+      </div>
+
+      <p class="quest">Link</p>
+      <input id="link" class="input-quest" type="url" />
+
+      <p class="quest">Título</p>
+      <input id="titulo" class="input-quest" type="text" />
+
+      <p class="quest">Subtítulo</p>
+      <input id="subtitulo" class="input-quest" type="text" />
+
+      <div id="buttom-quest">
+        <button>Criar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+  <script src="../js/CriarLive.js"></script>
 </body>
 </html>
