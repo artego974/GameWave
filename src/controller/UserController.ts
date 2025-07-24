@@ -238,4 +238,30 @@ export class UserController{
           res.status(500).json({ error: "Erro no upload" });
         }
       }      
+    async uploadBanner(req: Request, res: Response): Promise<void> {
+        try {
+          if (!req.file) {
+            res.status(400).json({ error: "Nenhum arquivo enviado." });
+            return;
+          }
+      
+          const { originalname, filename, mimetype, size, path } = req.file;
+      
+          // Se quiser, associe ao usuário aqui pelo req.params.id ou pelo token
+      
+          res.status(200).json({
+            message: "Upload feito com sucesso",
+            file: {
+              originalname,
+              filename,
+              mimetype,
+              size,
+              path,
+            },
+          });
+        } catch (err) {
+          console.error(err);
+          res.status(500).json({ error: "Erro no upload" });
+        }
+      }      
 }
