@@ -22,10 +22,10 @@ export class User {
     @Column({ type: 'varchar', length: 100, nullable: false, unique: true })
     nickName: string;
 
-    @Column({ type: 'varchar', default: "../../pubic/img/fotoPadrao.png" })
+    @Column({ type: 'varchar' })
     fotoPerfil!: string
 
-    @Column({ type: 'varchar', default: "../../pubic/img/banerPadrao.png" })
+    @Column({ type: 'varchar' })
     banerPerfil!: string
 
     @OneToMany(() => Live, (live) => live.user)
