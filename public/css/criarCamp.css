@@ -24,48 +24,20 @@
     font-family: Arial, sans-serif;
   }
   
-  /* Responsivo */
-  @media (max-width: 768px) {
-    .container-flex {
-      flex-direction: column;
-      padding: 2rem;
-      gap: 2rem;
-    }
-  
-    .card,
-    .questionnaire {
-      width: 100%;
-      max-width: 100%;
-      margin: 0;
-    }
-  
-    .questionnaire {
-      align-self: stretch;
-      margin-left: 0;
-    }
-  }
-  
-  @media (min-width: 769px) {
-    .questionnaire {
-      margin-left: 2%;
-    }
-  }
-  
   /* Container flex principal */
   .container-flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 1.5rem;
-    padding: 2rem 2rem; /* Alterado aqui */
-    background-color: #1c1f2e;
-    border-radius: 1%;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    max-width: 85%;
-    margin: 2rem auto;
-  }
-  
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 2rem 2rem; /* Alterado aqui */
+      background-color: #1c1f2e;
+      border-radius: 1%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 85%;
+      margin: 2rem auto;
+    }
   
   /* Card */
   .card {
@@ -87,8 +59,8 @@
   #imagem-preview {
     position: absolute;
     top: 0; left: 0;
-    max-width: 100%;
-    height: auto;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: none;
     border-radius: 0.25rem 0.25rem 0 0;
@@ -96,13 +68,13 @@
   
   /* Questionário */
   .questionnaire {
-    margin-top: 2%; /* Alterado aqui */
-    width: 30%;
-    max-width: 350px;
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-  }
+      margin-top: 2%; /* Alterado aqui */
+      width: 30%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+    }
   
   /* Texto das perguntas */
   .quest {
@@ -122,15 +94,9 @@
     border-radius: 4px;
   }
   
-  /* Botão estilizado e com hover */
-  #buttom-quest {
-    margin-top: 2rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
+  /* Botão Criar */
   #buttom-quest button {
+    margin-top: 1.5rem;
     width: 100%;
     padding: 0.75rem 0;
     background-color: #2a2f45;
@@ -150,11 +116,11 @@
   }
   
   .card-body {
-    background-color:  #2a2f45;
+    background-color: #2a2f45;
   }
   
   .btn-group {
-    background-color:#2a2f45 ;
+    background-color: #2a2f45;
     color: #ccc;
   }
   
@@ -172,28 +138,7 @@
     border: 0.3px solid #ffffff;
   }
   
-  /* Responsividade extra */
-  @media (max-width: 768px) {
-    .container-flex {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .card {
-      width: 100%;
-      margin-bottom: 2rem;
-    }
-  
-    .questionnaire {
-      width: 100%;
-      max-width: 100%;
-      margin-left: 0;
-      padding: 0 1rem;
-      align-self: center;
-    }
-  }
-  
-  /* Upload */
+  /* Novo estilo para o botão de escolher arquivo */
   .file-upload-wrapper {
     width: 100%;
     margin-bottom: 1rem;
@@ -221,3 +166,20 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
+  @media (max-width: 768px) {
+    .container-flex {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+  
+    .card {
+      width: 100%;
+    }
+  
+    .questionnaire {
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+    }
+  }

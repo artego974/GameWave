@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ email, password }) // Converte os dados para JSON
+          body: JSON.stringify({ email, password }), // Converte os dados para JSON
+          credentials: "include"
         });
   
         if (res.ok) {

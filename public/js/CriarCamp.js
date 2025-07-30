@@ -1,14 +1,35 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const botaoCriar = document.querySelector("#buttom-quest button");
+    const arquivoInput = document.getElementById("arquivo");
+    const imagemPreview = document.getElementById("imagem-preview");
+    const svgPlaceholder = document.querySelector('.card-img-wrapper svg');
+
+    // Mostrar imagem ao selecionar o arquivo
+    arquivoInput.addEventListener("change", function () {
+        const arquivo = arquivoInput.files[0];
+
+        if (arquivo) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                imagemPreview.src = e.target.result;
+                imagemPreview.style.display = 'block';
+                if (svgPlaceholder) svgPlaceholder.style.display = 'none';
+            };
+
+            reader.readAsDataURL(arquivo);
+        } else {
+            imagemPreview.src = '#';
+            imagemPreview.style.display = 'none';
+            if (svgPlaceholder) svgPlaceholder.style.display = 'block';
+        }
+    });
 
     botaoCriar.addEventListener("click", async function (event) {
         event.preventDefault();
 
-        // Pega os inputs pela classe input-quest
         const inputs = document.querySelectorAll(".input-quest");
 
-        // Captura dados do form
         const dados = {
             titulo: inputs[0].value,
             descricao: inputs[1].value,
@@ -19,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
-
             const formData = new FormData();
             formData.append("titulo", dados.titulo);
             formData.append("descricao", dados.descricao);
@@ -28,15 +48,18 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.append("data", dados.data);
             formData.append("hora", dados.hora);
 
-            // Pega arquivo da imagem
-            const arquivoInput = document.getElementById("arquivo");
             if (arquivoInput.files.length > 0) {
                 formData.append("arquivo", arquivoInput.files[0]);
             }
 
-            const resposta = await fetch("", {
+            // 🔴 Substitua pela URL real da sua API
+            const resposta = await fetch("http://localhost:3000/campeonato", {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: formData,
+                credentials: 'include'
             });
 
             if (!resposta.ok) throw new Error("Erro ao enviar os dados");
@@ -49,27 +72,4 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Erro ao criar campeonato.");
         }
     });
-    //função para pegar imagem dos arquivos do usuario 
-    function previewImagem() {
-        const arquivo = document.getElementById('arquivo').files[0];
-        const preview = document.getElementById('imagem-preview');
-        const svgPlaceholder = document.querySelector('.card-img-wrapper svg');
-
-        if (arquivo) {
-            const reader = new FileReader();
-
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                preview.style.display = 'block';
-                if (svgPlaceholder) svgPlaceholder.style.display = 'none';
-            };
-
-            reader.readAsDataURL(arquivo);
-        } else {
-            preview.src = '#';
-            preview.style.display = 'none';
-            if (svgPlaceholder) svgPlaceholder.style.display = 'block';
-        }
-    }
-
 });

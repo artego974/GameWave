@@ -1,4 +1,4 @@
-import {Request, Response} from "express"
+import { Request, Response } from "express"
 import { User } from "../model/User"
 import { AppDataSource } from "../config/data-source"
 import bcrypt from "bcryptjs"
@@ -16,33 +16,33 @@ if (!JWT_SECRET) {
     throw new Error("JWT_SECRET environment variable is not defined");
 }
 
-export class UserController{
-    async list(req: Request,res:Response){
+export class UserController {
+    async list(req: Request, res: Response) {
         const prod = await userRepository.find();
         res.json(prod);
         return;
     }
 
-    async create(req:Request,res:Response){
-        const {name,email,nickName,password} = req.body;
-        if(name == '' || nickName =='' || password == ''|| email == ''){
-            res.status(400).json({  messagem: "Preencha todos os campos!" })
+    async create(req: Request, res: Response) {
+        const { name, email, nickName, password } = req.body;
+        if (name == '' || nickName == '' || password == '' || email == '') {
+            res.status(400).json({ messagem: "Preencha todos os campos!" })
             return
-        }else{
-            const newUser = new User(name,email,password,nickName)
+        } else {
+            const newUser = new User(name, email, password, nickName)
             const user = userRepository.create(newUser);
             await userRepository.save(user);
             res.status(201).json(user);
             return;
-        }  
+        }
     }
 
-    async delete(req:Request,res:Response){
-        const {id} = req.params;
+    async delete(req: Request, res: Response) {
+        const { id } = req.params;
 
-        const user = await userRepository.findOneBy({id:Number(id)});
+        const user = await userRepository.findOneBy({ id: Number(id) });
 
-        if(!user){
+        if (!user) {
             res.status(401).json({ menssagem: "User não encontrado" });
             return;
         }
@@ -51,49 +51,49 @@ export class UserController{
         return;
     }
 
-    async show(req:Request,res:Response){
-        const {id} = req.params;
-        const user = await userRepository.findOneBy({id:Number(id)});
-        if(!user){
-            res.status(404).json({menssagem: "User não encontrado!"});
+    async show(req: Request, res: Response) {
+        const { id } = req.params;
+        const user = await userRepository.findOneBy({ id: Number(id) });
+        if (!user) {
+            res.status(404).json({ menssagem: "User não encontrado!" });
             return;
         }
         res.status(201).json(user);
         return;
     }
 
-    async shew(req:Request,res:Response){
-        const {nickName} = req.body;
+    async shew(req: Request, res: Response) {
+        const { nickName } = req.body;
         const user = await userRepository.findOneBy({ nickName });
 
-        if(!user){
-            res.status(404).json({menssagem: "User não encontrado!"});
+        if (!user) {
+            res.status(404).json({ menssagem: "User não encontrado!" });
             return;
         }
         res.status(200).json(user);
         return;
     }
 
-    async updatePassword(req: Request, res:Response){
-        const {id} = req.params
-        const {password, newPassword} = req.body
-        
-        const user = await userRepository.findOneBy({id:Number(id)});
+    async updatePassword(req: Request, res: Response) {
+        const { id } = req.params
+        const { password, newPassword } = req.body
 
-        if(!user){
-            res.status(404).json({menssagem: "User não encontrado!"});
+        const user = await userRepository.findOneBy({ id: Number(id) });
+
+        if (!user) {
+            res.status(404).json({ menssagem: "User não encontrado!" });
             return;
         }
 
-        if(!newPassword  || !password){
-            res.status(400).json({message: "Insira todos campos!"});
+        if (!newPassword || !password) {
+            res.status(400).json({ message: "Insira todos campos!" });
             return;
         }
 
         const isValid = await bcrypt.compare(password, user.password);
 
-        if(!isValid){
-            res.status(401).json({message: "Senha invalida!"});
+        if (!isValid) {
+            res.status(401).json({ message: "Senha invalida!" });
             return;
         }
 
@@ -104,26 +104,26 @@ export class UserController{
         return;
     }
 
-    async updateEmail(req: Request, res:Response){
-        const {id} = req.params
-        const {password, newEmail} = req.body
-        
-        const user = await userRepository.findOneBy({id:Number(id)});
+    async updateEmail(req: Request, res: Response) {
+        const { id } = req.params
+        const { password, newEmail } = req.body
 
-        if(!user){
-            res.status(404).json({menssagem: "User não encontrado!"});
+        const user = await userRepository.findOneBy({ id: Number(id) });
+
+        if (!user) {
+            res.status(404).json({ menssagem: "User não encontrado!" });
             return;
         }
 
-        if(!newEmail  || !password){
-            res.status(400).json({message: "Insira todos campos!"});
+        if (!newEmail || !password) {
+            res.status(400).json({ message: "Insira todos campos!" });
             return;
         }
 
         const isValid = await bcrypt.compare(password, user.password);
 
-        if(!isValid){
-            res.status(401).json({message: "Senha invalida!"});
+        if (!isValid) {
+            res.status(401).json({ message: "Senha invalida!" });
             return;
         }
 
@@ -133,23 +133,23 @@ export class UserController{
         res.status(200).json(user);
         return;
     }
-    
 
-    async update(req:Request,res:Response){
-        const {id} = req.params;
-        const {name,nickName} = req.body;
 
-        const user = await userRepository.findOneBy({id:Number(id)});
+    async update(req: Request, res: Response) {
+        const { id } = req.params;
+        const { name, nickName } = req.body;
 
-        if(!user){
-            res.status(404).json({menssagem: "Usuario não encontrado"})
+        const user = await userRepository.findOneBy({ id: Number(id) });
+
+        if (!user) {
+            res.status(404).json({ menssagem: "Usuario não encontrado" })
             return;
         }
 
-        if(name != ''){
+        if (name != '') {
             user.name = name;
         }
-        if(nickName != ''){
+        if (nickName != '') {
             user.nickName = nickName;
         }
 
@@ -159,7 +159,7 @@ export class UserController{
     }
 
     // Método para logar no site
-    async loginUser(req: Request, res: Response){
+    async loginUser(req: Request, res: Response) {
         const { email, password } = req.body;
 
         //verifica se ambos campos foram fornecidos
@@ -185,7 +185,7 @@ export class UserController{
                 res.status(401).json({ message: "Senha invalida." });
                 return;
             }
-            
+
             const { password: _, ...userWithoutPassword } = user; // Remove a senha do objeto
 
             const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
@@ -197,6 +197,7 @@ export class UserController{
                 sameSite: "none",                               // Define o cookie como None (padrão para cookies de terceiros)
                 maxAge: 1000 * 60 * 60                          // 1 hora em ms
             });
+
 
             // Se tudo estiver correto, retorna sucesso (200) com os dados do usuário sem a senha
             res.status(200).json({ message: "Logado com sucesso.", user: userWithoutPassword });
@@ -210,5 +211,67 @@ export class UserController{
     async logoutUser(req: Request, res: Response): Promise<void> {
         res.clearCookie("token");
         res.status(200).json({ message: "Logout successful." });
+    }
+
+    async uploadAvatar(req: Request, res: Response): Promise<void> {
+        try {
+            const { id } = req.params;
+
+            const user = await userRepository.findOneBy({ id: Number(id) });
+            if (!user) {
+                res.status(404).json({ error: "Usuário não encontrado." });
+                return;
+            }
+
+            if (!req.file) {
+                res.status(400).json({ error: "Nenhum arquivo enviado." });
+                return;
+            }
+
+            // Atualiza o caminho da foto de perfil no banco
+            user.fotoPerfil = `/upload/${req.file.filename}`;
+
+            await userRepository.save(user);
+
+            res.status(200).json({
+                message: "Foto de perfil atualizada com sucesso!",
+                fotoPerfil: user.fotoPerfil,
+                user,
+            });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: "Erro ao atualizar foto de perfil." });
+        }
+    }
+
+    async uploadBanner(req: Request, res: Response): Promise<void> {
+        try {
+            const { id } = req.params;
+
+            const user = await userRepository.findOneBy({ id: Number(id) });
+            if (!user) {
+                res.status(404).json({ error: "Usuário não encontrado." });
+                return;
+            }
+
+            if (!req.file) {
+                res.status(400).json({ error: "Nenhum arquivo enviado." });
+                return;
+            }
+
+            // Atualiza o caminho do banner no banco
+            user.banerPerfil = `/upload/${req.file.filename}`;
+
+            await userRepository.save(user);
+
+            res.status(200).json({
+                message: "Banner atualizado com sucesso!",
+                banerPerfil: user.banerPerfil,
+                user,
+            });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: "Erro ao atualizar banner." });
+        }
     }
 }

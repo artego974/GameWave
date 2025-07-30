@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameWave Configurações</title>
-    <link rel="stylesheet" href="../css/criar.css">
-    <link rel="stylesheet" href="../css/header.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameWave Criar Campeonatos</title>
+  <link rel="stylesheet" href="../css/criarCamp.css">
+  <link rel="stylesheet" href="../css/header.css">
 </head>
+
 <body>
   <header>
-
     <div class="nav-header">
       <div class="img-nav">
         <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt=""></a>
       </div>
-
       <div class="ancora-nav">
         <a href="campeonatos.html">Campeonatos</a>
         <a href="lives.html">Lives</a>
@@ -26,20 +26,25 @@
         <input type="text" placeholder="Pesquisar">
       </form>
     </div>
-    <div class="config-header">
 
-      <img src="../../assets/plus.png" alt=""> <!-- criar lives e coisas em um bloco-->
-      <!-- se sobrar tempo fazer notificação -->
+    <div class="config-header">
+      <img src="../../assets/plus.png" alt="plus" id="plusButton">
+      <div id="plusOverlay" class="plus-overlay hide">
+        <aside class="aside-plus-menu">
+          <a href="../pages/criarLives.html">Criar Live</a>
+          <a href="../pages/criarCampeonatos.html">Criar Camp</a>
+        </aside>
+      </div>
       <a href="perfil.html">
         <img src="../../assets/perfil.png" alt="">
-      </a> <!-- perfil -->
-      <a href="config.html">
-        <img src="../../assets/configuracoes.png" alt=""> <!-- configurações -->
       </a>
-    </div>  
-    
+      <a href="config.html">
+        <img src="../../assets/configuracoes.png" alt="">
+      </a>
+    </div>
+
     <div class="menu-toggle">
-      <img src="../assets/setting.png" alt="Menu" id="menuButton">
+      <img src="../../assets/configuracoes.png" alt="Menu" id="menuButton">
     </div>
 
     <div class="menu-overlay" id="menuOverlay">
@@ -50,10 +55,52 @@
         <a href="./config.html">Configurações</a>
       </aside>
     </div>
-    
   </header>
 
+  <div class="container-flex">
+    <div class="card shadow-sm" style="width: 22rem; margin: 0;">
+      <div class="card-img-wrapper">
+        <svg class="bd-placeholder-img card-img-top" height="225" preserveAspectRatio="xMidYMid slice" role="img"
+          width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100%" height="100%" fill="#55595c"></rect>
+        </svg>
+        <img id="imagem-preview" src="#" alt="Pré-visualização" />
+      </div>
+    </div>
 
-      <script src="../js/script.js"></script>
+    <div class="questionnaire">
+      <!-- Botão Escolher Arquivo -->
+      <div class="file-upload-wrapper">
+        <label for="arquivo" class="file-upload-label">Escolher arquivo</label>
+        <input type="file" id="arquivo" name="arquivo" accept="image/*" onchange="previewImagem()" style="display:none;" />
+      </div>
+
+      <p class="quest">Título</p>
+      <input class="input-quest" type="text" />
+
+      <p class="quest">Descrição</p>
+      <input class="input-quest" type="text" />
+
+      <p class="quest">Jogo</p>
+      <input class="input-quest" type="text" />
+
+      <p class="quest">Número de jogadores</p>
+      <input class="input-quest" type="number" />
+
+      <p class="quest">Data</p>
+      <input class="input-quest" type="date" />
+
+      <p class="quest">Hora</p>
+      <input class="input-quest" type="time" />
+
+      <div id="buttom-quest">
+        <button>Criar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+  <script src="../js/CriarCamp.js"></script>
 </body>
+
 </html>

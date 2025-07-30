@@ -1,61 +1,40 @@
 import express, { Application, Request, Response } from 'express';
+import cookieParser from 'cookie-parser';
 import { AppDataSource } from './config/data-source';
-import cors from 'cors';
-import path from 'path';
-
-// Rotas
-import UserRoutes from "./routes/UserRoutes";
+import UserRoutes from './routes/UserRoutes';
 import CampRoutes from "./routes/CampRoutes";
-import PlataformaRoutes from "./routes/PlataformaRoutes";
-import GameRoutes from "./routes/GameRoutes";
 import LiveRoutes from "./routes/LiveRoutes";
-import ParticipantesRoutes from "./routes/ParticipantesRoutes";
+import GameRoutes from "./routes/GameRoutes";
+import PlataformaRoutes from "./routes/PlataformaRoutes";
+import PartificapantesRoutes from "./routes/ParticipantesRoutes";
+import cors from "cors";
+import path from 'path';
+import multer from 'multer';
 
-//import helmet from 'helmet';
+const upload = multer({ dest: 'middlewares/upload/' });
 
 const app: Application = express();
 
-/**
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()); // ✅ adicionado aqui
+app.use(express.static("public"));
 
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://www.gstatic.com", "https://translate.googleapis.com"],
-      styleSrc: ["'self'", "https://www.gstatic.com", "https://fonts.googleapis.com", "'unsafe-inline'"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https://www.gstatic.com"],
-      connectSrc: ["'self'", "https://translate.googleapis.com"],
-    },
-  })
-);
-
-  */
-
- 
-
-// CORS precisa vir antes de tudo
 app.use(
   cors({
     origin: [
-      "http://127.0.0.1:5500", // Seu frontend
-      "http://localhost:5500",
-      "http://localhost:3000",// Alternativa
-      "http://127.0.0.1:3000"
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+      "http://127.0.0.1:5500",
     ],
-    credentials: true
+    credentials: true, // ✅ necessário para aceitar cookies cross-origin
   })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
-// Inicializa o banco e as rotas
 AppDataSource.initialize()
   .then(() => {
     app.use(CampRoutes);
@@ -63,8 +42,7 @@ AppDataSource.initialize()
     app.use(LiveRoutes);
     app.use(GameRoutes);
     app.use(PlataformaRoutes);
-    app.use(ParticipantesRoutes);
-
+    app.use(PartificapantesRoutes);
     app.listen(3000, () => console.log('Server rodando na porta 3000'));
   })
   .catch((error) => console.log(error));
