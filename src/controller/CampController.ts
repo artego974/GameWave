@@ -16,9 +16,9 @@ export class CampeonatoController {
 
     // Criar novo Campeonato
     async create(req: Request, res: Response) {
-        const { name, description, nameGame, timeDate, numberOfPlayers } = req.body;
+        const { name, description, nameGame, date,time, numberOfPlayers } = req.body;
 
-            if(!name || !description || !nameGame || !timeDate || !numberOfPlayers){
+            if(!name || !description || !nameGame || !date || !numberOfPlayers || !time){
                 res.status(400).json({message: "Preencha todos os campos"})
                 return;
             }
@@ -37,7 +37,7 @@ export class CampeonatoController {
             }
 
 
-            const campeonato = new Campeonato(name, description, numberOfPlayers,timeDate)
+            const campeonato = new Campeonato(name, description, numberOfPlayers,date, time)
             campeonato.game = verificaGame;
 
             await campRepository.save(campeonato);
@@ -85,7 +85,8 @@ export class CampeonatoController {
         camp.name = name ? name : camp.name
         camp.description = description ? description : camp.description
         camp.game = game ? game : camp.game
-        camp.timeDate = timeDate ? timeDate : camp.timeDate
+        camp.date = timeDate ? timeDate : camp.date
+        camp.time = 
         camp.numberOfPlayers = numberOfPlayers ? numberOfPlayers : camp.numberOfPlayers
 
         

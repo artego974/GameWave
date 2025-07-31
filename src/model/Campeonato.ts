@@ -19,8 +19,11 @@ export class Campeonato {
     @Column({ type: 'int', nullable: false })
     numberOfPlayers: number;
 
-    @Column({ type: 'datetime', nullable: false })
-    timeDate: Date;
+    @Column({ type: "date", nullable: false })
+    date: string;
+
+    @Column({ type: "time", nullable: false })
+    time: string;
 
     @ManyToOne(() => Games, (game) => game.campeonato)
     game!: Games;
@@ -32,11 +35,12 @@ export class Campeonato {
     participantes!: Participantes;
 
 
-    constructor(name: string, description:string, numberOfPlayers:number,timeDate: Date) {
+    constructor(name: string, description:string, numberOfPlayers:number,date: string, time: string) {
         this.name = name;
         this.description = description;
         this.numberOfPlayers = numberOfPlayers;
-        this.timeDate = timeDate;
+        this.date = date;
+        this.time = time;
     }
 
 
