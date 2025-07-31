@@ -1,60 +1,35 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  const API_URL = "http://localhost:3000";
 
-  document.addEventListener("DOMContentLoaded", () => {
-  const btnConfig = document.getElementById("config-perfil");
-
-  btnConfig.addEventListener("click", () => {
-    window.location.href = "config.html"; 
-  });
-});
-
-openBtn.addEventListener('click', function (e) {
-  e.stopPropagation();
-  sideMenu.classList.toggle('show');
-});
-
-document.addEventListener('click', function (e) {
-  if (!sideMenu.contains(e.target) && !openBtn.contains(e.target)) {
-    sideMenu.classList.remove('show');
-  }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btnConfig = document.getElementById("config-perfil");
-
-  if (btnConfig) {
-    btnConfig.addEventListener("click", () => {
-      window.location.href = "config.html";
+  try {
+    const response = await fetch(`${API_URL}/user/profile`, {
+      credentials: "include" // envia cookies (token JWT)
     });
+
+    if (!response.ok) {
+      throw new Error("Falha ao buscar dados do usuário");
+    }
+
+    const user = await response.json();
+
+    // Atualiza o nickName
+    const nickNameEl = document.getElementById("nickName");
+    nickNameEl.textContent = user.nickName || "Usuário";
+
+    // Atualiza imagem de perfil (se existir)
+    if (user.avatarUrl) {
+      const imgPerfil = document.getElementById("img-perfil");
+      imgPerfil.src = user.avatarUrl;
+    }
+
+    // Atualiza imagem de banner (se existir)
+    if (user.bannerUrl) {
+      const imgBanner = document.getElementById("img-banner");
+      imgBanner.src = user.bannerUrl;
+    }
+
+  } catch (error) {
+    console.error("Erro ao carregar perfil:", error);
+    alert("Não foi possível carregar o perfil. Tente novamente.");
   }
-
-  const bannerInput = document.getElementById("input-banner");
-  const bannerButton = document.getElementById("change-banner-button");
-  const bannerImg = document.getElementById("img-banner");
-
-  bannerButton.addEventListener("click", () => {
-    bannerInput.click();
-  });
-
-  bannerInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      bannerImg.src = URL.createObjectURL(file);
-    }
-  });
-
-  const perfilInput = document.getElementById("input-perfil");
-  const perfilButton = document.getElementById("botao-camera");
-  const perfilImg = document.getElementById("img-perfil");
-
-  perfilButton.addEventListener("click", (e) => {
-    e.preventDefault(); 
-    perfilInput.click();
-  });
-
-  perfilInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      perfilImg.src = URL.createObjectURL(file);
-    }
-  });
 });

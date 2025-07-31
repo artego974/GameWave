@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameWave SingIN</title>
     <link rel="stylesheet" href="../css/styleSingIN.css">
+    <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon">
 </head>
-
-
 <body>
 
     <main>
-        <p id="cad">Login</p>
         <div id="container">
-            <form action="submit">
-                <label for="email"> Email</label>
-                <input placeholder="Insira seu Email" type="text">
-                <label for="senha"> Senha</label>
-
-                <input placeholder="Insira sua Senha" type="text">
-                <button id="nextSingUp">Continuar</button>
+            <p id="cad">Login</p>
+            <form id="loginForm" >
+                <label for="email">Email</label>
+                <input placeholder="Insira seu Email" type="text" id="email" name="email" required>
+                <label for="senha">Senha</label>
+                <input placeholder="Insira sua Senha" type="password" id="senha" name="password" required>
+                <button id="nextSingIN" type="submit">Continuar</button>
+                <p style="margin-top: 15px;">
+                    Não tem uma conta? 
+                    <a href="SingUp.html" style="color: #007BFF; text-decoration: none;">Cadastre-se aqui</a>
+                </p>
             </form>
-            
         </div>
     </main>
+    <script src="../js/SingIN.js" defer></script>
 </body>
-
 </html>

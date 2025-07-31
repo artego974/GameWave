@@ -273,4 +273,22 @@ export class UserController {
             res.status(500).json({ error: "Erro ao atualizar banner." });
         }
     }
+
+    async profile(req: Request, res: Response) {
+        try {
+          const user = await userRepository.findOneBy({ id: req.user!.id });
+      
+          if (!user) {
+            res.status(404).json({ message: "Usuário não encontrado." });
+            return;
+          }
+      
+          const { password: _, ...userWithoutPassword } = user;
+          res.status(200).json(userWithoutPassword);
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ message: "Erro ao buscar perfil." });
+        }
+      }      
+      
 }

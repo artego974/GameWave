@@ -1,111 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GameWave Configurações</title>
-  <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon">
-  <link rel="stylesheet" href="../css/config.css">
-  <link rel="stylesheet" href="../css/header.css">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameWave Configurações</title>
+    <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon">
+    <link rel="stylesheet" href="../css/config.css">
+    <link rel="stylesheet" href="../css/header.css">
+  </head>
 
-<body>
-  <header>
+  <body>
+    <header>
 
-    <div class="nav-header">
-      <div class="img-nav">
-        <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt=""></a>
+      <div class="nav-header">
+        <div class="img-nav">
+          <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt=""></a>
+        </div>
+
+        <div class="ancora-nav">
+          <a href="campeonatos.html">Campeonatos</a>
+          <a href="lives.html">Lives</a>
+        </div>
       </div>
 
-      <div class="ancora-nav">
-        <a href="campeonatos.html">Campeonatos</a>
-        <a href="lives.html">Lives</a>
+      <div class="pesquisa-header">
+        <form action="">
+          <input type="text" placeholder="Pesquisar">
+        </form>
       </div>
-    </div>
+      <div class="config-header">
 
-    <div class="pesquisa-header">
-      <form action="">
-        <input type="text" placeholder="Pesquisar">
-      </form>
-    </div>
-    <div class="config-header">
+        <img src="../../assets/plus.png" alt="plus" id="plusButton">
 
-      <img src="../../assets/plus.png" alt="plus" id="plusButton">
+        <div id="plusOverlay" class="plus-overlay hide">
+          <aside class="aside-plus-menu">
+            <a href="../pages/criarLives.html">Criar Live</a>
+            <a href="../pages/criarCampeonatos.html">Criar Camp</a>
+          </aside>
+        </div>
+        <!-- se sobrar tempo fazer notificação -->
+        <a href="perfil.html">
+          <img src="../../assets/perfil.png" alt="">
+        </a> <!-- perfil -->
+        <a href="config.html">
+          <img src="../../assets/configuracoes.png" alt=""> <!-- configurações -->
+        </a>
+      </div>
 
-      <div id="plusOverlay" class="plus-overlay hide">
-        <aside class="aside-plus-menu">
-          <a href="../pages/criarLives.html">Criar Live</a>
-          <a href="../pages/criarCampeonatos.html">Criar Camp</a>
+      <div class="menu-toggle">
+        <img src="../../assets/configuracoes.png" alt="Menu" id="menuButton">
+      </div>
+
+      <div class="menu-overlay" id="menuOverlay">
+        <aside class="aside-menu">
+          <a href="./campeonatos.html">Campeonatos</a>
+          <a href="./lives.html">Lives</a>
+          <a href="./perfil.html">Perfil</a>
+          <a href="./config.html">Configurações</a>
         </aside>
       </div>
-      <!-- se sobrar tempo fazer notificação -->
-      <a href="perfil.html">
-        <img src="../../assets/perfil.png" alt="">
-      </a> <!-- perfil -->
-      <a href="config.html">
-        <img src="../../assets/configuracoes.png" alt=""> <!-- configurações -->
-      </a>
-    </div>
 
-    <div class="menu-toggle">
-      <img src="../../assets/configuracoes.png" alt="Menu" id="menuButton">
-    </div>
+    </header>
 
-    <div class="menu-overlay" id="menuOverlay">
-      <aside class="aside-menu">
-        <a href="./campeonatos.html">Campeonatos</a>
-        <a href="./lives.html">Lives</a>
-        <a href="./perfil.html">Perfil</a>
-        <a href="./config.html">Configurações</a>
-      </aside>
-    </div>
+    <main class="container">
+      <h1>Configurações</h1>
+      <p>Altere seu nickname, nome, imagem de perfil, banner, tema do site e senha.</p>
 
-  </header>
+      <section class="form-section">
+        <label for="nickname">Nickname</label>
+        <input type="text" id="nickname" placeholder="Digite seu nickname" />
 
-  <main class="container">
-    <h1>Configurações</h1>
-    <p>Altere seu nickname, nome, imagem de perfil, banner, tema do site e senha.</p>
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" placeholder="Digite seu nome" />
 
-    <section class="form-section">
-      <label for="nickname">Nickname</label>
-      <input type="text" id="nickname" placeholder="Digite seu nickname" />
+        <label for="banner">Banner</label>
+        <div class="custom-file">
+          <input type="file" id="banner" class="file-input" />
+          <label for="banner" class="file-label">Escolher imagem de banner</label>
+        </div>
 
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" placeholder="Digite seu nome" />
+        <label for="fotoPerfil">Foto de Perfil</label>
+        <div class="custom-file">
+          <input type="file" id="fotoPerfil" class="file-input" />
+          <label for="fotoPerfil" class="file-label">Escolher imagem de perfil</label>
+        </div>
 
-      <label for="banner">Banner</label>
-      <div class="custom-file">
-        <input type="file" id="banner" class="file-input" />
-        <label for="banner" class="file-label">Escolher imagem de banner</label>
-      </div>
+        <label for="tema">Tema</label>
+        <select id="tema">
+          <option value="claro">Claro</option>
+          <option value="escuro" selected>Escuro</option>
+        </select>
 
-      <label for="fotoPerfil">Foto de Perfil</label>
-      <div class="custom-file">
-        <input type="file" id="fotoPerfil" class="file-input" />
-        <label for="fotoPerfil" class="file-label">Escolher imagem de perfil</label>
-      </div>
+        <label for="senhaAtual">Senha atual</label>
+        <input type="password" id="senhaAtual" placeholder="Digite sua senha atual" />
 
-      <label for="tema">Tema</label>
-      <select id="tema">
-        <option value="claro">Claro</option>
-        <option value="escuro" selected>Escuro</option>
-      </select>
+        <label for="novaSenha">Nova senha</label>
+        <input type="password" id="novaSenha" placeholder="Digite a nova senha" />
 
-      <label for="senhaAtual">Senha atual</label>
-      <input type="password" id="senhaAtual" placeholder="Digite sua senha atual" />
-
-      <label for="novaSenha">Nova senha</label>
-      <input type="password" id="novaSenha" placeholder="Digite a nova senha" />
-
-      <button id="salvar">Salvar alterações</button>
-      <button id="excluirConta" class="btn-excluir">Excluir conta</button>
-    </section>
-  </main>
+        <button id="salvar">Salvar alterações</button>
+        <button id="excluirConta" class="btn-excluir">Excluir conta</button>
+      </section>
+    </main>
 
 
-  <script src="../js/script.js"></script>
-  <script src="../js/config.js"></script>
-</body>
+    <script src="../js/script.js"></script>
+    <script src="../js/config.js"></script>
+  </body>
 
-</html>
+  </html>

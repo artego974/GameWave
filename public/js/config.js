@@ -6,133 +6,105 @@ document.addEventListener("DOMContentLoaded", () => {
   const temaSelect = document.getElementById("tema");
   const senhaAtualInput = document.getElementById("senhaAtual");
   const novaSenhaInput = document.getElementById("novaSenha");
+
   const salvarBtn = document.getElementById("salvar");
-  const excluirContaBtn = document.getElementById("excluirConta");
-  const pesquisaInput = document.querySelector(".pesquisa-header input");
+  const excluirBtn = document.getElementById("excluirConta");
 
-  const userId = localStorage.getItem("userId");
+  const API_URL = "http://localhost:3000";
 
-  const temaSalvo = localStorage.getItem("tema");
-  if (temaSalvo) {
-    aplicarTema(temaSalvo);
-    temaSelect.value = temaSalvo;
-  }
+  // Buscar dados do usuário autenticado pelo token
+  fetch(`${API_URL}/user/profile`, {
+    credentials: "include"
+  })
+    .then(res => {
+      if (!res.ok) throw new Error("Usuário não autenticado");
+      return res.json();
+    })
+    .then(user => {
+      const userId = user.id;
 
-  temaSelect.addEventListener("change", () => {
-    const temaEscolhido = temaSelect.value;
-    aplicarTema(temaEscolhido);
-    localStorage.setItem("tema", temaEscolhido);
-  });
+      nicknameInput.value = user.nickName || "";
+      nomeInput.value = user.name || "";
+      temaSelect.value = localStorage.getItem("tema") || "escuro";
 
-  function aplicarTema(tema) {
-    if (tema === "claro") {
-      document.body.style.backgroundColor = "#ffffff";
-      document.body.style.color = "#000000";
+      // Atualizar dados básicos
+      salvarBtn.addEventListener("click", async () => {
+        // Atualizar nome e nickname
+        await fetch(`${API_URL}/user/${userId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            name: nomeInput.value,
+            nickName: nicknameInput.value
+          })
+        });
 
-      document.querySelectorAll("input, select").forEach(el => {
-        el.style.backgroundColor = "#f0f0f0";
-        el.style.color = "#000000";
-        el.style.border = "1px solid #ccc";
+        // Atualizar senha (se fornecida)
+        if (senhaAtualInput.value && novaSenhaInput.value) {
+          await fetch(`${API_URL}/user/updatePassword/${userId}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({
+              password: senhaAtualInput.value,
+              newPassword: novaSenhaInput.value
+            })
+          });
+        }
+
+        // Upload de banner
+        if (bannerInput.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", bannerInput.files[0]);
+
+          await fetch(`${API_URL}/user/upload/banner/${userId}`, {
+            method: "PUT",
+            credentials: "include",
+            body: formData
+          });
+        }
+
+        // Upload de foto de perfil
+        if (fotoPerfilInput.files.length > 0) {
+          const formData = new FormData();
+          formData.append("file", fotoPerfilInput.files[0]);
+
+          await fetch(`${API_URL}/user/upload/avatar/${userId}`, {
+            method: "PUT",
+            credentials: "include",
+            body: formData
+          });
+        }
+
+        // Atualizar tema local
+        localStorage.setItem("tema", temaSelect.value);
+
+        alert("Configurações atualizadas com sucesso!");
       });
 
-      document.querySelector("p").style.color = "#333";
+      // Excluir conta
+      excluirBtn.addEventListener("click", async () => {
+        const confirmar = confirm("Tem certeza que deseja excluir sua conta?");
+        if (confirmar) {
+          await fetch(`${API_URL}/user/${userId}`, {
+            method: "DELETE",
+            credentials: "include"
+          });
 
-      if (pesquisaInput) {
-        pesquisaInput.style.backgroundColor = "#ffffff";
-        pesquisaInput.style.color = "#000000";
-        pesquisaInput.style.border = "1px solid #ccc";
-      }
-
-    } else {
-      document.body.style.backgroundColor = "#0d1117";
-      document.body.style.color = "#ffffff";
-
-      document.querySelectorAll("input, select").forEach(el => {
-        el.style.backgroundColor = "#161b22";
-        el.style.color = "#c9d1d9";
-        el.style.border = "1px solid #30363d";
+          alert("Conta excluída com sucesso.");
+          localStorage.clear();
+          window.location.href = "../index.html";
+        }
       });
-
-      document.querySelector("p").style.color = "#8b949e";
-
-      if (pesquisaInput) {
-        pesquisaInput.style.backgroundColor = "#ffffff";
-        pesquisaInput.style.color = "#000000";
-        pesquisaInput.style.border = "1px solid #ccc";
-      }
-    }
-  }
-
-  salvarBtn.addEventListener("click", async () => {
-    if (!userId) {
-      alert("Usuário não autenticado.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("nickname", nicknameInput.value);
-    formData.append("nome", nomeInput.value);
-    formData.append("tema", temaSelect.value);
-
-    if (bannerInput.files.length > 0) {
-      formData.append("banner", bannerInput.files[0]);
-    }
-
-    if (fotoPerfilInput.files.length > 0) {
-      formData.append("fotoPerfil", fotoPerfilInput.files[0]);
-    }
-
-    const senhaAtual = senhaAtualInput.value;
-    const novaSenha = novaSenhaInput.value;
-    if (senhaAtual && novaSenha) {
-      formData.append("senhaAtual", senhaAtual);
-      formData.append("novaSenha", novaSenha);
-    }
-
-    try {
-      const response = await fetch(`http://localhost:3000/api/users/${userId}`, {
-        method: "PUT",
-        body: formData,
-      });
-
-      if (response.ok) {
-        alert("Perfil atualizado com sucesso!");
-        window.location.href = "./perfil.html";
-      } else {
-        const erro = await response.json();
-        alert("Erro ao atualizar perfil: " + erro.message);
-      }
-    } catch (error) {
-      console.error("Erro ao conectar com o servidor:", error);
-      alert("Erro ao conectar com o servidor.");
-    }
-  });
-
-  excluirContaBtn.addEventListener("click", async () => {
-    if (!userId) {
-      alert("Usuário não autenticado.");
-      return;
-    }
-
-    const confirmar = confirm("Tem certeza que deseja excluir sua conta? Esta ação não poderá ser desfeita.");
-    if (!confirmar) return;
-
-    try {
-      const response = await fetch(`http://localhost:3000/api/users/${userId}`, {
-        method: "DELETE"
-      });
-
-      if (response.ok) {
-        alert("Conta excluída com sucesso.");
-        localStorage.clear();
-        window.location.href = "./login.html";
-      } else {
-        const erro = await response.json();
-        alert("Erro ao excluir conta: " + erro.message);
-      }
-    } catch (error) {
-      console.error("Erro ao excluir conta:", error);
-      alert("Erro ao conectar com o servidor.");
-    }
-  });
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Você precisa estar logado para acessar esta página.");
+      window.location.href = "../pages/singIN.html";
+    });
 });
