@@ -1,54 +1,50 @@
-
-
-// Ao clicar no botão "Criar"
 document.addEventListener('DOMContentLoaded', () => {
     const botaoCriar = document.querySelector('#buttom-quest button');
+    const botaoEscolher = document.getElementById("arquivo");
 
     botaoCriar.addEventListener('click', async () => {
         const inputs = document.querySelectorAll('.input-quest');
-        const link = inputs[0].value.trim();
-        const titulo = inputs[1].value.trim();
-        const subtitulo = inputs[2].value.trim();
+        const link = document.getElementById("link").value.trim();
+        const titulo = document.getElementById("titulo").value.trim();
+        const subtitulo = document.getElementById("subtitulo").value.trim();
         const imagem = document.getElementById('arquivo').files[0];
 
-        // Verificação dos campos obrigatórios
         if (!link || !titulo || !subtitulo || !imagem) {
             alert('Preencha todos os campos e selecione uma imagem.');
             return;
         }
 
-        // Verificação do formato do link
         if (!validarURL(link)) {
             alert('Por favor, insira um link válido (deve começar com http:// ou https://).');
             return;
         }
 
-        // Envio usando FormData
-        const formData = new FormData();
-        formData.append('link', link);
-        formData.append('titulo', titulo);
-        formData.append('subtitulo', subtitulo);
-        formData.append('imagem', imagem);
-
         try {
-            const resposta = await fetch('', {
+            const resposta = await fetch("http://localhost:3000/live", {
                 method: 'POST',
-                body: formData
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ link, titulo, subtitulo }),
+                credentials: "include"
             });
-
+        
+            const respostaTexto = await resposta.text(); // <-- Adicionado para debug
+        
             if (resposta.ok) {
                 alert('Live criada com sucesso!');
-                // Limpa os campos
                 inputs.forEach(input => input.value = '');
                 document.getElementById('arquivo').value = '';
                 previewImagem(); // resetar imagem
             } else {
-                alert('Erro ao enviar os dados. Verifique os campos e tente novamente.');
+                console.error("Erro do servidor:", resposta.status, respostaTexto);
+                alert('Erro ao enviar os dados. Verifique os campos e tente novamente.\n\n' + respostaTexto);
             }
         } catch (erro) {
-            console.error('Erro:', erro);
+            console.error('Erro de conexão:', erro);
             alert('Erro ao conectar com o servidor.');
         }
+        
     });
 
     // Função para mostrar o preview da imagem
@@ -59,13 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (arquivo) {
             const reader = new FileReader();
-
             reader.onload = function (e) {
                 preview.src = e.target.result;
                 preview.style.display = 'block';
                 if (svgPlaceholder) svgPlaceholder.style.display = 'none';
             };
-
             reader.readAsDataURL(arquivo);
         } else {
             preview.src = '#';
@@ -74,13 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função para validar o link
-    function validarURL(url) {
+    // Validar URL
+    function validarURL(urlString) {
         try {
-            const link = new URL(url);
+            const link = new URL(urlString);
             return link.protocol === 'http:' || link.protocol === 'https:';
         } catch (e) {
             return false;
         }
     }
+
+    // Ouvir mudança no input de arquivo
+    botaoEscolher.addEventListener("change", previewImagem);
 });
