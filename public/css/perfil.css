@@ -1,320 +1,318 @@
 /* Reset & Base */
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-fundo-header: #2d4164;
+  --cor-violeta-fundo: #712cf9;
+  --cor-violeta-rgb: 112.520718, 44.062154, 249.437846;
+  --cor-violeta-hover: #6528e0;
+  --cor-violeta-ativa: #5a23c8;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  background-color: #0f111a;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+/* Menu Responsivo */
+.menu-toggle img {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -150px;
+  width: 150px;
+  background-color: #141921;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 10px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.side-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  width: 100%;
+}
+
+.side-menu.show {
+  right: 10px;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 35%;
+  height: 20%;
+  background-color: #141921;
+  padding: 10px;
+  border: 3px solid #fff;
+  z-index: 1000;
+  transition: right 0.3s ease;
+}
+
+.menu-overlay.show {
+  right: 10px;
+  transform: translateX(-50px);
+}
+
+.aside-menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.aside-menu a {
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid #fff;
+}
+
+/* Banner */
+#container-banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: #1e1e2f;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 60px;
+}
+
+#img-banner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  filter: brightness(0.5);
+  z-index: 0;
+}
+
+#change-banner-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  padding: 10px 15px;
+  background-color: #141921;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#change-banner-button:hover {
+  background-color: #141921;
+}
+
+#container-perfil {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.foto-perfil-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+#img-perfil {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #141921;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  margin-bottom: 10px;
+}
+
+.botao-camera {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #141921;
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao-camera img {
+  width: 18px;
+  height: 18px;
+}
+
+#info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#nickName {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.description {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#info button {
+  padding: 8px 16px;
+  background-color: var(--cor-violeta-fundo);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#info button:hover {
+  background-color: var(--cor-violeta-hover);
+}
+
+/* Container Menu */
+#container-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+}
+
+.linha-conteudo {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.torneio,
+.live {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #1c1f2e;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  transform: scale(0.95);
+}
+
+#camps  {
+  display: flex;
+}
+
+#Lives  {
+  display: flex;
   
-  :root {
-    --cor-fundo-header: #2d4164;
-    --cor-violeta-fundo: #712cf9;
-    --cor-violeta-rgb: 112.520718, 44.062154, 249.437846;
-    --cor-violeta-hover: #6528e0;
-    --cor-violeta-ativa: #5a23c8;
+}
+
+.torneio img,
+.live img {
+  width: 150%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.tituloCamp,
+.tituloLive {
+  font-size: 1em;
+  margin-top: 6px;
+}
+
+.gameTorneio,
+.subtitulo {
+  color: #b0b0b0;
+  font-size: 0.85em;
+  margin-top: 2px;
+}
+
+/* Botão Configuração Perfil */
+#config-perfil {
+  position: absolute;
+  right: 20px;
+  background-color: #1c1f2e;
+  color: #ccc;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px; 
+}
+
+#config-perfil:hover {
+  background-color: #191c2d;
+}
+
+#config-perfil img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsividade */
+@media (max-width: 576px) {
+  .menu-toggle {
+    margin-right: 4%;
   }
-  
-  html, body {
-    width: 100%;
-    min-height: 100vh;
-    scroll-behavior: smooth;
-    background-color: #0f111a;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
+
+  .custom-carousel .carousel-item img {
+    aspect-ratio: 4 / 3;
   }
-  
-  /* Menu Responsivo */
-  .menu-toggle img {
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
+
+  form {
+    margin-left: -40%;
+    min-width: 40vw;
   }
-  
-  .side-menu {
-    position: fixed;
-    top: 0;
-    right: -150px;
-    width: 150px;
-    background-color: #141921;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-    gap: 10px;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-    transition: right 0.3s ease;
-    z-index: 1000;
-  }
-  
-  .side-menu a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    width: 100%;
-  }
-  
-  .side-menu.show {
-    right: 10px;
-  }
-  
-  .menu-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 35%;
-    height: 20%;
-    background-color: #141921;
-    padding: 10px;
-    border: 3px solid #fff;
-    z-index: 1000;
-    transition: right 0.3s ease;
-  }
-  
-  .menu-overlay.show {
-    right: 10px;
-    transform: translateX(-50px);
-  }
-  
-  .aside-menu {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
-  }
-  
-  .aside-menu a {
-    color: #fff;
-    text-decoration: none;
-    border: 2px solid #fff;
-  }
-  
-  /* Banner */
-  #container-banner {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    background-color: #1e1e2f;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 60px;
-  }
-  
-  #img-banner {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-    filter: brightness(0.5);
-    z-index: 0;
-  }
-  
-  #change-banner-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1;
-    padding: 10px 15px;
-    background-color: #141921;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  #change-banner-button:hover {
-    background-color: #141921;
-  }
-  
-  #container-perfil {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .foto-perfil-wrapper {
-    position: relative;
-    width: 110px;
-    height: 110px;
-  }
-  
-  #img-perfil {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #141921;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-    margin-bottom: 10px;
-  }
-  
-  .botao-camera {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: #141921;
-    border: none;
-    border-radius: 50%;
-    padding: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .botao-camera img {
-    width: 18px;
-    height: 18px;
-  }
-  
-  #info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  #nickName {
-    font-size: 26px;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 5px;
-  }
-  
-  .description {
-    font-size: 14px;
-    color: #ccc;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  #info button {
-    padding: 8px 16px;
-    background-color: var(--cor-violeta-fundo);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  #info button:hover {
-    background-color: var(--cor-violeta-hover);
-  }
-  
-  /* Container Menu */
-  #container-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding: 20px;
-  }
-  
+
   .linha-conteudo {
-    display: flex;
-    gap: 20px;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
   }
-  
-  .torneio,
+
+  .toneio,
   .live {
-    width: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #1c1f2e;
-    border-radius: 10px;
-    padding: 8px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
-    transform: scale(0.95);
+    width: 45%;
   }
-  
-  #camps  {
-    display: flex;
-  }
-  
-  #Lives  {
-    display: flex;
-    
-  }
-  
-  .torneio img,
-  .live img {
-    width: 150%;
-    max-width: 300px;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .tituloCamp,
-  .tituloLive {
-    font-size: 1em;
-    margin-top: 6px;
-  }
-  
-  .gameTorneio,
-  .subtitulo {
-    color: #b0b0b0;
-    font-size: 0.85em;
-    margin-top: 2px;
-  }
-  
-  /* Botão Configuração Perfil */
-  #config-perfil {
-    position: absolute;
-    right: 20px;
-    background-color: #1c1f2e;
-    color: #ccc;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-radius: 12px; 
-  }
-  
-  #config-perfil:hover {
-    background-color: #191c2d;
-  }
-  
-  #config-perfil img {
-    width: 24px;
-    height: 24px;
-  }
-  
-  /* Responsividade */
-  @media (max-width: 576px) {
-    .menu-toggle {
-      margin-right: 4%;
-    }
-  
-    .custom-carousel .carousel-item img {
-      aspect-ratio: 4 / 3;
-    }
-  
-    form {
-      margin-left: -40%;
-      min-width: 40vw;
-    }
-  
-    .linha-conteudo {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  
-    .toneio,
-    .live {
-      width: 45%;
-    }
-  }
-  
-  
+}
