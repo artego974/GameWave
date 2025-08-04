@@ -33,6 +33,10 @@ document.addEventListener("DOMContentLoaded", function () {
   
         if (res.ok) {
           // Se o login foi bem-sucedido
+          const data = await res.json();
+          console.log(data.user);
+          localStorage.setItem("userId", data.user.id)
+          localStorage.setItem("user", data.user)
           formulario.style.display = "none";       // Esconde o formulário
           setTimeout(() => {
             window.location.href = "../index.html"; // Redireciona após 1.5s

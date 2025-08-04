@@ -171,7 +171,9 @@ export class UserController {
         try {
             // Busca o usuário no banco de dados pelo email
             const user = await userRepository.findOneBy({ email });
-
+            console.log(user);
+            
+            
             // Se não encontrar o usuário
             if (!user) {
                 res.status(401).json({ message: "Usuario não encontrado." });
@@ -187,7 +189,7 @@ export class UserController {
             }
 
             const { password: _, ...userWithoutPassword } = user; // Remove a senha do objeto
-
+             
             const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
 
             // Salva o token no cookie
@@ -200,6 +202,7 @@ export class UserController {
 
             // Se tudo estiver correto, retorna sucesso (200) com os dados do usuário sem a senha
             res.status(200).json({ message: "Logado com sucesso.", user: userWithoutPassword });
+            
         } catch (error) {
             // Em caso de erro inesperado, exibe o erro e retorna 500
             console.error("Erro ao logar no user:", error);
@@ -228,7 +231,7 @@ export class UserController {
             }
 
             // Atualiza o caminho da foto de perfil no banco
-            user.fotoPerfil = `/uploads/${req.file.filename}`;
+            user.fotoPerfil = `../../src/middlewares/upload/${req.file.filename}`;
 
             await userRepository.save(user);
 
@@ -259,7 +262,7 @@ export class UserController {
             }
 
             // Atualiza o caminho do banner no banco
-            user.banerPerfil = `/uploads/${req.file.filename}`;
+            user.banerPerfil = `../../src/middlewares/upload/${req.file.filename}`;
 
             await userRepository.save(user);
 
@@ -284,7 +287,12 @@ export class UserController {
           }
       
           const { password: _, ...userWithoutPassword } = user;
-          res.status(200).json(userWithoutPassword);
+      
+          res.status(200).json({
+            ...userWithoutPassword,
+            avatarUrl: `${process.env.BASE_URL || "http://localhost:3000"}${user.fotoPerfil || ""}`,
+            bannerUrl: `${process.env.BASE_URL || "http://localhost:3000"}${user.banerPerfil || ""}`
+          });
         } catch (error) {
           console.error(error);
           res.status(500).json({ message: "Erro ao buscar perfil." });
