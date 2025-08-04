@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     description: descricao,
                     nameGame: jogo,
                     numberOfPlayers: Number(jogadores), // mandar número como number
-                    timedate: dateTime
+                    time: hora,
+                    date: data
                 }),
                 credentials: 'include' // só se precisar mesmo cookies
             });
