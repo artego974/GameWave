@@ -14,7 +14,7 @@ export class GameController {
 
     // Criar novo games
     async create(req: Request, res: Response) {
-        const { name,description } = req.body;
+        const { name ,description } = req.body;
 
         if(!name){
             res.status(400).json({message: "Insira o nome do Jogo"})

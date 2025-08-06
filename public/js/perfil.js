@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const botaoCamera = document.getElementById("botao-camera");
   const changeBannerButton = document.getElementById("change-banner-button");
 
+  const nickName = document.getElementById("nickName")
+
   // 1. Buscar dados do usuário ao carregar a página
   try {
     const response = await fetch(`${API_URL}/user/${userId}`, {
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Preencher dados no HTML
     document.getElementById("img-perfil").src = `${user.fotoPerfil}`;
     document.getElementById("img-banner").src = `${user.banerPerfil}`;
-    document.getElementById("nickName").textContent = user.nickname;
+    document.getElementById("nickName").textContent = `${user.nickname}`;
 
   } catch (error) {
     console.error("Erro ao carregar perfil:", error);

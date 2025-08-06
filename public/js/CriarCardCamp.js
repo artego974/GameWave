@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     col.innerHTML = `
       <div class="card shadow-sm">
-        <img class="card-img-top" src="${camp.imagem || "https://via.placeholder.com/150"
+        <img id="imgCamp" class="card-img-top" src="${camp.fotoCampeonato || "https://via.placeholder.com/150"
       }" alt="Thumbnail">
         <div class="card-body">
           <h5 class="card-title">${camp.name}</h5>

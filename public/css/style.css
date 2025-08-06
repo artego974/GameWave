@@ -350,6 +350,7 @@ header img {
   justify-content: space-around;  
 }
 
+
 .card-body {
   text-align: center;     
 }
@@ -357,5 +358,10 @@ header img {
 .container {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+#imgCamp{
+  width: 200px;
+  height: 150px;
 }
 

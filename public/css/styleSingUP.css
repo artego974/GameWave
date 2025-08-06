@@ -1,108 +1,141 @@
 * {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #0f111a;
+  color: #ffffff;
+}
+
+body {
   
-  html, body {
-    width: 100%;
-    height: 100%;
-  }
-  
-  body {
-    background-image: url(../../assets/fundo.jpeg);
-    background-size: cover;
-    background-position: center;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  main {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+#container {
+  background-color: #1c1f2e;
+  border-radius: 10px;
+  padding: 30px 20px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+div #cad {
+  font-weight: bolder;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #cccccc;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2a2f45;
+  color: #ffffff;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+form input::placeholder {
+  color: #b0b0b0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  color: #cccccc;
+}
+
+#checkBox {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
+#nextSingUp {
+  margin-top: 20px;
+  height: 45px;
+  background-color: #712cf9;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+#nextSingUp:hover {
+  background-color: #6528e0;
+  transform: scale(1.05);
+}
+
+#nextSingUp:active {
+  background-color: #5a23c8;
+}
+
+/* Link "Já tem conta?" */
+.login-link {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #cccccc;
+}
+
+.login-link a {
+  color: #712cf9;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo */
+@media screen and (max-width: 500px) {
   #container {
-    border-radius: 10px;
-    padding: 30px 20px;
-    max-width: 400px;
-    width: 100%;
-  }
-  
-  #cad {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  form label {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="password"] {
-    height: 40px;
-    border-radius: 8px;
-    border: none;
-    background-color: #C7C7C7;
-    padding: 8px;
-    margin-top: 5px;
-  }
-  
-  .checkbox {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  #checkBox {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
-  }
-  
-  #nextSingUp {
-    margin-top: 20px;
-    height: 45px;
-    background-color: #89C4CD;
-    border: 1px #0090b0 solid;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-  }
-  
-  #nextSingUp:hover {
-    background-color: aquamarine;
-    transform: scale(1.05);
-  }
-  
-  /* Responsivo */
-  @media screen and (max-width: 500px) {
-    #container {
       padding: 20px 15px;
       max-width: 90%;
-    }
-  
-    #cad {
-      font-size: 20px;
-    }
-  
-    #nextSingUp {
-      font-size: 14px;
-    }
   }
-  
+
+  #cad {
+      font-size: 18px;
+  }
+
+  #nextSingUp {
+      font-size: 14px;
+  }
+}
