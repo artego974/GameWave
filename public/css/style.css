@@ -252,6 +252,9 @@ header img {
   .rowCamp, .rowLive{
     flex-wrap: wrap;
     flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
+    overflow-x: hidden;
   }
 }
 
