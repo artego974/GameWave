@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "gamewave",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

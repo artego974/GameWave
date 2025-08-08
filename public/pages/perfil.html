@@ -2,20 +2,19 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GameWave Perfil</title>
-  <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon">
-  <link rel="stylesheet" href="../css/perfil.css">
-  <link rel="stylesheet" href="../css/header.css">
+  <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/perfil.css" />
+  <link rel="stylesheet" href="../css/header.css" />
 </head>
 
 <body>
   <header>
-
     <div class="nav-header">
       <div class="img-nav">
-        <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt=""></a>
+        <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt="Logo GameWave" /></a>
       </div>
 
       <div class="ancora-nav">
@@ -26,30 +25,24 @@
 
     <div class="pesquisa-header">
       <form action="">
-        <input type="text" placeholder="Pesquisar">
+        <input type="text" placeholder="Pesquisar" />
       </form>
     </div>
+
     <div class="config-header">
-
-      <img src="../../assets/plus.png" alt="plus" id="plusButton">
-
+      <img src="../../assets/plus.png" alt="plus" id="plusButton" />
       <div id="plusOverlay" class="plus-overlay hide">
         <aside class="aside-plus-menu">
           <a href="../pages/criarLives.html">Criar Live</a>
           <a href="../pages/criarCampeonatos.html">Criar Camp</a>
         </aside>
       </div>
-      <!-- se sobrar tempo fazer notificação -->
-      <a href="perfil.html">
-        <img src="../../assets/perfil.png" alt="">
-      </a> <!-- perfil -->
-      <a href="config.html">
-        <img src="../../assets/configuracoes.png" alt=""> <!-- configurações -->
-      </a>
+      <a href="perfil.html"><img src="../../assets/perfil.png" alt="Perfil" /></a>
+      <a href="config.html"><img src="../../assets/configuracoes.png" alt="Configurações" /></a>
     </div>
 
     <div class="menu-toggle">
-      <img src="../assets/setting.png" alt="Menu" id="menuButton">
+      <img src="../../assets/setting.png" alt="Menu" id="menuButton" />
     </div>
 
     <div class="menu-overlay" id="menuOverlay">
@@ -60,36 +53,35 @@
         <a href="./config.html">Configurações</a>
       </aside>
     </div>
-
   </header>
 
   <main>
     <div id="container-banner">
-  <img id="img-banner" src="./assets/banner-exemplo.jpg" alt="fotoBanner">
+      <img id="img-banner" src="../../assets/banner1.png" alt="fotoBanner" />
+      <input type="file" id="input-banner" accept="image/*" style="display: none;" />
+      <button id="change-banner-button">Adicione um banner</button>
 
-  <input type="file" id="input-banner" accept="image/*" style="display: none;">
-  <button id="change-banner-button">Adicione um banner</button>
+      <div id="container-perfil">
+        <div class="foto-perfil-wrapper">
+          <img id="img-perfil" src="../../assets/usuario.png" alt="fotoPerfil" />
+          <input type="file" id="input-perfil" accept="image/*" style="display: none;" />
+          <button class="botao-camera" id="botao-camera">
+            <img src="../../assets/cam.png" alt="ícone câmera" />
+          </button>
+        </div>
 
-  <div id="container-perfil">
-    <div class="foto-perfil-wrapper">
-      <img id="img-perfil" src="./assets/usuario.png" alt="fotoPerfil">
-
-      <input type="file" id="input-perfil" accept="image/*" style="display: none;">
-      <button class="botao-camera" id="botao-camera">
-        <img src="./assets/cam.png" alt="ícone câmera">
-      </button>
+        <div id="info">
+          <h2 id="nickName">NickName</h2>
+        </div>
+      </div>
     </div>
-
-    <div id="info">
-      <h2 id="nickName">NickName</h2>
-    </div>
-  </div>
-</div>
 
     <div id="container-menu">
-
       <div>
-        <button id="config-perfil"><img src="../../assets/configuracoes.png" alt="config-"><p>configuracoes</p></button>
+        <button id="config-perfil">
+          <img src="../../assets/configuracoes.png" alt="config-" />
+          <a href="./config.html">Configurações</a>
+        </button>
       </div>
 
       <div class="album py-5 bg-body-tertiary">
@@ -99,19 +91,19 @@
             <!-- Cards de Campeonatos gerados por JS -->
           </div>
         </div>
-    
+
         <div class="container-cards" id="container-lives" style="margin-top: 5rem;">
           <h2 class="text-center">Lives</h2>
-          <div class="rowLive d-flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"></div>
+          <div class="rowLive d-flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <!-- Cards de Lives gerados por JS -->
+          </div>
         </div>
       </div>
-      
     </div>
+  </main>
 
-    <script src="../js/script.js"></script>
-    <script src="../js/perfil.js"></script>
-    <script src="../js/CriarCardCamp.js"></script>
-    <script src="../js/CriarCardLive.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/perfil.js"></script>
 </body>
 
 </html>

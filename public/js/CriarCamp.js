@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const API_URL = "http://localhost:3000"
+    const hostId = localStorage.getItem("userId");
     const botaoCriar = document.querySelector("#buttom-quest button");
         const arquivoInput = document.getElementById("arquivo");
         const imagemPreview = document.getElementById("imagem-preview");
         const svgPlaceholder = document.querySelector('.card-img-wrapper svg');
+        const bannerInput = document.getElementById("input-banner");
     
         // Mostrar imagem ao selecionar o arquivo
         arquivoInput.addEventListener("change", function () {
@@ -56,7 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     nameGame: jogo,
                     numberOfPlayers: Number(jogadores), // mandar número como number
                     time: hora,
-                    date: data
+                    date: data,
+                    hostId: hostId
                 }),
                 credentials: 'include' // só se precisar mesmo cookies
             });
@@ -70,6 +74,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log("Sucesso:", texto);
             alert("Campeonato criado com sucesso!");
+
+            const response = await fetch("http://localhost:3000/campeonato/nome",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: titulo,
+            }),
+            credentials: 'include' // só se precisar mesmo cookies
+        });
+            const campeonato = await response.json();
+
+            const file = arquivoInput.files[0];
+            if (!file) return;
+        
+            const formData = new FormData();
+            formData.append("file", file);
+        
+            try {
+              const res = await fetch(`${API_URL}/campeonato/upload/banner/${campeonato.id}`, {
+                method: "PUT",
+                body: formData,
+              });
+
+              if (!res.ok) {
+                console.error("Erro do servidor:", texto);
+                throw new Error("Erro ao enviar o banner.");
+            }
+        
+            } catch (error) {
+              console.error("Erro ao enviar banner:", error);
+              alert("Erro ao enviar banner.");
+            }
         } catch (erro) {
             console.error("Erro ao criar campeonato:", erro);
             alert("Erro ao criar campeonato.");

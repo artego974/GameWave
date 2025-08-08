@@ -2,9 +2,11 @@ import { Request, Response } from 'express';
 import { AppDataSource } from '../config/data-source';
 import { Campeonato } from '../model/Campeonato';
 import { Games } from '../model/Game';
+import { User } from '../model/User';
 
 const campRepository = AppDataSource.getRepository(Campeonato);
 const gameRepository = AppDataSource.getRepository(Games)
+const userRepository = AppDataSource.getRepository(User)
 
 export class CampeonatoController {
     // Listar todos os campeonatos
@@ -16,33 +18,64 @@ export class CampeonatoController {
 
     // Criar novo Campeonato
     async create(req: Request, res: Response) {
-        const { name, description, nameGame, date,time, numberOfPlayers } = req.body;
+        const { name, description, nameGame, date,time, numberOfPlayers, hostId } = req.body;
 
-            if(!name || !description || !nameGame || !date || !numberOfPlayers || !time){
+            if(!name || !description || !nameGame || !date || !numberOfPlayers || !time || !hostId){
                 res.status(400).json({message: "Preencha todos os campos"})
                 return;
             }
 
-            const verificaCamp = await campRepository.findOneBy({ name })
             
-            if(verificaCamp) {
-                res.status(400).json({message: "Nome de campeonato invalido"})
-                return;
-            }
-
             const verificaGame = await gameRepository.findOneBy({name:(nameGame)})
             if(!verificaGame){
                 res.status(401).json({message: "Jogo não encontrado"})
                 return;
             }
 
+            const verificaUser = await userRepository.findOneBy({id:(hostId)})
+            if(!verificaUser){
+                res.status(401).json({message: "Usuario não encontrado"})
+                return;
+            }
 
             const campeonato = new Campeonato(name, description, numberOfPlayers,date, time)
             campeonato.game = verificaGame;
+            campeonato.host = verificaUser
 
             await campRepository.save(campeonato);
             res.status(201).json(campeonato);
             return;
+    }
+
+    async uploadBanner(req: Request, res: Response): Promise<void> {
+        try {
+            const { id } = req.params;
+
+            const campeonato = await campRepository.findOneBy({ id: Number(id) });
+            if (!campeonato) {
+                res.status(404).json({ error: "Campeonato não encontrado." });
+                return;
+            }
+
+            if (!req.file) {
+                res.status(400).json({ error: "Nenhum arquivo enviado." });
+                return;
+            }
+
+            // Atualiza o caminho do banner no banco
+            campeonato.fotoCampeonato = `../../src/middlewares/upload/${req.file.filename}`;
+
+            await campRepository.save(campeonato);
+
+            res.status(200).json({
+                message: "Banner atualizado com sucesso!",
+                fotoCampeonato: campeonato.fotoCampeonato,
+                campeonato,
+            });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: "Erro ao atualizar banner." });
+        }
     }
 
     // Buscar campeonato por ID
