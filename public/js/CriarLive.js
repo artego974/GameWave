@@ -1,15 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const botaoCriar = document.querySelector('#buttom-quest button');
     const botaoEscolher = document.getElementById("arquivo");
+    const API_URL = "http://localhost:3000";
+    const hostId = localStorage.getItem("userId")
 
     botaoCriar.addEventListener('click', async () => {
         const inputs = document.querySelectorAll('.input-quest');
         const link = document.getElementById("link").value.trim();
         const titulo = document.getElementById("titulo").value.trim();
         const subtitulo = document.getElementById("subtitulo").value.trim();
-        const imagem = document.getElementById('arquivo').files[0];
+        const arquivo = botaoEscolher.files[0]; // arquivo real
 
-        if (!link || !titulo || !subtitulo || !imagem) {
+        // validações
+        if (!link || !titulo || !subtitulo || !arquivo) {
             alert('Preencha todos os campos e selecione uma imagem.');
             return;
         }
@@ -20,36 +23,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const resposta = await fetch("http://localhost:3000/live", {
+            // cria a live
+            const resposta = await fetch(`${API_URL}/live`, {
                 method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ link, titulo, subtitulo }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ link, titulo, subtitulo, hostId }),
                 credentials: "include"
             });
-        
-            const respostaTexto = await resposta.text(); // <-- Adicionado para debug
-        
-            if (resposta.ok) {
-                alert('Live criada com sucesso!');
-                inputs.forEach(input => input.value = '');
-                document.getElementById('arquivo').value = '';
-                previewImagem(); // resetar imagem
-            } else {
+
+            const respostaTexto = await resposta.text();
+            let live;
+            try { live = JSON.parse(respostaTexto); } catch { live = {}; }
+
+            if (!resposta.ok || !live.id) {
                 console.error("Erro do servidor:", resposta.status, respostaTexto);
-                alert('Erro ao enviar os dados. Verifique os campos e tente novamente.\n\n' + respostaTexto);
+                alert('Erro ao criar a live.');
+                return;
             }
+
+            // envia o banner
+            const formData = new FormData();
+            formData.append("file", arquivo);
+
+            const respUpload = await fetch(`${API_URL}/live/upload/banner/${live.id}`, {
+                method: "PUT",
+                body: formData,
+                credentials: "include"
+            });
+
+            if (!respUpload.ok) {
+                const erroUpload = await respUpload.text();
+                console.error("Erro upload:", erroUpload);
+                throw new Error("Erro ao enviar banner.");
+            }
+
+            alert('Live criada com sucesso!');
+            inputs.forEach(input => input.value = '');
+            botaoEscolher.value = '';
+            previewImagem(); // resetar preview
+
         } catch (erro) {
             console.error('Erro de conexão:', erro);
             alert('Erro ao conectar com o servidor.');
         }
-        
     });
 
-    // Função para mostrar o preview da imagem
+    // preview da imagem
     function previewImagem() {
-        const arquivo = document.getElementById('arquivo').files[0];
+        const arquivo = botaoEscolher.files[0];
         const preview = document.getElementById('imagem-preview');
         const svgPlaceholder = document.querySelector('.card-img-wrapper svg');
 
@@ -68,16 +89,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Validar URL
+    // validar URL
     function validarURL(urlString) {
         try {
             const link = new URL(urlString);
             return link.protocol === 'http:' || link.protocol === 'https:';
-        } catch (e) {
+        } catch {
             return false;
         }
     }
 
-    // Ouvir mudança no input de arquivo
+    // mudança no input de arquivo
     botaoEscolher.addEventListener("change", previewImagem);
 });

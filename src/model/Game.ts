@@ -16,9 +16,6 @@ export class Games{
     @OneToMany(() => Campeonato, (camp) => camp.game)
     campeonato!: Campeonato;
 
-    @OneToMany(() => Live, (live) => live.game)
-    live!: Live;
-
 
     constructor(name: string, description: string){
         this.name = name;

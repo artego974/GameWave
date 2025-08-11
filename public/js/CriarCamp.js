@@ -1,33 +1,29 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const API_URL = "http://localhost:3000"
+    const API_URL = "http://localhost:3000";
     const hostId = localStorage.getItem("userId");
     const botaoCriar = document.querySelector("#buttom-quest button");
-        const arquivoInput = document.getElementById("arquivo");
-        const imagemPreview = document.getElementById("imagem-preview");
-        const svgPlaceholder = document.querySelector('.card-img-wrapper svg');
-        const bannerInput = document.getElementById("input-banner");
-    
-        // Mostrar imagem ao selecionar o arquivo
-        arquivoInput.addEventListener("change", function () {
-            const arquivo = arquivoInput.files[0];
-    
-            if (arquivo) {
-                const reader = new FileReader();
-    
-                reader.onload = function (e) {
-                    imagemPreview.src = e.target.result;
-                    imagemPreview.style.display = 'block';
-                    if (svgPlaceholder) svgPlaceholder.style.display = 'none';
-                };
-    
-                reader.readAsDataURL(arquivo);
-            } else {
-                imagemPreview.src = '#';
-                imagemPreview.style.display = 'none';
-                if (svgPlaceholder) svgPlaceholder.style.display = 'block';
-            }
-        });
-    
+    const arquivoInput = document.getElementById("arquivo");
+    const imagemPreview = document.getElementById("imagem-preview");
+    const svgPlaceholder = document.querySelector('.card-img-wrapper svg');
+
+    // Pré-visualizar imagem
+    arquivoInput.addEventListener("change", function () {
+        const arquivo = arquivoInput.files[0];
+        if (arquivo) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagemPreview.src = e.target.result;
+                imagemPreview.style.display = 'block';
+                if (svgPlaceholder) svgPlaceholder.style.display = 'none';
+            };
+            reader.readAsDataURL(arquivo);
+        } else {
+            imagemPreview.src = '#';
+            imagemPreview.style.display = 'none';
+            if (svgPlaceholder) svgPlaceholder.style.display = 'block';
+        }
+    });
+
     botaoCriar.addEventListener("click", async function (event) {
         event.preventDefault();
 
@@ -35,82 +31,66 @@ document.addEventListener("DOMContentLoaded", function () {
         const descricao = document.getElementById("descricao").value.trim();
         const jogo = document.getElementById("jogo").value.trim();
         const jogadores = document.getElementById("numJogadores").value.trim();
-        const data = document.getElementById("data").value.trim();  // ex: 2025-07-31
-        const hora = document.getElementById("hora").value.trim();  // ex: 14:30
+        const data = document.getElementById("data").value.trim();
+        const hora = document.getElementById("hora").value.trim();
 
         if (!titulo || !descricao || !jogo || !jogadores || !data || !hora) {
             alert("Preencha todos os campos obrigatórios.");
             return;
         }
 
-        // Criar string ISO datetime no formato "YYYY-MM-DDTHH:mm"
-        const dateTime = `${data} ${hora}`;
-        console.log(dateTime)
-
         try {
-            const resposta = await fetch("http://localhost:3000/campeonato", {
+            // Primeiro cria o campeonato
+            const respCriar = await fetch(`${API_URL}/campeonato`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     name: titulo,
                     description: descricao,
                     nameGame: jogo,
-                    numberOfPlayers: Number(jogadores), // mandar número como number
+                    numberOfPlayers: Number(jogadores),
                     time: hora,
                     date: data,
                     hostId: hostId
                 }),
-                credentials: 'include' // só se precisar mesmo cookies
+                credentials: 'include'
             });
 
-            const texto = await resposta.text();
-
-            if (!resposta.ok) {
-                console.error("Erro do servidor:", texto);
-                throw new Error("Erro ao enviar os dados.");
+            if (!respCriar.ok) {
+                const erroTexto = await respCriar.text();
+                console.error("Erro do servidor:", erroTexto);
+                throw new Error("Erro ao criar campeonato.");
             }
 
-            console.log("Sucesso:", texto);
-            alert("Campeonato criado com sucesso!");
+            const campeonato = await respCriar.json();
+            console.log("Campeonato criado:", campeonato);
 
-            const response = await fetch("http://localhost:3000/campeonato/nome",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: titulo,
-            }),
-            credentials: 'include' // só se precisar mesmo cookies
-        });
-            const campeonato = await response.json();
-
+            // Depois envia o banner (se houver)
             const file = arquivoInput.files[0];
-            if (!file) return;
-        
-            const formData = new FormData();
-            formData.append("file", file);
-        
-            try {
-              const res = await fetch(`${API_URL}/campeonato/upload/banner/${campeonato.id}`, {
-                method: "PUT",
-                body: formData,
-              });
+            if (file) {
+                const formData = new FormData();
+                formData.append("file", file);
 
-              if (!res.ok) {
-                console.error("Erro do servidor:", texto);
-                throw new Error("Erro ao enviar o banner.");
+                const respUpload = await fetch(`${API_URL}/campeonato/upload/banner/${campeonato.id}`, {
+                    method: "PUT",
+                    body: formData,
+                    credentials: "include"
+                });
+
+                if (!respUpload.ok) {
+                    const erroUpload = await respUpload.text();
+                    console.error("Erro upload:", erroUpload);
+                    throw new Error("Erro ao enviar banner.");
+                }
+
+                const uploadData = await respUpload.json();
+                console.log("Banner enviado:", uploadData);
             }
-        
-            } catch (error) {
-              console.error("Erro ao enviar banner:", error);
-              alert("Erro ao enviar banner.");
-            }
+
+            alert("Campeonato criado com sucesso!");
         } catch (erro) {
-            console.error("Erro ao criar campeonato:", erro);
-            alert("Erro ao criar campeonato.");
+            console.error("Erro:", erro);
+            alert("Ocorreu um erro ao criar o campeonato.");
         }
     });
 });

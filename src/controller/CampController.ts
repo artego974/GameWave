@@ -20,7 +20,7 @@ export class CampeonatoController {
     async create(req: Request, res: Response) {
         const { name, description, nameGame, date,time, numberOfPlayers, hostId } = req.body;
 
-            if(!name || !description || !nameGame || !date || !numberOfPlayers || !time || !hostId){
+            if(!name || !description || !nameGame || !date || !numberOfPlayers || !time){
                 res.status(400).json({message: "Preencha todos os campos"})
                 return;
             }
