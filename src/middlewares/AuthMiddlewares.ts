@@ -27,7 +27,8 @@ if (!process.env.JWT_SECRET) {
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export function AuthMiddleware(req: Request, res: Response, next: NextFunction) {
-    const token = req.cookies.token; // lê do cookie
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.split(" ")[1]; // Bearer <token>
 
     // Verifica se o token existe
     if (!token) {

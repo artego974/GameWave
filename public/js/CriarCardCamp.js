@@ -6,6 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!rowC) {
     console.error("card não encontrado")
   }
+
+  const Pesquisar = document.getElementById('pesquisar-header');
+
+  if (Pesquisar) {
+    Pesquisar.addEventListener("submit", async (e) => {
+      try {
+        const response = await fetch(`${API_URL}/name`);
+        const campeonatos = await response.json();
+
+        campeonatos.forEach((camp) => criarCard(camp));
+
+      } catch (err) {
+        console.error("Erro ao carregar campeonatos", err);
+        alert("Erro ao carregar campeonatos.", err);
+      }
+    })
+  }
+
   // Função para gerar o card de cada campeonato
   function criarCard(camp) {
     const col = document.createElement("div");

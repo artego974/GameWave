@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Preencher dados no HTML
     document.getElementById("img-perfil").src = `${user.fotoPerfil}`;
     document.getElementById("img-banner").src = `${user.banerPerfil}`;
-    document.getElementById("nickName").textContent = `${user.nickname}`;
+    document.getElementById("nickName").textContent = `${user.nickName}`;
 
   } catch (error) {
     console.error("Erro ao carregar perfil:", error);

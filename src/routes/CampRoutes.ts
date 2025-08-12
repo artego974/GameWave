@@ -10,5 +10,6 @@ router.post("/campeonato", con.create);
 router.delete("/campeonato/:id",AuthMiddleware, con.delete);
 router.get("/campeonato/:id",AuthMiddleware, con.show);
 router.patch("/campeonato/:id",AuthMiddleware, con.update);
+router.get("/campeonato/name", AuthMiddleware, con.shew);
 
 export default router;

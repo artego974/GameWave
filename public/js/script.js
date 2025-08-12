@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const plusMenu = document.getElementById('plusOverlay');
 
   // --- Pesquisar ---
-  const Pesquisar = document.getElementById('pesquisar-header')
+  
 
   // const campLives = []
   // Pesquisar.addEventListener("submit", (e) => {
