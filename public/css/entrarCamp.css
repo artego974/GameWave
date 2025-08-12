@@ -1,0 +1,204 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --cor-fundo-header: #1e2a47;
+    --cor-violeta-fundo: #712cf9;
+    --cor-violeta-hover: #5b21cc;
+    --cor-violeta-ativa: #4c1db3;
+    --cor-card: #2b314d;
+    --cor-card-hover: #343c5e;
+    --cor-texto: #f0f0f0;
+  }
+  
+  html,
+  body {
+    width: 100%;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0f111a, #1a1d2b);
+    color: var(--cor-texto);
+  }
+  
+  /* HEADER */
+  header {
+    background-color: var(--cor-fundo-header);
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .nav-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .nav-header img {
+    height: 50px;
+    transition: transform 0.3s ease;
+  }
+  .nav-header img:hover {
+    transform: scale(1.05);
+  }
+  
+  .ancora-nav a {
+    text-decoration: none;
+    color: var(--cor-texto);
+    font-weight: 500;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+  }
+  .ancora-nav a:hover {
+    color: var(--cor-violeta-fundo);
+  }
+  
+  .pesquisa-header input {
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+  }
+  
+  /* CARD */
+  .container-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    max-width: 90%;
+    margin: 2rem auto;
+  }
+  
+  .card {
+    flex-grow: 1;
+    width: 100%;
+    background-color: var(--cor-card);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    background-color: var(--cor-card-hover);
+  }
+  
+  .card-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    background-color: #55595c;
+  }
+  
+  #imagem-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  
+  /* INFO */
+  .card-content {
+    padding: 1.5rem;
+  }
+  
+  .info-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--cor-violeta-fundo);
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-info p {
+    margin: 0.4rem 0;
+    font-size: 1rem;
+    color: #d0d0d0;
+  }
+  
+  .card-info strong {
+    color: var(--cor-texto);
+  }
+  
+  /* BOTÃO */
+  .card-button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1.5rem;
+  }
+  
+  .btn-entrar {
+    background: var(--cor-violeta-fundo);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  .btn-entrar:hover {
+    background: var(--cor-violeta-hover);
+    transform: scale(1.05);
+  }
+  .btn-entrar:active {
+    background: var(--cor-violeta-ativa);
+  }
+  
+  /* RESPONSIVO */
+  @media (max-width: 768px) {
+    .container-flex {
+      flex-direction: column;
+    }
+    .card {
+      width: 100%;
+    }
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .info-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .info-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+  
+  .info-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--cor-violeta-fundo);
+    margin-bottom: 0.5rem;
+  }
+  
+  .info-item strong {
+    color: #fff;
+  }

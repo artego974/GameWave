@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="card-text">${camp.description}</p>
           <div class="d-flex justify-content-between align-items-center ">
             <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
+              <a type="button" id=${camp.id} class="btn btn-sm btn-outline-secondary">Ver</a>
             </div>
             <small class="text-body-secondary">${camp.timeDate
         ? new Date(camp.timeDate).toLocaleDateString()
