@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const res = await fetch("http://localhost:3000/user/login", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
           },
           body: JSON.stringify({ email, password }), // Converte os dados para JSON
-          credentials: "include"
         });
   
         if (res.ok) {

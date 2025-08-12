@@ -342,20 +342,77 @@ header img {
 }
 
 .card {
-  margin: auto;           
-  width: 90%;   
-  min-height: 180px;
-  max-height: 500px;         
-  max-width: 450px;     
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;  
+  max-width: 360px; /* largura padrão YouTube */
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: box-shadow 0.3s ease;
+  margin: 1rem auto;
+  background-color: #fff;
 }
 
+.card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+}
+
+.card-img-top {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
 
 .card-body {
-  text-align: center;     
+  padding: 12px 14px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #0f0f0f;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #606060;
+  height: 40px; /* altura fixa para até 2 linhas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.d-flex.justify-content-between.align-items-center {
+  margin-top: auto; /* empurra para baixo */
+}
+
+.btn-group .btn {
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  color: #606060;
+  border-color: #ccc;
+  transition: all 0.3s ease;
+}
+
+.btn-group .btn:hover {
+  background-color: #e6e6e6;
+  color: #000;
+  border-color: #999;
+}
+
+.text-body-secondary {
+  font-size: 13px;
+  color: #606060;
 }
 
 .container {
