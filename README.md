@@ -90,4 +90,4 @@ O GameWave proporciona uma interface moderna, responsiva e integrada, permitindo
 - [ ] Adicionar testes automatizados no back-end
 ```
 
-Se quiser, já posso incluir **prints das telas** e um **guia de instalação passo a passo** nesse mesmo código para deixar o README mais profissional.
+
