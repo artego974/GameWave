@@ -1,91 +1,93 @@
 # 🎮 GameWave
 
-Plataforma web para organizar e visualizar campeonatos de jogos online, com integração entre front-end dinâmico e back-end via API REST.
+Plataforma web para organizar, criar e visualizar campeonatos e lives de jogos online, com integração total entre front-end dinâmico e back-end via API REST.
 
 ---
 
 ## ✅ Objetivo
 
-Formalizar e divulgar campeonatos de jogos online com interface moderna e responsiva. O site permite visualizar campeonatos recentes, lives e informações dos jogadores, com backend fornecendo os dados por meio de uma API.
+Oferecer um ambiente centralizado para formalizar, divulgar e acompanhar campeonatos e transmissões ao vivo de jogos online.  
+O GameWave proporciona uma interface moderna, responsiva e integrada, permitindo que os dados sejam consumidos diretamente do banco via API.
 
 ---
 
-## 📁 Estrutura Geral
-````
-GameWave/
-│
-├── index.html
-├── /pages/
-│ ├── campeonatos.html
-│ ├── lives.html
-│ ├── perfil.html
-│ ├── config.html
-│ ├── singIN.html
-│ └── singUP.html
-│
-├── /js/
-│ ├── CriarCardCamp.js
-│ ├── CriarCardLive.js
-│ └── script.js
-│
-├── /css/
-│ ├── style.css
-│ └── header.css
-│
-├── /assets/
-│ ├── logo.jfif
-│ ├── logo-sem-fundo.png
-│ └── imagens do carrossel`
-````
 
 ---
 
 ## 🌐 Front-end
 
-- HTML5, CSS3, JS, Bootstrap 5.3.6
-- Carrossel de boas-vindas
-- Cards dinâmicos de campeonatos (CriarCardCamp.js)
-- Cards dinâmicos de lives (CriarCardLive.js)
+- **Tecnologias:** HTML5, CSS3, JavaScript, Bootstrap 5.3.6
+- **Funcionalidades:**
+  - Carrossel de boas-vindas
+  - Cards dinâmicos de campeonatos (`CriarCardCamp.js`)
+  - Cards dinâmicos de lives (`CriarCardLive.js`)
+  - Página de criação de lives com upload de imagem (`criarLive.js`)
+  - Menu responsivo com botão “plus” para criação
+  - Páginas de autenticação (login e cadastro)
+  - Página de configurações com integração back-end
 
 ---
 
 ## 🧠 Back-end
 
-- Node.js + Express + banco de dados
-- API com rotas REST
+- **Tecnologias:** Node.js, Express, TypeORM, Multer, JWT
+- **Banco de Dados:** Integração com entidade de campeonatos e lives
+- **Funcionalidades:**
+  - API REST com rotas protegidas e abertas
+  - Upload de imagens para lives e campeonatos
+  - Autenticação via JWT
 
-### Endpoints esperados:
+### Endpoints principais:
 
-- `GET http://localhost:3000/campeonato`
-- `GET http://localhost:3000/live`
-
----
-
-## ⚠️ Problemas atuais
-
-### Front-end
-
-- `CriarCardCamp.js` não funciona no `index.html`
-  - Caminho do script pode estar errado
-  - Estrutura HTML pode estar com `<div>` quebrado
-  - Seletor `#container-campeonatos .row2` pode não existir
-  - Falha na requisição `fetch`
-
-- Imagens das lives com erro 403
-  - Solução: usar imagens locais ou links sem restrição de CORS
-
-### Back-end
-
-- Verificar se o servidor está rodando
-- Testar a rota: `http://localhost:3000/campeonato`
-- Verificar erros no console do terminal
+- `GET  http://localhost:3000/campeonato` — Lista campeonatos
+- `GET  http://localhost:3000/live` — Lista lives
+- `POST http://localhost:3000/live` — Cria nova live (com upload)
+- `POST http://localhost:3000/auth/login` — Autenticação de usuário
 
 ---
 
-## ✅ Checklist de correções
+## 🛠️ Status Atual
 
-- [ ] Corrigir caminho do `CriarCardCamp.js` no `index.html`
-- [ ] Verificar estrutura HTML do `index.html` (divs)
-- [ ] Garantir que a API está rodando e liberando CORS
-- [ ] Substituir imagens externas com erro por locais
-- [ ] Adicionar logs para depurar carregamento de dados
+### Funciona:
+- Listagem dinâmica de campeonatos e lives consumindo API
+- Upload de imagem ao criar lives
+- Alternância responsiva do menu
+- Integração das páginas de configurações com backend
+
+### Melhorias futuras:
+- Validação avançada nos formulários
+- Tratamento de erros visuais para requisições falhas
+- Otimização de carregamento de imagens
+
+---
+
+## 🚀 Como executar
+
+**Pré-requisitos:**
+- Node.js 20+
+- Banco de dados configurado no TypeORM
+- Dependências instaladas:  
+  ```bash
+  npm install
+  ```
+
+**Passos:**
+1. Inicie o servidor back-end:  
+   ```bash
+   npm start
+   ```
+2. Abra o `index.html` no navegador ou use um servidor local como Live Server.
+
+---
+
+## ✅ Checklist
+
+- [x] Cards dinâmicos conectados ao banco
+- [x] Upload de arquivos via Multer
+- [x] Menu responsivo e botão de criação
+- [x] Autenticação JWT
+- [ ] Implementar pesquisa com filtro dinâmico em campeonatos/lives
+- [ ] Adicionar testes automatizados no back-end
+```
+
+Se quiser, já posso incluir **prints das telas** e um **guia de instalação passo a passo** nesse mesmo código para deixar o README mais profissional.
