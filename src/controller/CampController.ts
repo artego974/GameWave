@@ -143,16 +143,16 @@ export class CampeonatoController {
     }
 
     
-    async shew(req:Request,res:Response){
-        const {name} = req.body;
-        const camp = await campRepository.findOneBy({ name });
+    async shew(req: Request, res: Response) {
+        const { name } = req.body;
+        const camp = await campRepository.createQueryBuilder("campeonato").where("campeonato.name LIKE :name", { name: `%${name}%` })
 
-        if(!camp){
-            res.status(404).json({menssagem: "Campeonato não encontrado!"});
-            return;
-        }
-        res.status(200).json(camp);
+            if(!camp){
+                res.status(404).json({ menssagem: "Campeonato não encontrado!" });
         return;
     }
+        res.status(200).json(camp);
+    return;
+}
 
 }

@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const imagemPreview = document.getElementById("imagem-preview");
     const svgPlaceholder = document.querySelector('.card-img-wrapper svg');
 
-    // Pré-visualizar imagem
     arquivoInput.addEventListener("change", function () {
         const arquivo = arquivoInput.files[0];
         if (arquivo) {
@@ -40,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            // Primeiro cria o campeonato
+            
             const respCriar = await fetch(`${API_URL}/campeonato`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -65,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const campeonato = await respCriar.json();
             console.log("Campeonato criado:", campeonato);
 
-            // Depois envia o banner (se houver)
             const file = arquivoInput.files[0];
             if (file) {
                 const formData = new FormData();

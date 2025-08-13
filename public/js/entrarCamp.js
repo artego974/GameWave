@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     btnEntrar.addEventListener("click", async () => {
         try {
-            const API_URL = "http://localhost:3000/participantes"; // ajuste para sua rota correta
+            const API_URL = "http://localhost:3000/participantes"; 
 
-            // Aqui você define os IDs do usuário e campeonato
-            const userId = localStorage.getItem("userId"); // exemplo pegando do localStorage
-            const CampId = 1; // exemplo fixo, mas pode vir da URL ou outro lugar
+            
+            const userId = 1; 
+            const CampId = 1; 
 
             if (!userId || !CampId) {
                 alert("Usuário ou campeonato inválido.");
@@ -39,8 +39,4 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Ocorreu um erro de conexão.");
         }
     });
-
-
-
-    
 })
