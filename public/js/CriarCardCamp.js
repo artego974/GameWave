@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const API_URL = "http://localhost:3000/campeonato";
+  const API_URL2 = "http://localhost:3000/game/";
   const containerCards = document.querySelector("#container-campeonatos .rowCamp");
   const formPesquisa = document.getElementById("pesquisa-header");
   const inputPesquisa = formPesquisa.querySelector("input[name='pesquisa']");
@@ -8,12 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
   //   console.error("Elementos necessários não encontrados no DOM.");
   //   return;
   // }
-
+ 
   // Função para criar um card de campeonato
   function criarCard(camp) {
     const col = document.createElement("div");
     col.className = "col";
-
+    
     col.innerHTML = `
       <div class="card shadow-sm">
         <img class="card-img-top" src="${camp.fotoCampeonato || "https://via.placeholder.com/150"}" alt="Thumbnail">
@@ -22,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="card-text">${camp.description || ""}</p>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-camp-id="${camp.id}">Ver</button>
             </div>
             <small class="text-body-secondary">${camp.timeDate ? new Date(camp.timeDate).toLocaleDateString() : "Sem data"}</small>
           </div>
@@ -30,6 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    const botaoVer = col.querySelector("button")
+    botaoVer.addEventListener("click",()=>{
+      localStorage.setItem("campData",JSON.stringify(camp))
+      window.location.href = "entraCamp.html"
+    })
     return col;
   }
 
