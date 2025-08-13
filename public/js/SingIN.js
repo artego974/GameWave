@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     formulario.addEventListener("submit",async (e) => {
       e.preventDefault(); // Evita recarregar a página
-      alert("Usuario logado")
+      
   
       // Coleta os dados inseridos nos campos
       const email = document.getElementById("email").value.trim();
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
         if (res.ok) {
           // Se o login foi bem-sucedido
+          alert("Usuario logado")
           const data = await res.json();
           console.log(data.user);
           localStorage.setItem("userId", data.user.id)

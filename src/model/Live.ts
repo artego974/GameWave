@@ -8,8 +8,8 @@ export class Live {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({type:"text"})
-    img: string
+    @Column({type:"varchar", nullable: true, default:"imagemPadrão"})
+    img!: string
 
     @Column({ type: "text", nullable: false })
     link: string
@@ -23,14 +23,9 @@ export class Live {
     @ManyToOne(() => User, (user) => user.Live)
     user!: User;
 
-    @ManyToOne(() => Games, (game) => game.live)
-    game!: Games
-
-
-    constructor(link: string, titulo: string, subtitulo: string, img:string) {
+    constructor(link: string, titulo: string, subtitulo: string) {
         this.link = link
         this.titulo = titulo;
         this.subtitulo = subtitulo;
-        this.img = img
     }
 }
