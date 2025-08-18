@@ -1,15 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const API_URL = "http://localhost:3000/campeonato";
-  const API_URL2 = "http://localhost:3000/game/";
   const containerCards = document.querySelector("#container-campeonatos .rowCamp");
   const formPesquisa = document.getElementById("pesquisa-header");
-  const inputPesquisa = formPesquisa.querySelector("input[name='pesquisa']");
+  const inputPesquisa = formPesquisa.querySelector("input");
 
-  // if (!containerCards || !formPesquisa || !inputPesquisa) {
-  //   console.error("Elementos necessários não encontrados no DOM.");
-  //   return;
-  // }
- 
+  let campeonatos = []; // armazenar todos para filtrar depois
+
   // Função para criar um card de campeonato
   function criarCard(camp) {
     const col = document.createElement("div");
@@ -31,11 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    const botaoVer = col.querySelector("button")
-    botaoVer.addEventListener("click",()=>{
-      localStorage.setItem("campData",JSON.stringify(camp))
-      window.location.href = "entraCamp.html"
-    })
+    const botaoVer = col.querySelector("button");
+    botaoVer.addEventListener("click", () => {
+      localStorage.setItem("campData", JSON.stringify(camp));
+      window.location.href = "entraCamp.html";
+    });
     return col;
   }
 
@@ -53,53 +49,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Função para carregar todos os campeonatos (rota pública)
+  // Função para carregar todos os campeonatos
   async function carregarTodos() {
     try {
       const response = await fetch(API_URL);
       if (!response.ok) throw new Error(`Erro ao carregar campeonatos: ${response.status}`);
-      const data = await response.json();
-      exibirCampeonatos(data);
+      campeonatos = await response.json();
+      exibirCampeonatos(campeonatos);
     } catch (err) {
       console.error(err);
       containerCards.innerHTML = `<p class="text-center text-danger">Erro ao carregar campeonatos.</p>`;
     }
   }
 
-  // Função para pesquisar campeonatos (rota pública, sem token)
-  async function pesquisar(termo) {
-    try {
-      const response = await fetch(`${API_URL}/name?name=${encodeURIComponent(termo)}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
-      });
-
-      if (!response.ok) throw new Error(`Erro na resposta da API: ${response.status}`);
-
-      const data = await response.json();
-      exibirCampeonatos(data);
-    } catch (err) {
-      console.error(err);
-      containerCards.innerHTML = `<p class="text-center text-danger">Erro ao pesquisar campeonatos.</p>`;
+  // Função para filtrar campeonatos
+  function filtrarCampeonatos(termo) {
+    const termoNormalizado = termo.toLowerCase().trim();
+    if (termoNormalizado === "") {
+      exibirCampeonatos(campeonatos); // mostra todos se vazio
+    } else {
+      const filtrados = campeonatos.filter(camp => 
+        camp.name.toLowerCase().includes(termoNormalizado) || 
+        (camp.description && camp.description.toLowerCase().includes(termoNormalizado))
+      );
+      exibirCampeonatos(filtrados);
     }
   }
 
-  // Evento submit no formulário de pesquisa
+  // Evento de pesquisa (ao enviar o form ou apertar Enter)
   formPesquisa.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    const termo = inputPesquisa.value.trim();
-
-    if (termo === "") {
-      carregarTodos();
-    } else {
-      pesquisar(termo);
-    }
+    filtrarCampeonatos(inputPesquisa.value);
   });
 
-  // Carrega todos inicialmente
+  // Carrega os campeonatos ao abrir a página
   carregarTodos();
 });
