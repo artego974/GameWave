@@ -1,110 +1,114 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const nicknameInput = document.getElementById("nickname");
-  const nomeInput = document.getElementById("nome");
-  const bannerInput = document.getElementById("banner");
-  const fotoPerfilInput = document.getElementById("fotoPerfil");
-  const temaSelect = document.getElementById("tema");
-  const senhaAtualInput = document.getElementById("senhaAtual");
-  const novaSenhaInput = document.getElementById("novaSenha");
+  
 
-  const salvarBtn = document.getElementById("salvar");
+  const salvarNameBtn = document.getElementById("btnAlterarNomeNick");
+  const salvarNovaSenha = document.getElementById("btnAlterarSenha");
   const excluirBtn = document.getElementById("excluirConta");
+  const userId = localStorage.getItem("userId");
+  if(userId == null){
+    alert("Você precisa estar logado para entrar nesta pagina!")
+    window.location.href = "../pages/singIN.html"
+  }
 
   const API_URL = "http://localhost:3000";
 
-  // Buscar dados do usuário autenticado pelo token
-  fetch(`${API_URL}/user/profile`, {
-    credentials: "include"
-  })
-    .then(res => {
-      if (!res.ok) throw new Error("Usuário não autenticado");
-      return res.json();
-    })
-    .then(user => {
-      const userId = user.id;
+  salvarNovaSenha.addEventListener("click", async () => {
+    const senhaAtualInput = document.getElementById("senhaAtual").value.trim();
+    const novaSenhaInput = document.getElementById("novaSenha").value.trim();
 
-      nicknameInput.value = user.nickName || "";
-      nomeInput.value = user.name || "";
-      temaSelect.value = localStorage.getItem("tema") || "escuro";
+    if (!senhaAtualInput || !novaSenhaInput) {
+      alert("Preencha todos os campos!");
+      return;
+    }
 
-      // Atualizar dados básicos
-      salvarBtn.addEventListener("click", async () => {
-        // Atualizar nome e nickname
-        await fetch(`${API_URL}/user/${userId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            name: nomeInput.value,
-            nickName: nicknameInput.value
-          })
-        });
-
-        // Atualizar senha (se fornecida)
-        if (senhaAtualInput.value && novaSenhaInput.value) {
-          await fetch(`${API_URL}/user/updatePassword/${userId}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify({
-              password: senhaAtualInput.value,
-              newPassword: novaSenhaInput.value
-            })
-          });
-        }
-
-        // Upload de banner
-        if (bannerInput.files.length > 0) {
-          const formData = new FormData();
-          formData.append("file", bannerInput.files[0]);
-
-          await fetch(`${API_URL}/user/upload/banner/${userId}`, {
-            method: "PUT",
-            credentials: "include",
-            body: formData
-          });
-        }
-
-        // Upload de foto de perfil
-        if (fotoPerfilInput.files.length > 0) {
-          const formData = new FormData();
-          formData.append("file", fotoPerfilInput.files[0]);
-
-          await fetch(`${API_URL}/user/upload/avatar/${userId}`, {
-            method: "PUT",
-            credentials: "include",
-            body: formData
-          });
-        }
-
-        // Atualizar tema local
-        localStorage.setItem("tema", temaSelect.value);
-
-        alert("Configurações atualizadas com sucesso!");
+    try {
+      const response = await fetch(`${API_URL}/user/updatePassword/${userId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          password: senhaAtualInput,
+          newPassword: novaSenhaInput
+        })
       });
 
-      // Excluir conta
-      excluirBtn.addEventListener("click", async () => {
-        const confirmar = confirm("Tem certeza que deseja excluir sua conta?");
-        if (confirmar) {
-          await fetch(`${API_URL}/user/${userId}`, {
-            method: "DELETE",
-            credentials: "include"
-          });
+      if (response.ok) {
+        alert("Senha alterada com sucesso!");
+        console.log("Senha alterada");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message || "Erro ao alterar senha!");
+      }
+    } catch (err) {
+      alert("Erro de conexão ao alterar senha!");
+      console.error("Erro:", err);
+    }
+  });
 
-          alert("Conta excluída com sucesso.");
-          localStorage.clear();
-          window.location.href = "../index.html";
+  salvarNameBtn.addEventListener("click", async () => {
+    const nicknameValue = document.getElementById("nickname").value.trim();
+    const nomeValue = document.getElementById("nome").value.trim();
+  
+    if (!nomeValue || !nicknameValue) {
+      alert("Preencha todos os campos!");
+      return;
+    }
+  
+    try {
+      const response = await fetch(`${API_URL}/user/${userId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: nomeValue,
+          nickName: nicknameValue
+        })
+      });
+  
+      if (response.ok) {
+        alert("Nome e nickname alterados com sucesso!");
+        console.log("Dados atualizados com sucesso!");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message || "Erro ao alterar dados!");
+      }
+    } catch (err) {
+      alert("Erro de conexão ao alterar os dados!");
+      console.error("Erro:", err);
+    }
+  });
+
+  
+  excluirBtn.addEventListener("click", async () => {
+    const confirmar = confirm("Tem certeza que deseja excluir sua conta?");
+    if (!confirmar) return;
+    try {
+
+      const resDeletuser = await fetch(`${API_URL}/user/${userId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
         }
       });
-    })
-    .catch(err => {
-      console.error(err);
-      alert("Você precisa estar logado para acessar esta página.");
-      window.location.href = "../pages/singIN.html";
-    });
+  
+      if (resDeletuser.ok) {
+        alert("Conta excluída com sucesso.");
+        localStorage.clear();
+        window.location.href = "./index.html";
+      } else {
+        let errorMessage = "Erro ao excluir conta!";
+        try {
+          const errorData = await res.json();
+          errorMessage = errorData.message || errorMessage;
+        } catch {} 
+        alert(errorMessage);
+      }
+    } catch (err) {
+      alert("Erro de conexão ao excluir conta!");
+      console.error("Erro:", err);
+    }
+  });
+  
 });

@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.setItem("token")}`
+            Authorization: `Bearer ${localStorage.getItem("token")}`
           },
           body: JSON.stringify({ email, password }), // Converte os dados para JSON
         });
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
           localStorage.setItem("user", data.user)
           formulario.style.display = "none";       // Esconde o formulário
           setTimeout(() => {
-            window.location.href = "../index.html"; // Redireciona após 1.5s
+            window.location.href = "./index.html"; // Redireciona após 1.5s
           }, 1500);
         } else {
           // Se houve erro, exibe a mensagem da API (ou uma mensagem genérica)

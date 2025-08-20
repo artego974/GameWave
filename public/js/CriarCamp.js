@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const API_URL = "http://localhost:3000";
     const hostId = localStorage.getItem("userId");
+    if(hostId == null){
+        alert("Você precisa estar logado para entrar nesta pagina!")
+        window.location.href = "../pages/singIN.html"
+      }
+    
     const botaoCriar = document.querySelector("#buttom-quest button");
     const arquivoInput = document.getElementById("arquivo");
     const imagemPreview = document.getElementById("imagem-preview");

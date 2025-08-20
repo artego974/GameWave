@@ -28,7 +28,7 @@ export class Campeonato {
     @ManyToOne(() => Games, (game) => game.campeonato)
     game!: Games;
 
-    @ManyToOne(()=> User, (host) => host.campeonato)
+    @ManyToOne(()=> User, (host) => host.campeonatos)
     host!: User
 
     @ManyToOne(() => Participantes, (participantes) => participantes.campeonato)

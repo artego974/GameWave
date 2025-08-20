@@ -17,17 +17,9 @@ html, body {
   width: 100%;
   min-height: 100vh;
   scroll-behavior: smooth;
-  background-color: #0f111a;
+  background-color: #0d1117;
   color: #ffffff;
   font-family: Arial, sans-serif;
-}
-
-body {
-  background-color: #0d1117;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
 }
 
 .container {
@@ -59,8 +51,7 @@ label {
 }
 
 input[type="text"],
-input[type="file"],
-select {
+input[type="password"] {
   background-color: #161b22;
   border: 1px solid #30363d;
   padding: 10px;
@@ -80,40 +71,6 @@ button {
 
 button:hover {
   background-color: #1c1f2e;
-}
-
-.custom-file {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.file-input {
-  display: none;
-}
-
-.file-label {
-  display: inline-block;
-  background-color: #1c1f2e;
-  color: #fff;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 1px solid #30363d;
-  transition: background-color 0.2s ease;
-  font-size: 14px;
-}
-
-.file-label:hover {
-  background-color: #2c2f40;
-} 
-
-input[type="password"] {
-  background-color: #161b22;
-  border: 1px solid #30363d;
-  padding: 10px;
-  border-radius: 6px;
-  color: #c9d1d9;
 }
 
 .btn-excluir {

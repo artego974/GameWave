@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const botaoEscolher = document.getElementById("arquivo");
     const API_URL = "http://localhost:3000";
     const hostId = localStorage.getItem("userId")
+    if(hostId == null){
+        alert("Você precisa estar logado para entrar nesta pagina!")
+        window.location.href = "../pages/singIN.html"
+      }
+    
 
     botaoCriar.addEventListener('click', async () => {
         const inputs = document.querySelectorAll('.input-quest');

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-secondary" data-camp-id="${camp.id}">Ver</button>
             </div>
-            <small class="text-body-secondary">${camp.timeDate ? new Date(camp.timeDate).toLocaleDateString() : "Sem data"}</small>
+            <small class="text-body-secondary">${camp.date ? new Date(camp.date).toLocaleDateString() : "Sem data"}</small>
           </div>
         </div>
       </div>
