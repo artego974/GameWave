@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const botaoCamera = document.getElementById("botao-camera");
   const changeBannerButton = document.getElementById("change-banner-button");
   const nickName = document.getElementById("nickName"); 
-
   const containerCampeonatos = document.querySelector("#container-campeonatos .rowCamp");
 
   // --- Função para criar card ---
@@ -52,8 +51,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       containerCampeonatos.innerHTML = `<p class="text-center">Nenhum campeonato encontrado.</p>`;
       return;
     }
-    
-    lista.forEach(camp => containerCampeonatos.appendChild(criarCard(camp)));
+
+    lista.forEach(camp => {
+      const card = criarCard(camp);
+      containerCampeonatos.appendChild(card);
+    });
   }
 
   // --- Buscar dados do usuário ---
@@ -73,17 +75,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     alert("Erro ao carregar dados do perfil.");
   }
 
-  // // --- Buscar campeonatos do usuário ---
-  // try {
-  //   const resCamp = await fetch(`${API_URL}/campeonato`);
-  //   if (!resCamp.ok) throw new Error("Erro ao carregar campeonatos");
-  //   const campeonatos = await resCamp.json();
-  //   const meusCampeonatos = campeonatos.filter(c => c.hostId == userId); // apenas do usuário logado
-  //   exibirCampeonatos(meusCampeonatos);
-  // } catch (error) {
-  //   console.error("Erro ao carregar campeonatos:", error);
-  //   containerCampeonatos.innerHTML = `<p class="text-center text-danger">Erro ao carregar campeonatos.</p>`;
-  // }
+  // --- Buscar campeonatos do usuário ---
+  try {
+    const resCamp = await fetch(`${API_URL}/campeonato`);
+    if (!resCamp.ok) throw new Error("Erro ao carregar campeonatos");
+    const campeonatos = await resCamp.json();
+    const meusCampeonatos = campeonatos.filter(c => c.hostId == userId); // apenas do usuário logado
+    exibirCampeonatos(meusCampeonatos);
+  } catch (error) {
+    console.error("Erro ao carregar campeonatos:", error);
+    containerCampeonatos.innerHTML = `<p class="text-center text-danger">Erro ao carregar campeonatos.</p>`;
+  }
 
   // --- Eventos de avatar e banner ---
   botaoCamera.addEventListener("click", e => {
