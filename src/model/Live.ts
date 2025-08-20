@@ -20,7 +20,7 @@ export class Live {
     @Column({ type: "varchar", length: 255, nullable: false })
     subtitulo: string;
 
-    @ManyToOne(() => User, (user) => user.Live)
+    @ManyToOne(() => User, (user) => user.lives)
     user!: User;
 
     constructor(link: string, titulo: string, subtitulo: string) {

@@ -4,8 +4,12 @@ import { AppDataSource } from "../config/data-source"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken";                         // Biblioteca para manipulação de Tokens JWT (Authenticação)
 import dotenv from "dotenv";                            // Biblioteca para carregar variáveis de ambiente
+import { Live } from "../model/Live";
+import { Campeonato } from "../model/Campeonato";
 
 const userRepository = AppDataSource.getRepository(User);
+const liveRepository = AppDataSource.getRepository(Live);
+const campRepository = AppDataSource.getRepository(Campeonato);
 
 dotenv.config();                                        // Carrega as variáveis de ambiente do arquivo .env
 
@@ -18,8 +22,8 @@ if (!JWT_SECRET) {
 
 export class UserController {
     async list(req: Request, res: Response) {
-        const prod = await userRepository.find();
-        res.json(prod);
+        const user = await userRepository.find();
+        res.json(user);
         return;
     }
 
@@ -38,18 +42,43 @@ export class UserController {
     }
 
     async delete(req: Request, res: Response) {
-        const { id } = req.params;
+        try {
+            const { id } = req.params;
+            const userId = Number(id);
 
-        const user = await userRepository.findOneBy({ id: Number(id) });
+            // Busca o usuário junto com as lives e campeonatos
+            const user = await userRepository.findOne({
+                where: { id: userId },
+                relations: ["lives", "campeonatos"]
+            });
 
-        if (!user) {
-            res.status(401).json({ menssagem: "User não encontrado" });
+            if (!user) {
+                res.status(404).json({ mensagem: "Usuário não encontrado" });
+                return;
+            }
+
+            // Remove as lives
+            if (user.lives && user.lives.length > 0) {
+                await liveRepository.remove(user.lives);
+            }
+
+            // Remove os campeonatos
+            if (user.campeonatos && user.campeonatos.length > 0) {
+                await campRepository.remove(user.campeonatos);
+            }
+
+            // Remove o usuário
+            await userRepository.remove(user);
+
+            res.status(204).send();
+            return;
+        } catch (error) {
+            console.error("Erro ao deletar usuário:", error);
+            res.status(500).json({ mensagem: "Erro ao deletar usuário" });
             return;
         }
-        await userRepository.remove(user);
-        res.status(204).send();
-        return;
     }
+
 
     async show(req: Request, res: Response) {
         const { id } = req.params;
@@ -172,8 +201,8 @@ export class UserController {
             // Busca o usuário no banco de dados pelo email
             const user = await userRepository.findOneBy({ email });
             console.log(user);
-            
-            
+
+
             // Se não encontrar o usuário
             if (!user) {
                 res.status(401).json({ message: "Usuario não encontrado." });
@@ -189,7 +218,7 @@ export class UserController {
             }
 
             const { password: _, ...userWithoutPassword } = user; // Remove a senha do objeto
-             
+
             const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
 
             // Salva o token no cookie
@@ -202,7 +231,7 @@ export class UserController {
 
             // Se tudo estiver correto, retorna sucesso (200) com os dados do usuário sem a senha
             res.status(200).json({ message: "Logado com sucesso.", user: userWithoutPassword });
-            
+
         } catch (error) {
             // Em caso de erro inesperado, exibe o erro e retorna 500
             console.error("Erro ao logar no user:", error);
@@ -279,24 +308,24 @@ export class UserController {
 
     async profile(req: Request, res: Response) {
         try {
-          const user = await userRepository.findOneBy({ id: req.user!.id });
-      
-          if (!user) {
-            res.status(404).json({ message: "Usuário não encontrado." });
-            return;
-          }
-      
-          const { password: _, ...userWithoutPassword } = user;
-      
-          res.status(200).json({
-            ...userWithoutPassword,
-            avatarUrl: `${process.env.BASE_URL || "http://localhost:3000"}${user.fotoPerfil || ""}`,
-            bannerUrl: `${process.env.BASE_URL || "http://localhost:3000"}${user.banerPerfil || ""}`
-          });
+            const user = await userRepository.findOneBy({ id: req.user!.id });
+
+            if (!user) {
+                res.status(404).json({ message: "Usuário não encontrado." });
+                return;
+            }
+
+            const { password: _, ...userWithoutPassword } = user;
+
+            res.status(200).json({
+                ...userWithoutPassword,
+                avatarUrl: `${process.env.BASE_URL || "http://localhost:3000"}${user.fotoPerfil || ""}`,
+                bannerUrl: `${process.env.BASE_URL || "http://localhost:3000"}${user.banerPerfil || ""}`
+            });
         } catch (error) {
-          console.error(error);
-          res.status(500).json({ message: "Erro ao buscar perfil." });
+            console.error(error);
+            res.status(500).json({ message: "Erro ao buscar perfil." });
         }
-      }      
-      
+    }
+
 }

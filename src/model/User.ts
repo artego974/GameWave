@@ -29,10 +29,12 @@ export class User {
     banerPerfil!: string
 
     @OneToMany(() => Live, (live) => live.user)
-    Live!: Live;
+    lives!: Live[];
 
     @OneToMany(() => Campeonato, (campeonato) => campeonato.host)
-    campeonato!: Campeonato
+    campeonatos!: Campeonato[];
+
+
 
 
 

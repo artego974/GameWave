@@ -82,8 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!confirmar) return;
     try {
 
-      
-
       const resDeletuser = await fetch(`${API_URL}/user/${userId}`, {
         method: "DELETE",
         headers: {
