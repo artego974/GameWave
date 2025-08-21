@@ -60,43 +60,27 @@
       <img id="img-banner" src="../../assets/banner1.png" alt="fotoBanner" />
       <input type="file" id="input-banner" accept="image/*" style="display: none;" />
       <button id="change-banner-button">Adicione um banner</button>
-
-      <div id="container-perfil">
-        <div class="foto-perfil-wrapper">
-          <img id="img-perfil" src="../../assets/usuario.png" alt="fotoPerfil" />
-          <input type="file" id="input-perfil" accept="image/*" style="display: none;" />
-          <button class="botao-camera" id="botao-camera">
-            <img src="../../assets/cam.png" alt="ícone câmera" />
-          </button>
-        </div>
-
-        <div id="info">
-          <h2 id="nickName">NickName</h2>
-        </div>
-      </div>
-    </div>
-
-    <div id="container-menu">
-      
-      </div>
-
-      <div class="album py-5 bg-body-tertiary">
-        <div class="container-cards" id="container-campeonatos">
-          <h2 class="text-center">Campeonatos</h2>
-          <div class="rowCamp d-flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <!-- Cards de Campeonatos gerados por JS -->
+  
+      <div class="overlay-content">
+        <h1>Bem-vindo, <span id="nickNameWelcome">NickName</span>!!</h1>
+        <p>Aqui você pode gerenciar personalizar seu perfil.</p>
+  
+        <div id="container-perfil">
+          <div class="foto-perfil-wrapper">
+            <img id="img-perfil" src="../../assets/usuario.png" alt="fotoPerfil" />
+            <input type="file" id="input-perfil" accept="image/*" style="display: none;" />
+            <button class="botao-camera" id="botao-camera">
+              <img src="../../assets/cam.png" alt="ícone câmera" />
+            </button>
           </div>
-        </div>
-
-        <div class="container-cards" id="container-lives" style="margin-top: 5rem;">
-          <h2 class="text-center">Lives</h2>
-          <div class="rowLive d-flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <!-- Cards de Lives gerados por JS -->
+          <div id="info">
+            <h2 id="nickName">NickName</h2>
           </div>
         </div>
       </div>
     </div>
   </main>
+  
 
   <script src="../js/script.js"></script>
   <script src="../js/perfil.js"></script>
