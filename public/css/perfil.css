@@ -7,7 +7,7 @@ main {
   align-items: center;
   text-align: center;
   padding: 0;
-  background-color: #141921
+  background-color: #333
 }
 
 /* BANNER */
@@ -35,7 +35,7 @@ main {
 /* Botão alterar banner */
 #change-banner-button {
   position: absolute;
-  bottom: 20px;   /* base do banner */
+  top: 20px;   /* base do banner */
   right: 20px;    /* alinhado à direita */
   z-index: 2;
   padding: 10px 15px;
