@@ -12,51 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const botaoCamera = document.getElementById("botao-camera");
   const changeBannerButton = document.getElementById("change-banner-button");
   const nickName = document.getElementById("nickName"); 
-  const containerCampeonatos = document.querySelector("#container-campeonatos .rowCamp");
-
-  // --- Função para criar card ---
-  function criarCard(camp) {
-    const col = document.createElement("div");
-    col.className = "col";
-
-    col.innerHTML = `
-      <div class="card shadow-sm">
-        <img class="card-img-top" src="${camp.fotoCampeonato || 'https://via.placeholder.com/150'}" alt="Thumbnail">
-        <div class="card-body">
-          <h5 class="card-title">${camp.name}</h5>
-          <p class="card-text">${camp.description || ""}</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary" data-camp-id="${camp.id}">Ver</button>
-            </div>
-            <small class="text-body-secondary">${camp.date ? new Date(camp.date).toLocaleDateString() : "Sem data"}</small>
-          </div>
-        </div>
-      </div>
-    `;
-
-    const botaoVer = col.querySelector("button");
-    botaoVer.addEventListener("click", () => {
-      localStorage.setItem("campData", JSON.stringify(camp));
-      window.location.href = "entraCamp.html";
-    });
-
-    return col;
-  }
-
-  // --- Função para exibir campeonatos ---
-  function exibirCampeonatos(lista) {
-    containerCampeonatos.innerHTML = "";
-    if (!lista || lista.length === 0) {
-      containerCampeonatos.innerHTML = `<p class="text-center">Nenhum campeonato encontrado.</p>`;
-      return;
-    }
-
-    lista.forEach(camp => {
-      const card = criarCard(camp);
-      containerCampeonatos.appendChild(card);
-    });
-  }
+ 
 
   // --- Buscar dados do usuário ---
   try {
@@ -70,22 +26,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("img-perfil").src = `${user.fotoPerfil}`;
     document.getElementById("img-banner").src = `${user.banerPerfil}`;
     nickName.textContent = `${user.nickName}`;
+    const nickNameWelcome = document.getElementById("nickNameWelcome");
+    if (nickNameWelcome) {
+      nickNameWelcome.textContent = user.nickName;
+    }
   } catch (error) {
     console.error("Erro ao carregar perfil:", error);
     alert("Erro ao carregar dados do perfil.");
   }
 
-  // --- Buscar campeonatos do usuário ---
-  try {
-    const resCamp = await fetch(`${API_URL}/campeonato`);
-    if (!resCamp.ok) throw new Error("Erro ao carregar campeonatos");
-    const campeonatos = await resCamp.json();
-    const meusCampeonatos = campeonatos.filter(c => c.hostId == userId); // apenas do usuário logado
-    exibirCampeonatos(meusCampeonatos);
-  } catch (error) {
-    console.error("Erro ao carregar campeonatos:", error);
-    containerCampeonatos.innerHTML = `<p class="text-center text-danger">Erro ao carregar campeonatos.</p>`;
-  }
 
   // --- Eventos de avatar e banner ---
   botaoCamera.addEventListener("click", e => {
