@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GameWave Perfil</title>
   <link rel="shortcut icon" href="../../assets/logo.jfif" type="image/x-icon" />
-  <link rel="stylesheet" href="../css/perfil.css" />
+  <link rel="stylesheet" href="../css/perfil.css"/>
   <link rel="stylesheet" href="../css/header.css" />
 </head>
 
@@ -14,7 +14,7 @@
   <header>
     <div class="nav-header">
       <div class="img-nav">
-        <a href="./index.html"><img src="../../assets/logo-sem-fundo.png" alt="Logo GameWave" /></a>
+        <a href="../index.html"><img src="../../assets/logo-sem-fundo.png" alt="Logo GameWave" /></a>
       </div>
 
       <div class="ancora-nav">
@@ -42,7 +42,7 @@
     </div>
 
     <div class="menu-toggle">
-      <img src="../../assets/configuracoes.png" alt="Menu" id="menuButton" />
+      <img src="../../assets/setting.png" alt="Menu" id="menuButton" />
     </div>
 
     <div class="menu-overlay" id="menuOverlay">
@@ -51,8 +51,6 @@
         <a href="./lives.html">Lives</a>
         <a href="./perfil.html">Perfil</a>
         <a href="./config.html">Configurações</a>
-        <a href="criarCampeonatos.html">Criar Campeonato</a>
-        <a href="criarLives.html">Criar Live</a>
       </aside>
     </div>
   </header>
@@ -62,27 +60,41 @@
       <img id="img-banner" src="../../assets/banner1.png" alt="fotoBanner" />
       <input type="file" id="input-banner" accept="image/*" style="display: none;" />
       <button id="change-banner-button">Adicione um banner</button>
-  
-      <div class="overlay-content">
-        <h1>Bem-vindo, <span id="nickNameWelcome">NickName</span>!!</h1>
-        <p>Aqui você pode gerenciar personalizar seu perfil.</p>
-  
-        <div id="container-perfil">
-          <div class="foto-perfil-wrapper">
-            <img id="img-perfil" src="../../assets/usuario.png" alt="fotoPerfil" />
-            <input type="file" id="input-perfil" accept="image/*" style="display: none;" />
-            <button class="botao-camera" id="botao-camera">
-              <img src="../../assets/cam.png" alt="ícone câmera" />
-            </button>
+
+      <div id="container-perfil">
+        <div class="foto-perfil-wrapper">
+          <img id="img-perfil" src="../../assets/usuario.png" alt="fotoPerfil" />
+          <input type="file" id="input-perfil" accept="image/*" style="display: none;" />
+          <button class="botao-camera" id="botao-camera">
+            <img src="../../assets/cam.png" alt="ícone câmera" />
+          </button>
+        </div>
+
+        <div id="info">
+          <h2 id="nickName">NickName</h2>
+        </div>
+      </div>
+    </div>
+
+    <div id="container-menu">
+
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container-cards" id="container-campeonatos">
+          <h2 class="text-center">Campeonatos</h2>
+          <div class="rowCamp d-flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <!-- Cards de Campeonatos gerados por JS -->
           </div>
-          <div id="info">
-            <h2 id="nickName">NickName</h2>
+        </div>
+
+        <div class="container-cards" id="container-lives" style="margin-top: 5rem;">
+          <h2 class="text-center">Lives</h2>
+          <div class="rowLive d-flex g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <!-- Cards de Lives gerados por JS -->
           </div>
         </div>
       </div>
     </div>
   </main>
-  
 
   <script src="../js/script.js"></script>
   <script src="../js/perfil.js"></script>
