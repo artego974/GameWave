@@ -137,6 +137,16 @@ header img {
   cursor: pointer;
 }
 
+.carousel-caption h1,
+.carousel-caption p {
+  color: #fff; /* deixa o texto sempre branco */
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.8); /* sombra para destacar */
+  font-weight: bold;
+}
+
+
+
+
 .custom-carousel .carousel-item {
   width: 100%;
 }
@@ -419,6 +429,8 @@ header img {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+
+
 
 #imgCamp{
   width: 200px;

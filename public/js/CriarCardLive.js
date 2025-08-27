@@ -21,9 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="btn-group">
               <a href="${live.link}" target="_blank" class="btn btn-sm btn-outline-secondary">Ver</a>
             </div>
-            <small class="text-body-secondary">
-              ${live.timeDate ? new Date(live.timeDate).toLocaleDateString() : "Sem data"}
-            </small>
           </div>
         </div>
       </div>
